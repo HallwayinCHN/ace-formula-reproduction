@@ -1,0 +1,65 @@
+{
+  "protocol": "FTEC5660-ACE-Formula-heldout-v1",
+  "question_count": 100,
+  "condition_count": 5,
+  "created_at_utc": "2026-11-03T09:13:11.324954+00:00",
+  "seed_count": 3,
+  "logical_predictions": 1500,
+  "primary_comparison": "combined_minus_ace",
+  "condition_schedule": {
+    "42": [
+      "base",
+      "ace",
+      "selective",
+      "retrieval",
+      "combined"
+    ],
+    "43": [
+      "selective",
+      "retrieval",
+      "combined",
+      "base",
+      "ace"
+    ],
+    "44": [
+      "combined",
+      "base",
+      "ace",
+      "selective",
+      "retrieval"
+    ]
+  },
+  "bootstrap_seed": 2026,
+  "bootstrap_repetitions": 10000,
+  "source_commit": "b004443a2effcdb73a8c8453c330b4e853ba2e17",
+  "file_hashes": {
+    "repro/holdout.py": "6b47ed0a73a678b5fd53a91a9718544c9c021cfe60fa79b43259e306101f49e9",
+    "repro/holdout_batch.py": "a91109e1bebf5f1ce470ced43c3dc72737b4ced22174bf2a95d92242282226bb",
+    "repro/holdout_stats.py": "a0d7e4074030b31cd0c9d77ce756916e8320df615381b766d3ec812476b9f6a6",
+    "repro/holdout_analysis.py": "b02dd1364073eb9d458274623509f382244b8a6e3a1462af281d5f42abffe570",
+    "repro/holdout_freeze.py": "a722ea5ea60b81090c7aecd3e335eb59abaf7b86a8c62e39b23b845bdde24727",
+    "repro/methods.py": "ae0b6c0f36a43e24e774668d2e3b4172925a783d2aaac7cfaa31feb321b39442",
+    "repro/transport.py": "5379ac0a93a2d200ef245709a29061ad2b719be33ee51454a5185eef4b7897b9",
+    "repro/replay.py": "839f605493536dfb22ed97159c9f931e4000887f4563392e32f44fa5747810a2",
+    "repro/holdout_progress.py": "69180b6658628b06f55e00ef6f56fb23857886192048f5f8b1459143d13b9dd3",
+    "repro/resume_balance.py": "d65ac3d5185ce84aaf135fc89b40ba1faa887a901d3fcbaf27a868bae8372913",
+    "repro/balance.py": "78945dc1fef75a1fd30f00ce1f5e00a9609a81a7b25da3031416b57997a4fa9e",
+    "repro/pilot.py": "71bbd9c4ced8c7bc3c9737a282e33ee105d1e97ac420d13e9283f7c94e36a520",
+    "repro/prepare.py": "c14b0962aa94891ac25d16408adc8c7645ef2a9c8556d59c61f743d65192ccce",
+    "repro/configs/pilot.json": "d580c8d7bf6f951a35d118fa616295fd8daf27b9867002ba3987371f03fd489f",
+    "repro/artifacts/sample_manifest.json": "3b34a0d322de75d276c11faf72c7eb7f719839c484b72acdba815f743ccf43ef",
+    "repro/artifacts/frozen_books.json": "35e5aeda3862e5c8c43d81e85b9e9a9d0383100074d2e32955ac42ee137790bd",
+    "repro/artifacts/STAGE3_PLAN.md": "c32796b5e45456e783f1bb8ed423d1726542cd3bd98892df09f979d878ae8232",
+    "eval/finance/data/formula_test.jsonl": "079919e9631e50ba0489d2be1221ecf59952a9230ff91c5325c27b37ed99e342",
+    "repro/artifacts/books/ace-seed42.txt": "04437316150c89da2ef203c24c639bd083776354f02bfebec5a822f5551a475f",
+    "repro/artifacts/books/ace-seed43.txt": "180db2ab36846d5a8f55bd83fe040399a853207c06ec8f9d70dcf7c533db02a6",
+    "repro/artifacts/books/ace-seed44.txt": "4ee2fb49fbe2be4242c256d8d2cde4f286725df7da264f5f9042a6f1de77164f",
+    "repro/artifacts/books/selective-seed42.txt": "1e788c8f8ba3aa803b8d1f5f03973249c7d778d0480b0dd733511eeeb497de81",
+    "repro/artifacts/books/selective-seed43.txt": "8f4cc566d4253e0295b8a027c9dd8ec26aad30c846f01c7fa6d982a453c07218",
+    "repro/artifacts/books/selective-seed44.txt": "96008ce119000d92d08e7c592ed5f68cc2dca11111079aa12e5de1940ad5fefb"
+  },
+  "spent_before_test_cny": 11.317092768,
+  "additional_forecast_with_30pct_margin_cny": 36.8256096,
+  "forecast_assumptions": "No cache discount; 700 overhead tokens, 1.2x local book tokens, 1000 output tokens",
+  "blinding": "No scoring until fifteen inference jobs complete; target removed from generator inputs"
+}
