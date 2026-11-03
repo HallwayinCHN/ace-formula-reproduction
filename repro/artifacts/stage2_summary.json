@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "formal_learning_jobs": 6,
+  "sample_counts": {
+    "train": 60,
+    "validation": 30
+  },
+  "validation_accuracy_mean": {
+    "ace": 0.888888888888889,
+    "selective": 0.8777777777777778
+  },
+  "learning_call_reduction_percent": 41.81585677749361,
+  "standardized_learning_cost_reduction_percent": 49.028083842874125,
+  "stage2_accounted_cny": 10.687351104,
+  "all_stages_accounted_cny": 11.317092768,
+  "frozen_books": 6,
+  "offline_tests": 27,
+  "provider_402_rejections": 3,
+  "replayed_completed_calls": 509,
+  "held_out_test_evaluated": false,
+  "actual_provider_bill_cny": null,
+  "next_plan": "repro/artifacts/STAGE3_PLAN.md"
+}

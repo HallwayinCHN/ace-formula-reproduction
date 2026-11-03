@@ -1,0 +1,47 @@
+{
+  "books": [
+    {
+      "variant": "ace",
+      "seed": 42,
+      "path": "repro/artifacts/books/ace-seed42.txt",
+      "source_path": "results/repro/formal-ace-seed42/best_playbook.txt",
+      "sha256": "04437316150c89da2ef203c24c639bd083776354f02bfebec5a822f5551a475f"
+    },
+    {
+      "variant": "ace",
+      "seed": 43,
+      "path": "repro/artifacts/books/ace-seed43.txt",
+      "source_path": "results/repro/formal-ace-seed43/best_playbook.txt",
+      "sha256": "180db2ab36846d5a8f55bd83fe040399a853207c06ec8f9d70dcf7c533db02a6"
+    },
+    {
+      "variant": "ace",
+      "seed": 44,
+      "path": "repro/artifacts/books/ace-seed44.txt",
+      "source_path": "results/repro/formal-ace-seed44/best_playbook.txt",
+      "sha256": "4ee2fb49fbe2be4242c256d8d2cde4f286725df7da264f5f9042a6f1de77164f"
+    },
+    {
+      "variant": "selective",
+      "seed": 42,
+      "path": "repro/artifacts/books/selective-seed42.txt",
+      "source_path": "results/repro/formal-selective-seed42/best_playbook.txt",
+      "sha256": "1e788c8f8ba3aa803b8d1f5f03973249c7d778d0480b0dd733511eeeb497de81"
+    },
+    {
+      "variant": "selective",
+      "seed": 43,
+      "path": "repro/artifacts/books/selective-seed43.txt",
+      "source_path": "results/repro/formal-selective-seed43/best_playbook.txt",
+      "sha256": "8f4cc566d4253e0295b8a027c9dd8ec26aad30c846f01c7fa6d982a453c07218"
+    },
+    {
+      "variant": "selective",
+      "seed": 44,
+      "path": "repro/artifacts/books/selective-seed44.txt",
+      "source_path": "results/repro/formal-selective-seed44/best_playbook.txt",
+      "sha256": "96008ce119000d92d08e7c592ed5f68cc2dca11111079aa12e5de1940ad5fefb"
+    }
+  ],
+  "held_out_test_evaluated": false
+}

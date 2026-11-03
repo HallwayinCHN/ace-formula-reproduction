@@ -2,6 +2,7 @@
 
 import json
 import statistics
+import shutil
 
 from repro import ROOT
 from repro.methods import parse_entries
@@ -24,9 +25,21 @@ def collect():
             row["entries"] = len(parse_entries(raw.decode()))
             rows.append(row)
             books.append({"variant": variant, "seed": seed,
-                          "path": str((output / "best_playbook.txt").relative_to(ROOT)),
+                          "path": f"repro/artifacts/books/{variant}-seed{seed}.txt",
+                          "source_path": str((output / "best_playbook.txt").relative_to(ROOT)),
                           "sha256": digest(raw)})
     return rows, books
+
+
+def freeze_books(books):
+    for book in books:
+        target = ROOT / book["path"]
+        if target.exists() and digest(target.read_bytes()) != book["sha256"]:
+            raise ValueError("Refusing to overwrite an already frozen playbook")
+    for book in books:
+        target = ROOT / book["path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / book["source_path"], target)
 
 
 def grouped(rows):
@@ -41,6 +54,9 @@ def grouped(rows):
             "learning_calls": sum(row["learning_calls"] for row in selected),
             "learning_accounted_cny": sum(row["learning_accounted_cny"] for row in selected),
             "learning_full_cache_miss_cny": sum(row["learning_full_cache_miss_cny"] for row in selected),
+            "learning_without_diagnostic_calls": sum(row["learning_without_diagnostic_calls"] for row in selected),
+            "learning_without_diagnostic_full_miss_cny": sum(
+                row["learning_without_diagnostic_full_miss_cny"] for row in selected),
             "all_calls_accounted_cny": sum(row["accounted_cny"] for row in selected),
             "skipped_correct": sum(row["skipped_correct"] for row in selected),
         }
@@ -49,9 +65,29 @@ def grouped(rows):
 
 def main():
     rows, books = collect()
-    groups = grouped(rows)
     ledger = CostLedger(ROOT / "results/repro/live_usage.jsonl", "report", load_config())
     all_records = ledger.records()
+    for row in rows:
+        requests = [r for r in all_records if r["run_id"] == f"formal-{row['variant']}-seed{row['seed']}"]
+        row["cached_input_tokens"] = sum(r.get("cached_tokens", 0) for r in requests)
+        row["cache_hit_fraction"] = row["cached_input_tokens"] / max(1, row["prompt_tokens"])
+        row["unknown_billing_requests"] = sum(r["state"] in ("pending", "failed_billing_unknown") for r in requests)
+        row["rejected_402_requests"] = sum(r["state"] == "rejected_402" for r in requests)
+        row["learning_request_attempts"] = row["learning_calls"]
+        row["learning_calls"] = sum(r["state"] == "completed" and r["call_id"].startswith("train_") for r in requests)
+        row["validation_calls"] = sum(r["state"] == "completed" and r["call_id"].startswith("test_") for r in requests)
+        row["learning_full_cache_miss_cny"] += sum(
+            r["accounted_cny"] for r in requests if r["state"] != "completed" and r["call_id"].startswith("train_")
+        )
+        core = [r for r in requests if r["state"] == "completed" and r["call_id"].startswith("train_")
+                and not r["call_id"].endswith("_post_curate")]
+        config = load_config()
+        row["learning_without_diagnostic_calls"] = len(core)
+        row["learning_without_diagnostic_full_miss_cny"] = sum(
+            (r.get("prompt_tokens", 0) * config["input_usd_per_million"]
+             + r.get("completion_tokens", 0) * config["output_usd_per_million"])
+            / 1_000_000 * config["usd_to_cny_budget_factor"] for r in core)
+    groups = grouped(rows)
     stage2_names = {f"formal-{row['variant']}-seed{row['seed']}" for row in rows}
     stage2_records = [row for row in all_records if row["run_id"] in stage2_names]
     comparison = {
@@ -61,6 +97,9 @@ def main():
                                                   / groups["ace"]["learning_calls"]),
         "standardized_learning_cost_reduction_percent": 100 * (
             1 - groups["selective"]["learning_full_cache_miss_cny"] / groups["ace"]["learning_full_cache_miss_cny"]),
+        "learning_call_reduction_excluding_diagnostics_percent": 100 * (
+            1 - groups["selective"]["learning_without_diagnostic_calls"]
+            / groups["ace"]["learning_without_diagnostic_calls"]),
     }
     report = {
         "status": "training_and_validation_complete", "sample_counts": {"train": 60, "validation": 30},
@@ -72,6 +111,7 @@ def main():
         "caveat": "Validation selected the books; these are not unbiased held-out performance estimates.",
     }
     write_json(ARTIFACTS / "stage2_analysis.json", report)
+    freeze_books(books)
     write_json(ARTIFACTS / "frozen_books.json", {"books": books, "held_out_test_evaluated": False})
     print(json.dumps({"groups": groups, "comparison": comparison,
                       "stage2_accounted_cny": report["stage2_accounted_cny"]}, indent=2))

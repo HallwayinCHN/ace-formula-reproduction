@@ -1,0 +1,941 @@
+{
+  "status": "training_and_validation_complete",
+  "sample_counts": {
+    "train": 60,
+    "validation": 30
+  },
+  "groups": {
+    "ace": {
+      "validation_accuracy_mean": 0.888888888888889,
+      "validation_accuracy_sd": 0.01924500897298752,
+      "validation_accuracy_variance": 0.0003703703703703702,
+      "learning_calls": 782,
+      "learning_accounted_cny": 6.228277728,
+      "learning_full_cache_miss_cny": 8.7682872,
+      "learning_without_diagnostic_calls": 602,
+      "learning_without_diagnostic_full_miss_cny": 6.766670399999999,
+      "all_calls_accounted_cny": 6.90216432,
+      "skipped_correct": 0
+    },
+    "selective": {
+      "validation_accuracy_mean": 0.8777777777777778,
+      "validation_accuracy_sd": 0.01924500897298752,
+      "validation_accuracy_variance": 0.0003703703703703702,
+      "learning_calls": 455,
+      "learning_accounted_cny": 3.180543264,
+      "learning_full_cache_miss_cny": 4.469364,
+      "learning_without_diagnostic_calls": 384,
+      "learning_without_diagnostic_full_miss_cny": 3.7790904,
+      "all_calls_accounted_cny": 3.785186784,
+      "skipped_correct": 109
+    }
+  },
+  "comparison": {
+    "validation_accuracy_change_percentage_points": -1.1111111111111183,
+    "learning_call_reduction_percent": 41.81585677749361,
+    "standardized_learning_cost_reduction_percent": 49.028083842874125,
+    "learning_call_reduction_excluding_diagnostics_percent": 36.21262458471761
+  },
+  "runs": [
+    {
+      "status": "completed",
+      "mock": false,
+      "variant": "ace",
+      "seed": 42,
+      "train_count": 60,
+      "validation_count": 30,
+      "best_validation_accuracy": 0.8666666666666667,
+      "checkpoints": [
+        {
+          "epoch": 1,
+          "step": 30,
+          "train_result": {
+            "pre_train_accuracy": 0.7666666666666667,
+            "post_train_accuracy": 0.9
+          },
+          "val_result": {
+            "accuracy": 0.8333333333333334,
+            "correct": 25,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 2988,
+          "playbook_length": 11660,
+          "playbook_stats": {
+            "total_bullets": 27,
+            "high_performing": 0,
+            "problematic": 3,
+            "unused": 17,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 23,
+                "helpful": 11,
+                "harmful": 1
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 4,
+                "helpful": 4,
+                "harmful": 3
+              }
+            }
+          }
+        },
+        {
+          "epoch": 1,
+          "step": 60,
+          "train_result": {
+            "pre_train_accuracy": 0.7666666666666667,
+            "post_train_accuracy": 0.8666666666666667
+          },
+          "val_result": {
+            "accuracy": 0.8666666666666667,
+            "correct": 26,
+            "total": 30,
+            "no_answer": 1,
+            "errors": 0
+          },
+          "playbook_num_tokens": 5993,
+          "playbook_length": 23578,
+          "playbook_stats": {
+            "total_bullets": 49,
+            "high_performing": 2,
+            "problematic": 2,
+            "unused": 28,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 39,
+                "helpful": 34,
+                "harmful": 2
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 10,
+                "helpful": 8,
+                "harmful": 6
+              }
+            }
+          }
+        }
+      ],
+      "logical_calls": 314,
+      "replayed_calls": 0,
+      "actual_request_attempts": 314,
+      "accounted_cny": 2.200483104,
+      "learning_calls": 254,
+      "validation_calls": 60,
+      "learning_accounted_cny": 1.949489952,
+      "validation_accounted_cny": 0.250993152,
+      "learning_full_cache_miss_cny": 2.7195912,
+      "roles": {
+        "generator": 194,
+        "reflector": 60,
+        "curator": 60
+      },
+      "prompt_tokens": 1077115,
+      "output_tokens": 105480,
+      "truncated": 4,
+      "api_seconds": 713.359733422054,
+      "skipped_correct": 0,
+      "best_playbook_sha256": "04437316150c89da2ef203c24c639bd083776354f02bfebec5a822f5551a475f",
+      "retrieval_validation_tokens": [
+        1477,
+        1456,
+        1173,
+        1487,
+        1396,
+        1448,
+        1494,
+        1289,
+        1479,
+        1282,
+        1282,
+        1447,
+        1328,
+        1390,
+        1256,
+        1467,
+        1394,
+        1451,
+        1353,
+        1442,
+        1321,
+        1448,
+        1441,
+        1347,
+        1497,
+        1468,
+        1260,
+        1441,
+        1435,
+        1267
+      ],
+      "full_book_tokens": 5993,
+      "held_out_test_loaded": false,
+      "initial_train_correct": 46,
+      "entries": 49,
+      "cached_input_tokens": 594048,
+      "cache_hit_fraction": 0.5515177116649569,
+      "unknown_billing_requests": 0,
+      "rejected_402_requests": 0,
+      "learning_request_attempts": 254,
+      "learning_without_diagnostic_calls": 194,
+      "learning_without_diagnostic_full_miss_cny": 2.0819544
+    },
+    {
+      "status": "completed",
+      "mock": false,
+      "variant": "ace",
+      "seed": 43,
+      "train_count": 60,
+      "validation_count": 30,
+      "best_validation_accuracy": 0.9,
+      "checkpoints": [
+        {
+          "epoch": 1,
+          "step": 30,
+          "train_result": {
+            "pre_train_accuracy": 0.7,
+            "post_train_accuracy": 0.8
+          },
+          "val_result": {
+            "accuracy": 0.7666666666666667,
+            "correct": 23,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 3758,
+          "playbook_length": 15004,
+          "playbook_stats": {
+            "total_bullets": 40,
+            "high_performing": 0,
+            "problematic": 2,
+            "unused": 32,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 26,
+                "helpful": 5,
+                "harmful": 0
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 7,
+                "helpful": 1,
+                "harmful": 1
+              },
+              "PROBLEM-SOLVING HEURISTICS": {
+                "count": 7,
+                "helpful": 1,
+                "harmful": 1
+              }
+            }
+          }
+        },
+        {
+          "epoch": 1,
+          "step": 60,
+          "train_result": {
+            "pre_train_accuracy": 0.7666666666666667,
+            "post_train_accuracy": 0.8833333333333333
+          },
+          "val_result": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 6036,
+          "playbook_length": 23266,
+          "playbook_stats": {
+            "total_bullets": 59,
+            "high_performing": 0,
+            "problematic": 3,
+            "unused": 39,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 41,
+                "helpful": 21,
+                "harmful": 0
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 10,
+                "helpful": 2,
+                "harmful": 1
+              },
+              "PROBLEM-SOLVING HEURISTICS": {
+                "count": 8,
+                "helpful": 1,
+                "harmful": 2
+              }
+            }
+          }
+        }
+      ],
+      "logical_calls": 322,
+      "replayed_calls": 0,
+      "actual_request_attempts": 322,
+      "accounted_cny": 2.18844816,
+      "learning_calls": 262,
+      "validation_calls": 60,
+      "learning_accounted_cny": 2.02168944,
+      "validation_accounted_cny": 0.16675872,
+      "learning_full_cache_miss_cny": 2.8827095999999997,
+      "roles": {
+        "generator": 198,
+        "reflector": 64,
+        "curator": 60
+      },
+      "prompt_tokens": 1150451,
+      "output_tokens": 101541,
+      "truncated": 3,
+      "api_seconds": 699.1191179922316,
+      "skipped_correct": 0,
+      "best_playbook_sha256": "180db2ab36846d5a8f55bd83fe040399a853207c06ec8f9d70dcf7c533db02a6",
+      "retrieval_validation_tokens": [
+        981,
+        1233,
+        961,
+        1324,
+        1151,
+        898,
+        1294,
+        1012,
+        872,
+        914,
+        914,
+        875,
+        1012,
+        1130,
+        1023,
+        1182,
+        924,
+        889,
+        913,
+        908,
+        1048,
+        889,
+        1192,
+        1096,
+        1214,
+        1152,
+        899,
+        1215,
+        976,
+        964
+      ],
+      "full_book_tokens": 6036,
+      "held_out_test_loaded": false,
+      "initial_train_correct": 46,
+      "entries": 59,
+      "cached_input_tokens": 657920,
+      "cache_hit_fraction": 0.571880071380702,
+      "unknown_billing_requests": 0,
+      "rejected_402_requests": 0,
+      "learning_request_attempts": 262,
+      "learning_without_diagnostic_calls": 202,
+      "learning_without_diagnostic_full_miss_cny": 2.2382543999999998
+    },
+    {
+      "status": "completed",
+      "mock": false,
+      "variant": "ace",
+      "seed": 44,
+      "train_count": 60,
+      "validation_count": 30,
+      "best_validation_accuracy": 0.9,
+      "checkpoints": [
+        {
+          "epoch": 1,
+          "step": 30,
+          "train_result": {
+            "pre_train_accuracy": 0.6666666666666666,
+            "post_train_accuracy": 0.8333333333333334
+          },
+          "val_result": {
+            "accuracy": 0.8,
+            "correct": 24,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 3592,
+          "playbook_length": 14611,
+          "playbook_stats": {
+            "total_bullets": 39,
+            "high_performing": 0,
+            "problematic": 0,
+            "unused": 37,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 22,
+                "helpful": 3,
+                "harmful": 0
+              },
+              "PROBLEM-SOLVING HEURISTICS": {
+                "count": 17,
+                "helpful": 0,
+                "harmful": 0
+              }
+            }
+          }
+        },
+        {
+          "epoch": 1,
+          "step": 60,
+          "train_result": {
+            "pre_train_accuracy": 0.7333333333333333,
+            "post_train_accuracy": 0.8666666666666667
+          },
+          "val_result": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 6811,
+          "playbook_length": 27409,
+          "playbook_stats": {
+            "total_bullets": 66,
+            "high_performing": 0,
+            "problematic": 1,
+            "unused": 47,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 42,
+                "helpful": 20,
+                "harmful": 1
+              },
+              "PROBLEM-SOLVING HEURISTICS": {
+                "count": 24,
+                "helpful": 12,
+                "harmful": 0
+              }
+            }
+          }
+        }
+      ],
+      "logical_calls": 326,
+      "replayed_calls": 0,
+      "actual_request_attempts": 326,
+      "accounted_cny": 2.513233056,
+      "learning_calls": 266,
+      "validation_calls": 60,
+      "learning_accounted_cny": 2.257098336,
+      "validation_accounted_cny": 0.25613472,
+      "learning_full_cache_miss_cny": 3.1659864,
+      "roles": {
+        "generator": 201,
+        "reflector": 65,
+        "curator": 60
+      },
+      "prompt_tokens": 1239455,
+      "output_tokens": 122812,
+      "truncated": 4,
+      "api_seconds": 797.8423315486871,
+      "skipped_correct": 0,
+      "best_playbook_sha256": "4ee2fb49fbe2be4242c256d8d2cde4f286725df7da264f5f9042a6f1de77164f",
+      "retrieval_validation_tokens": [
+        1429,
+        1453,
+        1318,
+        1382,
+        1392,
+        1275,
+        1431,
+        1369,
+        1377,
+        1214,
+        1214,
+        1186,
+        1279,
+        1279,
+        1391,
+        1491,
+        1313,
+        1447,
+        1283,
+        1420,
+        1208,
+        1423,
+        1429,
+        1436,
+        1435,
+        1254,
+        1259,
+        1457,
+        1407,
+        1256
+      ],
+      "full_book_tokens": 6811,
+      "held_out_test_loaded": false,
+      "initial_train_correct": 44,
+      "entries": 66,
+      "cached_input_tokens": 697472,
+      "cache_hit_fraction": 0.5627247459568924,
+      "unknown_billing_requests": 0,
+      "rejected_402_requests": 0,
+      "learning_request_attempts": 266,
+      "learning_without_diagnostic_calls": 206,
+      "learning_without_diagnostic_full_miss_cny": 2.4464615999999997
+    },
+    {
+      "status": "completed",
+      "mock": false,
+      "variant": "selective",
+      "seed": 42,
+      "train_count": 60,
+      "validation_count": 30,
+      "best_validation_accuracy": 0.9,
+      "checkpoints": [
+        {
+          "epoch": 1,
+          "step": 30,
+          "train_result": {
+            "pre_train_accuracy": 0.8333333333333334,
+            "post_train_accuracy": 0.9333333333333333
+          },
+          "val_result": {
+            "accuracy": 0.8333333333333334,
+            "correct": 25,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 1234,
+          "playbook_length": 4946,
+          "playbook_stats": {
+            "total_bullets": 16,
+            "high_performing": 0,
+            "problematic": 1,
+            "unused": 14,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 7,
+                "helpful": 1,
+                "harmful": 0
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 5,
+                "helpful": 0,
+                "harmful": 1
+              },
+              "CONTEXT CLUES & INDICATORS": {
+                "count": 4,
+                "helpful": 0,
+                "harmful": 0
+              }
+            }
+          }
+        },
+        {
+          "epoch": 1,
+          "step": 60,
+          "train_result": {
+            "pre_train_accuracy": 0.7833333333333333,
+            "post_train_accuracy": 0.8833333333333333
+          },
+          "val_result": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 3483,
+          "playbook_length": 14144,
+          "playbook_stats": {
+            "total_bullets": 37,
+            "high_performing": 0,
+            "problematic": 2,
+            "unused": 31,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 13,
+                "helpful": 3,
+                "harmful": 1
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 11,
+                "helpful": 1,
+                "harmful": 1
+              },
+              "CONTEXT CLUES & INDICATORS": {
+                "count": 13,
+                "helpful": 1,
+                "harmful": 0
+              }
+            }
+          }
+        }
+      ],
+      "logical_calls": 205,
+      "replayed_calls": 182,
+      "actual_request_attempts": 206,
+      "accounted_cny": 1.1898144959999999,
+      "learning_calls": 145,
+      "validation_calls": 60,
+      "learning_accounted_cny": 0.954989856,
+      "validation_accounted_cny": 0.23482464,
+      "learning_full_cache_miss_cny": 1.278324,
+      "roles": {
+        "generator": 159,
+        "reflector": 25,
+        "curator": 22
+      },
+      "prompt_tokens": 461085,
+      "output_tokens": 77158,
+      "truncated": 2,
+      "api_seconds": 500.38320637797005,
+      "skipped_correct": 38,
+      "best_playbook_sha256": "1e788c8f8ba3aa803b8d1f5f03973249c7d778d0480b0dd733511eeeb497de81",
+      "retrieval_validation_tokens": [
+        1066,
+        1052,
+        1148,
+        1007,
+        1030,
+        1083,
+        1123,
+        1091,
+        1112,
+        984,
+        984,
+        1022,
+        1101,
+        1029,
+        1144,
+        1093,
+        1102,
+        1105,
+        1051,
+        1056,
+        1029,
+        1105,
+        994,
+        1170,
+        1053,
+        1143,
+        1115,
+        1083,
+        1216,
+        1158
+      ],
+      "full_book_tokens": 3483,
+      "held_out_test_loaded": false,
+      "initial_train_correct": 47,
+      "entries": 37,
+      "cached_input_tokens": 279552,
+      "cache_hit_fraction": 0.6062916815771495,
+      "unknown_billing_requests": 0,
+      "rejected_402_requests": 1,
+      "learning_request_attempts": 145,
+      "learning_without_diagnostic_calls": 123,
+      "learning_without_diagnostic_full_miss_cny": 1.0601424
+    },
+    {
+      "status": "completed",
+      "mock": false,
+      "variant": "selective",
+      "seed": 43,
+      "train_count": 60,
+      "validation_count": 30,
+      "best_validation_accuracy": 0.8666666666666667,
+      "checkpoints": [
+        {
+          "epoch": 1,
+          "step": 30,
+          "train_result": {
+            "pre_train_accuracy": 0.6666666666666666,
+            "post_train_accuracy": 0.8666666666666667
+          },
+          "val_result": {
+            "accuracy": 0.8,
+            "correct": 24,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 3160,
+          "playbook_length": 12693,
+          "playbook_stats": {
+            "total_bullets": 32,
+            "high_performing": 0,
+            "problematic": 1,
+            "unused": 30,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 13,
+                "helpful": 1,
+                "harmful": 0
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 8,
+                "helpful": 0,
+                "harmful": 1
+              },
+              "PROBLEM-SOLVING HEURISTICS": {
+                "count": 11,
+                "helpful": 0,
+                "harmful": 0
+              }
+            }
+          }
+        },
+        {
+          "epoch": 1,
+          "step": 60,
+          "train_result": {
+            "pre_train_accuracy": 0.7833333333333333,
+            "post_train_accuracy": 0.9166666666666666
+          },
+          "val_result": {
+            "accuracy": 0.8666666666666667,
+            "correct": 26,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 4173,
+          "playbook_length": 16273,
+          "playbook_stats": {
+            "total_bullets": 40,
+            "high_performing": 0,
+            "problematic": 1,
+            "unused": 32,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 19,
+                "helpful": 4,
+                "harmful": 0
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 8,
+                "helpful": 0,
+                "harmful": 1
+              },
+              "PROBLEM-SOLVING HEURISTICS": {
+                "count": 13,
+                "helpful": 5,
+                "harmful": 0
+              }
+            }
+          }
+        }
+      ],
+      "logical_calls": 210,
+      "replayed_calls": 180,
+      "actual_request_attempts": 211,
+      "accounted_cny": 1.297048704,
+      "learning_calls": 150,
+      "validation_calls": 60,
+      "learning_accounted_cny": 1.105662144,
+      "validation_accounted_cny": 0.19138655999999998,
+      "learning_full_cache_miss_cny": 1.5951792,
+      "roles": {
+        "generator": 161,
+        "reflector": 27,
+        "curator": 23
+      },
+      "prompt_tokens": 644080,
+      "output_tokens": 79647,
+      "truncated": 2,
+      "api_seconds": 520.309440363897,
+      "skipped_correct": 37,
+      "best_playbook_sha256": "8f4cc566d4253e0295b8a027c9dd8ec26aad30c846f01c7fa6d982a453c07218",
+      "retrieval_validation_tokens": [
+        1272,
+        1235,
+        1272,
+        1294,
+        1187,
+        1144,
+        1299,
+        1263,
+        1192,
+        1169,
+        1169,
+        1165,
+        1262,
+        1231,
+        1255,
+        1232,
+        1198,
+        1197,
+        1186,
+        1237,
+        1215,
+        1201,
+        1295,
+        1244,
+        1357,
+        1349,
+        1231,
+        1235,
+        1261,
+        1206
+      ],
+      "full_book_tokens": 4173,
+      "held_out_test_loaded": false,
+      "initial_train_correct": 47,
+      "entries": 40,
+      "cached_input_tokens": 430848,
+      "cache_hit_fraction": 0.668935535958266,
+      "unknown_billing_requests": 0,
+      "rejected_402_requests": 1,
+      "learning_request_attempts": 150,
+      "learning_without_diagnostic_calls": 127,
+      "learning_without_diagnostic_full_miss_cny": 1.3737527999999999
+    },
+    {
+      "status": "completed",
+      "mock": false,
+      "variant": "selective",
+      "seed": 44,
+      "train_count": 60,
+      "validation_count": 30,
+      "best_validation_accuracy": 0.8666666666666667,
+      "checkpoints": [
+        {
+          "epoch": 1,
+          "step": 30,
+          "train_result": {
+            "pre_train_accuracy": 0.6666666666666666,
+            "post_train_accuracy": 0.8333333333333334
+          },
+          "val_result": {
+            "accuracy": 0.7,
+            "correct": 21,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 2436,
+          "playbook_length": 9931,
+          "playbook_stats": {
+            "total_bullets": 29,
+            "high_performing": 0,
+            "problematic": 3,
+            "unused": 26,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 14,
+                "helpful": 0,
+                "harmful": 0
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 15,
+                "helpful": 0,
+                "harmful": 3
+              }
+            }
+          }
+        },
+        {
+          "epoch": 1,
+          "step": 60,
+          "train_result": {
+            "pre_train_accuracy": 0.7333333333333333,
+            "post_train_accuracy": 0.8833333333333333
+          },
+          "val_result": {
+            "accuracy": 0.8666666666666667,
+            "correct": 26,
+            "total": 30,
+            "no_answer": 0,
+            "errors": 0
+          },
+          "playbook_num_tokens": 4113,
+          "playbook_length": 16584,
+          "playbook_stats": {
+            "total_bullets": 44,
+            "high_performing": 0,
+            "problematic": 5,
+            "unused": 38,
+            "by_section": {
+              "FORMULAS & CALCULATIONS": {
+                "count": 23,
+                "helpful": 1,
+                "harmful": 0
+              },
+              "COMMON MISTAKES TO AVOID": {
+                "count": 21,
+                "helpful": 0,
+                "harmful": 8
+              }
+            }
+          }
+        }
+      ],
+      "logical_calls": 220,
+      "replayed_calls": 147,
+      "actual_request_attempts": 221,
+      "accounted_cny": 1.298323584,
+      "learning_calls": 160,
+      "validation_calls": 60,
+      "learning_accounted_cny": 1.119891264,
+      "validation_accounted_cny": 0.17843232,
+      "learning_full_cache_miss_cny": 1.5958607999999999,
+      "roles": {
+        "generator": 166,
+        "reflector": 29,
+        "curator": 26
+      },
+      "prompt_tokens": 618100,
+      "output_tokens": 78278,
+      "truncated": 2,
+      "api_seconds": 518.2952432932798,
+      "skipped_correct": 34,
+      "best_playbook_sha256": "96008ce119000d92d08e7c592ed5f68cc2dca11111079aa12e5de1940ad5fefb",
+      "retrieval_validation_tokens": [
+        1252,
+        1260,
+        1236,
+        1283,
+        1296,
+        1165,
+        1275,
+        1233,
+        1219,
+        1291,
+        1268,
+        1155,
+        1196,
+        1239,
+        1252,
+        1231,
+        1181,
+        1292,
+        1128,
+        1194,
+        1258,
+        1304,
+        1223,
+        1267,
+        1294,
+        1250,
+        1260,
+        1320,
+        1250,
+        1266
+      ],
+      "full_book_tokens": 4113,
+      "held_out_test_loaded": false,
+      "initial_train_correct": 44,
+      "entries": 44,
+      "cached_input_tokens": 398208,
+      "cache_hit_fraction": 0.6442452677560265,
+      "unknown_billing_requests": 0,
+      "rejected_402_requests": 1,
+      "learning_request_attempts": 161,
+      "learning_without_diagnostic_calls": 134,
+      "learning_without_diagnostic_full_miss_cny": 1.3451952
+    }
+  ],
+  "stage2_accounted_cny": 10.687351104,
+  "all_stages_accounted_cny": 11.317092768,
+  "actual_provider_bill_cny": null,
+  "held_out_test_evaluated": false,
+  "retrieval_quality_measured": false,
+  "caveat": "Validation selected the books; these are not unbiased held-out performance estimates."
+}

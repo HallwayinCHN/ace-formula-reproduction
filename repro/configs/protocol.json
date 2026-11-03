@@ -56,7 +56,7 @@
     ]
   },
   "formal_size_locked": true,
-  "formal_run_status": "not_started",
+  "formal_run_status": "training_complete",
   "efficiency_goal": {
     "max_accuracy_drop_percentage_points": 2,
     "min_cost_reduction_percent": 20
@@ -74,5 +74,7 @@
   },
   "cost_pilot": "pilot-20261103T074930Z-b45fef00",
   "json_mode": false,
-  "allow_truncated_nonempty": true
+  "allow_truncated_nonempty": true,
+  "frozen_books_manifest": "repro/artifacts/frozen_books.json",
+  "held_out_test_status": "not_started"
 }
