@@ -1,0 +1,31 @@
+{
+  "verified_at_utc": "2026-11-03T11:12:50.145732+00:00",
+  "state": "running",
+  "predictions_completed": 342,
+  "completed_conditions": 2,
+  "probe_new_predictions": 1,
+  "original_220_predictions_and_replays_unchanged": true,
+  "preserved_files_verified": 440,
+  "old_failure_reserve_retained_cny": 0.734616,
+  "scores_opened": false,
+  "policy": {
+    "interval_seconds": 300,
+    "maximum_watch_hours": 24,
+    "max_extra_failure_reserve_cny": 5.0,
+    "max_active_conditions": 3,
+    "automatic_retry_http_codes": [
+      503
+    ],
+    "probe_new_predictions": 1,
+    "health_checks": [
+      "GET /user/balance",
+      "GET /models"
+    ],
+    "health_checks_do_not_prove_inference_health": true,
+    "retain_all_unknown_billing_reservations": true,
+    "no_automatic_retry_after_timeout_or_missing_response": true,
+    "no_changes_to_model_prompts_data_books_or_scoring": true,
+    "no_score_loading_until_all_1500_predictions_complete": true,
+    "error_source": "https://api-docs.deepseek.com/quick_start/error_codes/"
+  }
+}
