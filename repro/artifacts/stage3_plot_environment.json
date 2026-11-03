@@ -1,0 +1,17 @@
+{
+  "python": "3.12.13",
+  "purpose": "Plotting only; original uv.lock unchanged",
+  "packages": {
+    "kiwisolver": "1.5.1",
+    "packaging": "26.3",
+    "numpy": "2.5.4",
+    "pillow": "13.0.0",
+    "contourpy": "1.4.0",
+    "matplotlib": "3.11.2",
+    "cycler": "0.12.1",
+    "fonttools": "4.68.0",
+    "tzdata": "2026.6",
+    "python-dateutil": "4.0.0",
+    "pyparsing": "3.3.3"
+  }
+}

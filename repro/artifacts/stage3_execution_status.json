@@ -1,12 +1,12 @@
 {
-  "status": "inference_stopped_service_error",
-  "snapshot_at_utc": "2026-11-03T09:52:49.824810+00:00",
+  "status": "completed_and_scored",
+  "snapshot_at_utc": "2026-11-03T11:30:10.619935+00:00",
   "logical_predictions_required": 1500,
-  "predictions_completed": 220,
-  "completed_conditions": 1,
-  "all_stages_accounted_cny_including_pending_reservations": 13.002372096,
+  "predictions_completed": 1500,
+  "completed_conditions": 15,
+  "all_stages_accounted_cny_including_pending_reservations": 18.646485312,
   "heldout_request_states": {
-    "completed": 220,
+    "completed": 1500,
     "failed_billing_unknown": 12
   },
   "heldout_roles": [
@@ -14,7 +14,7 @@
   ],
   "frozen_hashes_verified": 24,
   "upstream_hashes_verified": 12,
-  "scores_opened": false,
+  "scores_opened": true,
   "labels_used_for_generation": false,
   "auto_finalize_after_full_batch": true,
   "jobs": [
@@ -27,88 +27,89 @@
     {
       "variant": "base",
       "seed": 43,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "base",
       "seed": 44,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "ace",
       "seed": 42,
-      "items": 7,
-      "status": "incomplete"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "ace",
       "seed": 43,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "ace",
       "seed": 44,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "selective",
       "seed": 42,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "selective",
       "seed": 43,
-      "items": 21,
-      "status": "incomplete"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "selective",
       "seed": 44,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "retrieval",
       "seed": 42,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "retrieval",
       "seed": 43,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "retrieval",
       "seed": 44,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "combined",
       "seed": 42,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "combined",
       "seed": 43,
-      "items": 0,
-      "status": "not_started"
+      "items": 100,
+      "status": "completed"
     },
     {
       "variant": "combined",
       "seed": 44,
-      "items": 92,
-      "status": "incomplete"
+      "items": 100,
+      "status": "completed"
     }
   ],
-  "resume_blocker": "All three lanes stopped after HTTP 503 retries; unknown-billing slots require reconciliation before restart",
-  "auto_finalizer_status": "waiting_for_complete_batch"
+  "auto_finalizer_status": "complete",
+  "automatic_recovery_status": "complete",
+  "pending_requests": 0
 }

@@ -76,6 +76,6 @@
   "json_mode": false,
   "allow_truncated_nonempty": true,
   "frozen_books_manifest": "repro/artifacts/frozen_books.json",
-  "held_out_test_status": "inference_blinded",
+  "held_out_test_status": "scored",
   "automatic_recovery_contract": "repro/artifacts/stage3_recovery_contract.json"
 }

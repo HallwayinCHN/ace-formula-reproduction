@@ -1,0 +1,902 @@
+{
+  "regressions": [
+    {
+      "sample_id": 64,
+      "context": "Use formula Gross Domestic Product (GDP) to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: GDP = C + I + G + (X - M), Explanation: C: Consumption, I: Investment, G: Government spending, X: Exports, M: Imports. Question:  \"In a financial year, an economy has the following reports: Consumption - $2,200 billion, Investment - $900 billion, Government expenditures - $1,100 billion, Exports - $500 billion, and Imports - $450 billion. Calculate the GDP.\". Answer:",
+      "delta_seed_mean": -0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "4250.0",
+          "target": "4250000000000.0",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "4250.0",
+          "target": "4250000000000.0",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "4250000000000.0",
+          "target": "4250000000000.0",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "sample_id": 84,
+      "context": "Use formula Unemployment Rate to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: Unemployment Rate = (Number of Unemployed / Labor Force) × 100, Explanation: Number of Unemployed: People without jobs, Labor Force: Total working-age population. Question:  \"If a labor market expands by 50,000 due to immigration and there is no change in the number of unemployed, how does the unemployment rate change?\". Answer:",
+      "delta_seed_mean": -0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "0.00",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "-0.01",
+          "target": "0.0",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "No final answer found",
+          "target": "0.0",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "-0.24",
+          "target": "0.0",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "No final answer found",
+          "target": "0.0",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "Insufficient information to determine the change in the unemployment rate.",
+          "target": "0.0",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "0.0",
+          "target": "0.0",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "sample_id": 109,
+      "context": "Use formula Gross Domestic Product (GDP) to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: GDP = C + I + G + (X - M), Explanation: C: Consumption, I: Investment, G: Government spending, X: Exports, M: Imports. Question:  \"For educational purposes, calculate the GDP for a hypothetical scenario where Consumption totals $10 billion, Investment is $4 billion, Government expenditures are $6 billion, Exports tally at $3 billion, and Imports are at $2 billion.\". Answer:",
+      "delta_seed_mean": -0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "21000000000.0",
+          "target": "21000000000.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "No final answer found",
+          "target": "21000000000.0",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "sample_id": 148,
+      "context": "Use formula Capital Asset Pricing Model (CAPM) to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: r_a = r_f + β (r_m - r_f), Explanation: r_a: Expected return on the asset, r_f: Risk-free rate, β: Beta of the asset, r_m: Expected return of the market. Question:  \"Calculate the expected annual return on an asset with a beta of 2, a risk-free rate of 3.5%, and a market return of 15% using the CAPM.\". Answer:",
+      "delta_seed_mean": -0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "26.5",
+          "target": "0.27",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "26.5",
+          "target": "0.27",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "26.5",
+          "target": "0.27",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "26.5",
+          "target": "0.27",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "26.5",
+          "target": "0.27",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "0.27",
+          "target": "0.27",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "26.5",
+          "target": "0.27",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "sample_id": 158,
+      "context": "Use formula WACC (Weighted Average Cost of Capital) to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: WACC = (E/V) × Re + (D/V) × Rd × (1 - Tc), Explanation: E: Equity, D: Debt, V: Total capital, Re: Cost of equity, Rd: Cost of debt, Tc: Corporate tax rate. Question:  \"A new enterprise funded with $400,000 equity and $600,000 debt has costs of 10% on equity and 7% on debt, and the tax rate is 17%. What is the WACC?\". Answer:",
+      "delta_seed_mean": -0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "No final answer found",
+          "target": "0.07",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "7.49",
+          "target": "0.07",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "7.49",
+          "target": "0.07",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "0.07",
+          "target": "0.07",
+          "is_correct": true
+        }
+      ]
+    }
+  ],
+  "gains": [
+    {
+      "sample_id": 33,
+      "context": "Use formula Return on Investment (ROI) to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: ROI = (Gain from Investment - Cost of Investment) / Cost of Investment, Explanation: Gain from Investment: Revenue generated from investment, Cost of Investment: Initial investment cost. Question:  \"An investor buys $50,000 worth of bonds and receives a total of $58,000 after maturity. What is the ROI on these bonds?\". Answer:",
+      "delta_seed_mean": 0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "0.16",
+          "target": "0.16",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "0.16",
+          "target": "0.16",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "16.0",
+          "target": "0.16",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "sample_id": 121,
+      "context": "Use formula Return on Equity (ROE) to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: ROE = (Net Income / Shareholder's Equity) × 100, Explanation: Net Income: Company's total earnings, Shareholder's Equity: Equity held by shareholders. Question:  \"If a manufacturer records a net income of $1,500,000 and a shareholder's equity of $5,000,000, determine its ROE.\". Answer:",
+      "delta_seed_mean": 0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "0.30",
+          "target": "30.0",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "0.30",
+          "target": "30.0",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "0.3",
+          "target": "30.0",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "No final answer found",
+          "target": "30.0",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "0.30",
+          "target": "30.0",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "30.0",
+          "target": "30.0",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "sample_id": 186,
+      "context": "Use formula Interest Rate Parity (IRP) to answer the question. Answer with a numerical answer with 2 decimal places and with no explanations or other text. Formula: Forward Rate / Spot Rate = (1 + i_d) / (1 + i_f), Explanation: i_d: Domestic interest rate, i_f: Foreign interest rate. Question:  \"An article for a financial review needs input on what the NZD/USD forward rate should be for an upcoming quarterly report; the spot rate is listed at 0.66, New Zealand’s interest rate is 0.25%, and the United States’ rate is 1.5% for a duration of 6 months.\". Answer:",
+      "delta_seed_mean": 0.3333333333333333,
+      "outputs": [
+        {
+          "variant": "base",
+          "seed": 42,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 43,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "base",
+          "seed": 44,
+          "final_answer": "No final answer found",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 42,
+          "final_answer": "No final answer found",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 43,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "ace",
+          "seed": 44,
+          "final_answer": "No final answer found",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 42,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 43,
+          "final_answer": "No final answer found",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "selective",
+          "seed": 44,
+          "final_answer": "No final answer found",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 42,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 43,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "retrieval",
+          "seed": 44,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 42,
+          "final_answer": "0.65",
+          "target": "0.65",
+          "is_correct": true
+        },
+        {
+          "variant": "combined",
+          "seed": 43,
+          "final_answer": "0.66",
+          "target": "0.65",
+          "is_correct": false
+        },
+        {
+          "variant": "combined",
+          "seed": 44,
+          "final_answer": "No final answer found",
+          "target": "0.65",
+          "is_correct": false
+        }
+      ]
+    }
+  ]
+}

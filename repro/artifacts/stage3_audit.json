@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "audited_at_utc": "2026-11-03T11:25:39.552516+00:00",
+  "prediction_rows": 1500,
+  "distinct_questions": 100,
+  "conditions": 15,
+  "frozen_hashes_verified": 24,
+  "upstream_files_verified": 12,
+  "heldout_roles": [
+    "generator"
+  ],
+  "heldout_request_states": {
+    "completed": 1500,
+    "failed_billing_unknown": 12
+  },
+  "all_phases_request_states": {
+    "completed": 3189,
+    "rejected_402": 3,
+    "failed_billing_unknown": 12
+  },
+  "heldout_response_models": {
+    "deepseek-flash": 1500
+  },
+  "artifact_hashes": {
+    "stage3_analysis.json": "ef13d507759a7049eb371eaaa178fbb7f335b4e41d7278641c88d18de3d65cc4",
+    "stage3_scored.jsonl": "6c70f50c4475f916aaa158405b45f87228f52cbeaaa0dc86f3abdb2e409016c2",
+    "stage3_cases.json": "1e32f5e27519022435eafffc239fdfb55674b9379c81733cb9b4811c099969a4",
+    "stage3_lock.json": "ac9d822dcd8f58ee58bab84c12f4aa9c0cd163dc8a9542bf8b5f2c67e2c37d55"
+  },
+  "accounted_cny": 18.646485312,
+  "unknown_billing_requests": 12,
+  "recovery": {
+    "contract_sha256": "9e78e89699662ea108b7d2c7b2059a9e934cefb0602da8521f92d3dfaec1956e",
+    "preserved_predictions_verified": 220,
+    "preserved_files_verified": 440,
+    "original_unknown_reserve_cny": 0.734616,
+    "policy": {
+      "interval_seconds": 300,
+      "maximum_watch_hours": 24,
+      "max_extra_failure_reserve_cny": 5.0,
+      "max_active_conditions": 3,
+      "automatic_retry_http_codes": [
+        503
+      ],
+      "probe_new_predictions": 1,
+      "health_checks": [
+        "GET /user/balance",
+        "GET /models"
+      ],
+      "health_checks_do_not_prove_inference_health": true,
+      "retain_all_unknown_billing_reservations": true,
+      "no_automatic_retry_after_timeout_or_missing_response": true,
+      "no_changes_to_model_prompts_data_books_or_scoring": true,
+      "no_score_loading_until_all_1500_predictions_complete": true,
+      "error_source": "https://api-docs.deepseek.com/quick_start/error_codes/"
+    }
+  }
+}

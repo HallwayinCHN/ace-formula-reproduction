@@ -33,7 +33,7 @@ def main():
                          fmt="o", markersize=7, capsize=4, label=LABELS[variant])
         axes[0].annotate(f"{y:.1f}%", (x, y), xytext=(6, 7), textcoords="offset points", fontsize=9)
     axes[0].set(xlabel="Learning + 100 answers: standardized cost (CNY)", ylabel="Accuracy (%)",
-                title="Accuracy and complete usage cost")
+                title="Accuracy and learning + inference cost")
     axes[0].set_xlim(left=0)
     axes[0].grid(alpha=.17)
     axes[0].legend(loc="best", fontsize=8.5, frameon=False)
@@ -56,7 +56,7 @@ def main():
     left, right = axes[1].get_xlim()
     axes[1].set_xlim(left - .5, right + max(5, (right - left) * .7))
     axes[1].grid(axis="x", alpha=.17)
-    axes[1].legend(loc="lower left", fontsize=8, frameon=False)
+    axes[1].legend(loc="upper right", fontsize=8, frameon=False)
     fig.suptitle("ACE Formula: 100 held-out questions, three frozen training orders", fontsize=13)
     fig.text(.5, .025, "Left: mean +/- sample SD across 3 seeds. Right: 10,000 paired question-cluster resamples.\n"
              "Cost uses all-cache-miss prices; intervals condition on these trained books. "
