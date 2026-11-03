@@ -4,3 +4,6 @@
 __pycache__/
 */__pycache__/
 results/
+.DS_Store
+.env.*
+*.pyc

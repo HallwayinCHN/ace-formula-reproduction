@@ -1,0 +1,47 @@
+{
+  "upstream_commit": "82709de050e1db6e6ef2f07bcb0393560b94992a",
+  "python": "3.12.13",
+  "upstream_source_hashes": {
+    "ace/ace.py": "70f7af3ff9088498afa8d6939c5e142cd8b0046179516ee336c57586b92ec914",
+    "ace/core/generator.py": "4b750a59752bd5bdb24b2f27b80938844d8a7b5d89e86d7d6bb726f3685c25f5",
+    "ace/core/reflector.py": "fe5ae8fb006fd16fdef7b8e7ad38dc746195a4bf0a366a82e69c473c9982b811",
+    "ace/core/curator.py": "a22f7f233761acfb00852914d78112a776274c55bc022738af7defca95897617",
+    "ace/prompts/generator.py": "b8b12d4a6281ea4c422a2ee0bd919b50580d388027917e8740f82f97eb24eebb",
+    "ace/prompts/reflector.py": "72b343ce2781531dac2fd765543410b6abfc4817c39078dd4f83187c4d217e9c",
+    "ace/prompts/curator.py": "eb03d59b3f3593832f730a798199b581ad797acd503c47d1737616c68cf26107",
+    "eval/finance/data_processor.py": "ba20c128d6deefb63d8246d5e300bc07a26e9bb1e0170734fb9b193eb41a4621",
+    "utils.py": "7824aa262de2cd030b6914d1f7de698ec620dbec9c9e5f14ed1fe6322079570c",
+    "playbook_utils.py": "c67943f06cb0ee747be04d0599216e40d6c00e0cdf96ddc6af38fc26143e3a07",
+    "llm.py": "cc615c5b26773fddc99c702bf2521a1c929e6363a905824b1be3e300337d1026",
+    "uv.lock": "120dd2b908a6f62fe5be96e8a710229c46cb848bd515e4cd3626ea6917dbff1e"
+  },
+  "splits": {
+    "train": {
+      "path": "eval/finance/data/formula_train_subset_500.jsonl",
+      "records": 500,
+      "sha256": "aea676feb2354462ba22d3c2c73a18b780e1193b05597beaeb0250ae9021b482",
+      "missing_fields": 0,
+      "duplicate_questions": 0
+    },
+    "validation": {
+      "path": "eval/finance/data/formula_val_subset_300.jsonl",
+      "records": 300,
+      "sha256": "09948f7f24af5f2331f69a047ef086649873756cbf8626d19d23029346e98933",
+      "missing_fields": 0,
+      "duplicate_questions": 0
+    },
+    "test": {
+      "path": "eval/finance/data/formula_test.jsonl",
+      "records": 200,
+      "sha256": "079919e9631e50ba0489d2be1221ecf59952a9230ff91c5325c27b37ed99e342",
+      "missing_fields": 0,
+      "duplicate_questions": 0
+    }
+  },
+  "cross_split_question_overlap": {
+    "train__validation": 0,
+    "train__test": 0,
+    "validation__test": 0
+  },
+  "test_policy": "Structural audit only; no held-out text/labels displayed or sent to any model."
+}
