@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from importlib import metadata
 import json
 import os
+import subprocess
 import uuid
 
 from dotenv import load_dotenv
@@ -31,7 +32,8 @@ def preflight(config):
 
 def environment_snapshot():
     return {"packages": {dist.metadata["Name"]: dist.version for dist in metadata.distributions()},
-            "upstream_commit": PIN, "upstream_source_hashes": verify_upstream()}
+            "upstream_commit": PIN, "upstream_source_hashes": verify_upstream(),
+            "experiment_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()}
 
 
 @contextmanager

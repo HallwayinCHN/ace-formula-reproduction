@@ -3,6 +3,7 @@
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import importlib
+import fcntl
 import json
 import os
 from pathlib import Path
@@ -28,6 +29,10 @@ class CostLedger:
         self.path, self.run_id, self.config = Path(path), run_id, config
 
     def records(self):
+        with self.locked():
+            return self._records()
+
+    def _records(self):
         latest = {}
         if self.path.exists():
             for line in self.path.read_text().splitlines():
@@ -42,13 +47,38 @@ class CostLedger:
         return total, run
 
     def reserve(self, amount):
-        total, run = self.totals()
+        with self.locked():
+            self._check(amount)
+
+    def _check(self, amount):
+        records = self._records()
+        total = sum(row["accounted_cny"] for row in records)
+        run = sum(row["accounted_cny"] for row in records if row["run_id"] == self.run_id)
         if total + amount > self.config["project_limit_cny"]:
             raise ExperimentStopped("Project cost limit reached; no new request was sent")
-        if run + amount > self.config["pilot_limit_cny"]:
-            raise ExperimentStopped("Pilot cost limit reached; no new request was sent")
+        if run + amount > self.config.get("run_limit_cny", self.config["pilot_limit_cny"]):
+            raise ExperimentStopped("Run cost limit reached; no new request was sent")
 
     def append(self, row):
+        with self.locked():
+            self._append(row)
+
+    def reserve_and_append(self, row):
+        with self.locked():
+            self._check(row["accounted_cny"])
+            self._append(row)
+
+    @contextmanager
+    def locked(self):
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        with self.path.with_suffix(".lock").open("a") as handle:
+            fcntl.flock(handle, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle, fcntl.LOCK_UN)
+
+    def _append(self, row):
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a") as handle:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -60,6 +90,7 @@ class Transport:
         self.output.mkdir(parents=True, exist_ok=True)
         self.run_id = self.output.name
         self.calls = 0
+        self.request_context = {}
         self.encoder = tiktoken.get_encoding("cl100k_base")
         self.client = client or self._live_client()
         ledger_name = "mock_usage.jsonl" if mock else "live_usage.jsonl"
@@ -85,7 +116,7 @@ class Transport:
     def call(self, client, api_provider, model, prompt, role, call_id, max_tokens=4096,
              log_dir=None, use_json_mode=False, **unused):
         if self.calls >= self.config["max_calls"]:
-            raise ExperimentStopped("Pilot logical-call limit reached")
+            raise ExperimentStopped("Run logical-call limit reached")
         self.calls += 1
         # cl100k is not DeepSeek's tokenizer: reserve 2x local input estimate, then reconcile API usage.
         reserve = self.cost(2 * len(self.encoder.encode(prompt)), max_tokens)
@@ -115,13 +146,13 @@ class Transport:
 
     def _reserve_record(self, reserve, role, call_id, attempt):
         accounted = 0.0 if self.mock else reserve
-        self.ledger.reserve(accounted)
         record = {
             "request_id": uuid.uuid4().hex, "run_id": self.run_id, "role": role, "call_id": call_id,
             "attempt": attempt, "state": "pending", "accounted_cny": accounted,
             "mock": self.mock, "timestamp": datetime.now(timezone.utc).isoformat(),
+            **self.request_context,
         }
-        self.ledger.append(record)
+        self.ledger.reserve_and_append(record)
         return record
 
     def _failure(self, record, exc, started):
