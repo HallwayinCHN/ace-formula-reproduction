@@ -1,0 +1,108 @@
+{
+  "source_pilot": "pilot-20261103T074930Z-b45fef00",
+  "model": "deepseek-flash",
+  "baseline_validation": {
+    "accuracy": 0.6,
+    "correct": 6,
+    "total": 10,
+    "no_answer": 0
+  },
+  "checkpoint_validation": [
+    {
+      "step": 5,
+      "accuracy": 0.6,
+      "correct": 6,
+      "total": 10,
+      "no_answer": 0
+    },
+    {
+      "step": 10,
+      "accuracy": 0.6,
+      "correct": 6,
+      "total": 10,
+      "no_answer": 1
+    }
+  ],
+  "best_validation_accuracy": 0.6,
+  "initial_training_correct": 5,
+  "logical_calls": 79,
+  "request_counts_by_role": {
+    "generator": 57,
+    "reflector": 12,
+    "curator": 10
+  },
+  "response_models": [
+    "deepseek-flash"
+  ],
+  "prompt_tokens": 133605,
+  "completion_tokens": 34403,
+  "truncated_responses": 3,
+  "truncations_by_role": {
+    "generator": 1,
+    "reflector": 2
+  },
+  "api_call_seconds": 206.01724779373035,
+  "pilot_estimated_cny": 0.516649824,
+  "all_runs_accounted_cny": 0.629741664,
+  "actual_provider_bill_cny": null,
+  "observed_cost_inputs": {
+    "train_count": 10,
+    "train_calls": 49,
+    "train_input": 92243,
+    "train_output": 26029,
+    "base_input": 442.4,
+    "generator_output": 258.63157894736844,
+    "token_ratio": 1.0431654676258992,
+    "final_playbook_tokens": 1802,
+    "mean_playbook_tokens": 1046.8
+  },
+  "size_forecasts": [
+    {
+      "train": 100,
+      "validation": 40,
+      "test": 200,
+      "learning_cny": 97.62115027338129,
+      "validation_cny": 17.94275436758803,
+      "test_cny": 69.27812846648996,
+      "total_including_spent_and_30pct_margin_cny": 240.9243847036971
+    },
+    {
+      "train": 60,
+      "validation": 30,
+      "test": 100,
+      "learning_cny": 40.08056902446043,
+      "validation_cny": 8.584665200151457,
+      "test_cny": 23.811507398712603,
+      "total_including_spent_and_30pct_margin_cny": 94.84950577432183
+    },
+    {
+      "train": 30,
+      "validation": 20,
+      "test": 60,
+      "learning_cny": 13.105739084892084,
+      "validation_cny": 3.2869098456645207,
+      "test_cny": 9.414503863687997,
+      "total_including_spent_and_30pct_margin_cny": 34.17904029651798
+    }
+  ],
+  "selected_size": {
+    "train": 60,
+    "validation": 30,
+    "test": 100,
+    "learning_cny": 40.08056902446043,
+    "validation_cny": 8.584665200151457,
+    "test_cny": 23.811507398712603,
+    "total_including_spent_and_30pct_margin_cny": 94.84950577432183
+  },
+  "held_out_test_used_for_inference": false,
+  "forecast_assumptions": [
+    "Peak pricing, no cache discount, FX accounting factor 8",
+    "Linear playbook growth from 10 training items; this is uncertain",
+    "Both learning methods cost as much as original ACE, plus 30 percent margin",
+    "No test accuracy or test labels are used for size choice"
+  ],
+  "quality_limitations": [
+    "10 validation items and best-of-two checkpoint selection; not a held-out result",
+    "Pilot is a feasibility check, not evidence of method superiority"
+  ]
+}

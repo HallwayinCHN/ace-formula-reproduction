@@ -90,6 +90,33 @@ class TransportTests(unittest.TestCase):
                 transport.call(None, "fixture", "fixture", "test", "generator", "test_1")
             self.assertGreater(transport.ledger.totals()[0], 0)
 
+    def test_truncated_response_is_saved_but_not_accepted(self):
+        response = SimpleNamespace(
+            usage=SimpleNamespace(prompt_tokens=10, completion_tokens=4096), model="fixture",
+            choices=[SimpleNamespace(message=SimpleNamespace(content="incomplete fixture"), finish_reason="length")],
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            transport = self.make_transport(directory, lambda **kwargs: response)
+            transport.config["allow_truncated_nonempty"] = False
+            with self.assertRaises(ExperimentStopped):
+                transport.call(None, "fixture", "fixture", "test", "reflector", "train_1", log_dir=directory)
+            record = transport.ledger.records()[0]
+            self.assertFalse(record["response_valid"])
+            saved = json.loads((Path(directory) / f"{record['request_id']}.json").read_text())
+            self.assertEqual(saved["response"], "incomplete fixture")
+
+    def test_upstream_compatibility_preserves_nonempty_truncated_text_and_marks_it(self):
+        response = SimpleNamespace(
+            usage=SimpleNamespace(prompt_tokens=10, completion_tokens=4096), model="fixture",
+            choices=[SimpleNamespace(message=SimpleNamespace(content="incomplete fixture"), finish_reason="length")],
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            transport = self.make_transport(directory, lambda **kwargs: response)
+            text, info = transport.call(None, "fixture", "fixture", "test", "reflector", "train_1")
+            self.assertEqual(text, "incomplete fixture")
+            self.assertFalse(info["response_valid"])
+            self.assertEqual(info["response_finish_reason"], "length")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -22,5 +22,6 @@
   "curator_frequency": 1,
   "playbook_token_budget": 80000,
   "json_mode": false,
+  "allow_truncated_nonempty": true,
   "test_workers": 1
 }

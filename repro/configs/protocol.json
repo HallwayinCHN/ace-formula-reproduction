@@ -1,20 +1,78 @@
 {
   "protocol": "FTEC5660-ACE-Formula-v1",
   "paper": "https://arxiv.org/abs/2510.04618v3",
-  "reference_formula_accuracy_percent": {"paper_base_llm": 67.5, "paper_ace_offline_with_gt": 85.5},
+  "reference_formula_accuracy_percent": {
+    "paper_base_llm": 67.5,
+    "paper_ace_offline_with_gt": 85.5
+  },
   "mode": "offline",
-  "formal_tiers_train_validation_test": [[100, 40, 200], [60, 30, 100], [30, 20, 60]],
-  "pilot_train_validation": [10, 10],
+  "formal_tiers_train_validation_test": [
+    [
+      100,
+      40,
+      200
+    ],
+    [
+      60,
+      30,
+      100
+    ],
+    [
+      30,
+      20,
+      60
+    ]
+  ],
+  "pilot_train_validation": [
+    10,
+    10
+  ],
   "pilot_disjoint_from_formal": true,
   "selection_seed": 42,
-  "training_order_seeds": [42, 43, 44],
-  "variants": ["base", "ace", "selective", "retrieval", "combined"],
-  "selective": {"incorrect_initial_prediction": "original_reflection_loop", "correct_sample_keep_every": 5},
-  "retrieval": {"stage": "frozen_playbook_inference_only", "method": "tfidf_cosine", "max_entries": 12,
-                "max_tokens": 1500, "tiebreak": ["helpful_minus_harmful_desc", "id_asc"]},
-  "formal_size_locked": false,
+  "training_order_seeds": [
+    42,
+    43,
+    44
+  ],
+  "variants": [
+    "base",
+    "ace",
+    "selective",
+    "retrieval",
+    "combined"
+  ],
+  "selective": {
+    "incorrect_initial_prediction": "original_reflection_loop",
+    "correct_sample_keep_every": 5
+  },
+  "retrieval": {
+    "stage": "frozen_playbook_inference_only",
+    "method": "tfidf_cosine",
+    "max_entries": 12,
+    "max_tokens": 1500,
+    "tiebreak": [
+      "helpful_minus_harmful_desc",
+      "id_asc"
+    ]
+  },
+  "formal_size_locked": true,
   "formal_run_status": "not_started",
-  "efficiency_goal": {"max_accuracy_drop_percentage_points": 2, "min_cost_reduction_percent": 20},
-  "constraints": ["Do not tune on held-out test", "Do not correct primary benchmark labels",
-                  "Do not claim strict original-model numerical reproduction", "Count failed evaluation items"]
+  "efficiency_goal": {
+    "max_accuracy_drop_percentage_points": 2,
+    "min_cost_reduction_percent": 20
+  },
+  "constraints": [
+    "Do not tune on held-out test",
+    "Do not correct primary benchmark labels",
+    "Do not claim strict original-model numerical reproduction",
+    "Count failed evaluation items"
+  ],
+  "selected_counts": {
+    "train": 60,
+    "validation": 30,
+    "test": 100
+  },
+  "cost_pilot": "pilot-20261103T074930Z-b45fef00",
+  "json_mode": false,
+  "allow_truncated_nonempty": true
 }

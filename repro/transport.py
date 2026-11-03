@@ -142,10 +142,10 @@ class Transport:
                       prompt_tokens=usage.prompt_tokens, completion_tokens=usage.completion_tokens,
                       cached_tokens=cached, estimated_cny_at_peak=cost,
                       response_model=response.model, elapsed_seconds=time.monotonic() - started)
-        self.ledger.append(record)
         content = response.choices[0].message.content if response.choices else None
-        if not content or response.choices[0].finish_reason == "length":
-            raise ExperimentStopped("Empty or truncated response; usage recorded and pilot stopped")
+        finish_reason = response.choices[0].finish_reason if response.choices else None
+        record.update(response_finish_reason=finish_reason, response_valid=bool(content) and finish_reason != "length")
+        self.ledger.append(record)
         info = {
             **record, "model": model, "prompt": prompt, "response": content,
             "prompt_num_tokens": usage.prompt_tokens, "response_num_tokens": usage.completion_tokens,
@@ -154,6 +154,11 @@ class Transport:
         if log_dir:
             Path(log_dir).mkdir(parents=True, exist_ok=True)
             write_json(Path(log_dir) / f"{record['request_id']}.json", info)
+        allow_partial = finish_reason == "length" and self.config.get("allow_truncated_nonempty", False)
+        if not content or (not record["response_valid"] and not allow_partial):
+            raise ExperimentStopped("Empty or truncated response; raw output and usage recorded; pilot stopped")
+        if allow_partial:
+            print(f"[TRUNCATED] {record['role']}/{record['call_id']}: upstream handling; finish_reason=length")
         return content, info
 
 

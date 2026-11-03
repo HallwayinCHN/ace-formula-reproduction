@@ -1,24 +1,28 @@
 {
   "date_local": "2026-11-03",
-  "status": "offline_preparation_complete_waiting_for_api_key",
+  "status": "stage1_complete_live_pilot_finished",
   "upstream_commit": "82709de050e1db6e6ef2f07bcb0393560b94992a",
   "python": "3.12.13",
-  "dependency_install": "uv sync --locked",
   "data_records": {
     "train": 500,
     "validation": 300,
     "test": 200
   },
-  "offline_tests_passed": 7,
-  "mock_logical_calls": 12,
-  "mock_summary": "results/repro/mock-20261103T073841Z-1cb5b917/summary.json",
-  "real_model_requests": 0,
-  "actual_api_spend_cny": 0,
-  "held_out_test_policy": "structural audit only; not used for inference or tuning",
-  "formal_size_locked": false,
-  "pending": [
-    "local DEEPSEEK_API_KEY",
-    "10 train + 10 validation live pilot",
-    "cost-based formal tier choice"
-  ]
+  "offline_tests_passed": 9,
+  "completed_live_pilot": "pilot-20261103T074930Z-b45fef00",
+  "completed_pilot_requests": 79,
+  "all_live_requests_including_diagnostics": 92,
+  "baseline_validation_accuracy": 0.6,
+  "best_ace_validation_accuracy": 0.6,
+  "all_runs_estimated_cny": 0.629741664,
+  "actual_provider_bill_cny": null,
+  "held_out_test_used_for_inference": false,
+  "formal_size_locked": true,
+  "formal_counts": {
+    "train": 60,
+    "validation": 30,
+    "test": 100
+  },
+  "formal_experiments_started": false,
+  "forecast_total_cny_with_30pct_margin": 94.84950577432183
 }
