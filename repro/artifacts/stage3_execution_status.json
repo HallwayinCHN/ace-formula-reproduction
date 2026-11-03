@@ -1,0 +1,112 @@
+{
+  "status": "inference_blinded_running",
+  "snapshot_at_utc": "2026-11-03T09:31:44.982554+00:00",
+  "logical_predictions_required": 1500,
+  "predictions_completed": 184,
+  "completed_conditions": 0,
+  "all_stages_accounted_cny_including_pending_reservations": 12.27704064,
+  "heldout_request_states": {
+    "completed": 184,
+    "pending": 3
+  },
+  "heldout_roles": [
+    "generator"
+  ],
+  "frozen_hashes_verified": 24,
+  "upstream_hashes_verified": 12,
+  "scores_opened": false,
+  "labels_used_for_generation": false,
+  "auto_finalize_after_full_batch": true,
+  "jobs": [
+    {
+      "variant": "base",
+      "seed": 42,
+      "items": 92,
+      "status": "running"
+    },
+    {
+      "variant": "base",
+      "seed": 43,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "base",
+      "seed": 44,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "ace",
+      "seed": 42,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "ace",
+      "seed": 43,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "ace",
+      "seed": 44,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "selective",
+      "seed": 42,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "selective",
+      "seed": 43,
+      "items": 6,
+      "status": "running"
+    },
+    {
+      "variant": "selective",
+      "seed": 44,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "retrieval",
+      "seed": 42,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "retrieval",
+      "seed": 43,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "retrieval",
+      "seed": 44,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "combined",
+      "seed": 42,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "combined",
+      "seed": 43,
+      "items": 0,
+      "status": "not_started"
+    },
+    {
+      "variant": "combined",
+      "seed": 44,
+      "items": 86,
+      "status": "running"
+    }
+  ]
+}

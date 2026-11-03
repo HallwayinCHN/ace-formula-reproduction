@@ -146,6 +146,10 @@ DEEPSEEK_API_KEY=你的实际密钥
 .venv/bin/python -m repro.report_stage3
 ```
 
+现有批次的离线自动收尾器为 `repro.finish_stage3 --watch`：只等待批次完成，不发起模型调用，
+全部条件完成后顺序执行统计、审计、绘图、报告并更新协议状态。若批次明确失败则保留进度，
+不会自行更换配置或恢复收费请求。运行状态写入本地 `results/repro/stage3-finalizer-status.json`。
+
 图表单独使用 `.plot-venv`，不修改原始 `uv.lock` 或主实验依赖。精确绘图版本写入
 `artifacts/stage3_plot_environment.json`；绘图命令为 `.plot-venv/bin/python -m repro.plot_stage3`。
 原始 API 响应和恢复缓存留在忽略的 `results/repro/`；开封后的逐题输出、统计与审计保存在
