@@ -70,7 +70,8 @@ def report():
              "运行期间官方报告过 Flash API 部分中断，证据与时间见 `STAGE3_SERVICE_EVENT.md`；"
              "不能把本次延迟差异全部归因于方法。", "",
              "## 完整性与适用范围", "",
-             f"- 离线检查 33 项通过；最终核验 {audit['prediction_rows']} 个唯一方案/种子/题目组合、"
+             f"- 原冻结流程 33 项检查通过，恢复机制新增 9 项检查通过；最终核验 {audit['prediction_rows']} "
+             "个唯一方案/种子/题目组合、"
              f"{audit['frozen_hashes_verified']} 个冻结文件哈希、{audit['upstream_files_verified']} 个上游原始文件哈希。",
              f"- 第三阶段请求状态：`{audit['heldout_request_states']}`；"
              f"全阶段结果或计费状态不明请求数为 {audit['unknown_billing_requests']}。"
@@ -88,6 +89,12 @@ def report():
              "- `stage3_accuracy_cost.png` / `.svg`：准确率与完整使用成本、配对差异区间。",
              "- 下一阶段仅整理交付：不超过 10 页报告、可复现的 GitHub 说明和不超过 15 分钟录屏。"
              "本次测试已经开封，后续若新增方法应标为探索性，不能把这批测试重新当作未见数据。", ""]
+    if "recovery" in audit:
+        verified = audit["recovery"]["preserved_predictions_verified"]
+        text += ["## 定时恢复说明", "",
+                 f"服务中断后按用户新授权增加定时检测与明确 503 断点重试，原先 {verified} 条预测及回放文件哈希保持一致。"
+                 "这是运行层变更，记录于 `STAGE3_RECOVERY.md` 和 `stage3_recovery_contract.json`。"
+                 "失败请求的未知计费预留没有清零；费用和延迟包含此次服务不稳定带来的限制。", ""]
     (ARTIFACTS / "STAGE3.md").write_text("\n".join(text))
 
 

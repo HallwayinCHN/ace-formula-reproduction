@@ -56,6 +56,14 @@ def verify():
         "accounted_cny": sum(row["accounted_cny"] for row in ledger),
         "unknown_billing_requests": sum(row["state"] in ("pending", "failed_billing_unknown") for row in ledger),
     }
+    from repro.recovery import CONTRACT, validate_recovery
+    if CONTRACT.exists():
+        recovery = validate_recovery()
+        audit["recovery"] = {"contract_sha256": digest(CONTRACT.read_bytes()),
+                             "preserved_predictions_verified": recovery["successful_predictions_before_recovery"],
+                             "preserved_files_verified": len(recovery["preserved_files"]),
+                             "original_unknown_reserve_cny": recovery["existing_unknown_billing_reserve_cny"],
+                             "policy": recovery["policy"]}
     write_json(ARTIFACTS / "stage3_audit.json", audit)
     print(json.dumps(audit, indent=2))
 

@@ -37,6 +37,12 @@ def snapshot():
     data.update(request_states=dict(Counter(row["state"] for row in heldout)),
                 errors=dict(Counter(row.get("status_code") for row in heldout if row.get("status_code"))),
                 budget=config["project_limit_cny"])
+    for job in data["jobs"]:
+        folder = ROOT / "results/repro" / f"holdout-{job['variant']}-seed{job['seed']}"
+        job["items"] = max(job["items"], len(list(folder.glob("items/*.json"))))
+    data["predictions_completed"] = sum(job["items"] for job in data["jobs"])
+    automatic = ROOT / "results/repro/stage3-auto-resume-status.json"
+    data["automatic"] = json.loads(automatic.read_text()) if automatic.exists() else None
     return data
 
 
@@ -55,6 +61,19 @@ def render(data, interval):
         state = "已停止，需处理失败请求后续跑（本窗口不会重启实验）。"
     else:
         state = "等待启动实验。"
+    automatic = data.get("automatic")
+    if automatic:
+        alive = (datetime.now(ZoneInfo("UTC"))
+                 - datetime.fromisoformat(automatic["heartbeat_at_utc"])).total_seconds() < 90
+        labels = {"checking": "自动检测服务中（只读）", "probing": "正在用下一道未完成题目试跑恢复",
+                  "running": "已自动恢复，正在断点续跑", "finalizing": "预测已齐，正在评分和生成报告"}
+        if alive and automatic["state"] == "waiting":
+            next_check = datetime.fromisoformat(automatic["next_check_at_utc"]).astimezone(ZoneInfo("Asia/Shanghai"))
+            state = f"自动恢复待命；下次检测 {next_check:%H:%M:%S}"
+        elif alive and automatic["state"] in labels:
+            state = labels[automatic["state"]]
+        elif automatic["state"] in ("blocked", "stopped"):
+            state = "自动恢复已停止，需检查恢复状态文件。"
     lines = ["ACE 第三阶段 · 实时进度", f"更新时间：{now}（北京时间）｜每 {interval:g} 秒刷新", "",
              f"[{'█' * filled}{'░' * (30-filled)}] {done}/1500  ({done/15:.1f}%)",
              f"完整条件：{data['completed_conditions']}/15", f"状态：{state}", ""]
