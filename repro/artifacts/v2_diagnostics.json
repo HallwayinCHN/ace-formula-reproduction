@@ -1,0 +1,55 @@
+{
+  "status": "posthoc_diagnostic_only",
+  "groups": {
+    "base": {
+      "incorrect": 92,
+      "missing_answer": 3,
+      "truncated": 3,
+      "output_tokens": 65195,
+      "truncated_output_token_fraction": 0.1884807117110208
+    },
+    "ace": {
+      "incorrect": 48,
+      "missing_answer": 6,
+      "truncated": 6,
+      "output_tokens": 93535,
+      "truncated_output_token_fraction": 0.2627465654567809
+    },
+    "selective": {
+      "incorrect": 61,
+      "missing_answer": 8,
+      "truncated": 6,
+      "output_tokens": 85655,
+      "truncated_output_token_fraction": 0.2869184519292511
+    },
+    "retrieval": {
+      "incorrect": 56,
+      "missing_answer": 3,
+      "truncated": 4,
+      "output_tokens": 79380,
+      "truncated_output_token_fraction": 0.20639959687578735
+    },
+    "combined": {
+      "incorrect": 53,
+      "missing_answer": 4,
+      "truncated": 4,
+      "output_tokens": 79378,
+      "truncated_output_token_fraction": 0.20640479729899971
+    }
+  },
+  "discordant_pairs_vs_ace": {
+    "selective": {
+      "gained": 3,
+      "lost": 16
+    },
+    "retrieval": {
+      "gained": 6,
+      "lost": 14
+    },
+    "combined": {
+      "gained": 5,
+      "lost": 10
+    }
+  },
+  "interpretation": "Truncation and missing answers are observed associations, not proven causes. Changing the prompt can also affect correctly answered questions."
+}
