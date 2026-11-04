@@ -112,4 +112,3 @@ class ProspectiveTestIsolationTests(unittest.TestCase):
                     with self.assertRaises(FileNotFoundError):
                         analyze()
         labels.assert_not_called()
-

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "audited_at_utc": "2026-11-04T04:28:05.466994+00:00",
+  "unique_test_predictions": 600,
+  "new_test_questions": 100,
+  "overlap_with_previous_test": 0,
+  "all_v2_request_states": {
+    "completed": 1147
+  },
+  "all_v2_response_models": {
+    "deepseek-flash": 1147
+  },
+  "original_sources_books_and_220_old_predictions_verified": true,
+  "final_contract_sha256": "5d56f55e9dde503fca4dd53e9dbb7ee9b712b7c77d1d3c19483d85cc366a05f1",
+  "final_scored_sha256": "ad5df86472d8cbe9f0328d73a89c1b5f1928385a501a7df04f85f6d286273d95",
+  "final_analysis_sha256": "99f95b84973cee8ee9caa1d2c74008f18a61c09728e05e6c006831361b96efcc"
+}

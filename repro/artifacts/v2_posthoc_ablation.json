@@ -1,0 +1,15 @@
+{
+  "status": "posthoc_archive_ablation_not_a_new_test",
+  "new_api_calls": 0,
+  "fallback_triggered": 5,
+  "fallback_correct_rescues": 0,
+  "first_answers_correct": 239,
+  "final_answers_correct": 239,
+  "gained_vs_original": 7,
+  "lost_vs_original": 10,
+  "first_only_accounted_cny_per_100": 0.2809896,
+  "with_fallback_accounted_cny_per_100": 0.33362873600000004,
+  "nonnumeric_original": 14,
+  "nonnumeric_candidate": 2,
+  "limitation": "Offline ablation of fixed recorded responses only; selecting a new no-fallback method after seeing this test requires a new evaluation cohort"
+}

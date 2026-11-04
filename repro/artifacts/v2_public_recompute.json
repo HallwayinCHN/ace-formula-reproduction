@@ -1,0 +1,28 @@
+{
+  "status": "public_rows_recompute_passed",
+  "metrics": {
+    "original": {
+      "correct": 242,
+      "accounted_cny_per_100": 0.5764604480000001,
+      "standardized_cny_per_100": 2.0517352
+    },
+    "brief_guard": {
+      "correct": 239,
+      "accounted_cny_per_100": 0.33362873600000004,
+      "standardized_cny_per_100": 1.8345935999999998
+    }
+  },
+  "comparison": {
+    "delta_percentage_points": -0.9999999999999999,
+    "ci95_percentage_points": [
+      -4.333333333333333,
+      2.0
+    ],
+    "bootstrap_seed": 2026,
+    "repetitions": 10000,
+    "clusters": 100,
+    "unit": "question; all three trained-book seeds kept together"
+  },
+  "private_logs_required": false,
+  "new_api_calls": 0
+}

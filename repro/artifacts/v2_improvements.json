@@ -1,0 +1,19 @@
+{
+  "primary_comparison": {
+    "delta_percentage_points": -0.9999999999999999,
+    "ci95_percentage_points": [
+      -4.333333333333333,
+      2.0
+    ],
+    "bootstrap_seed": 2026,
+    "repetitions": 10000,
+    "clusters": 100,
+    "unit": "question; all three trained-book seeds kept together"
+  },
+  "reductions_percent": {
+    "含缓存推理核算": 42.12460938863926,
+    "统一无缓存价推理成本": 10.583315039874552,
+    "输出 tokens": 53.382035944745176,
+    "单题 API 耗时中位数": 19.579138583790733
+  }
+}

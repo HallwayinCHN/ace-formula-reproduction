@@ -1,0 +1,41 @@
+{
+  "status": "exact_archive_replay_verified",
+  "new_api_calls": 0,
+  "runs": [
+    {
+      "seed": 42,
+      "original_matched_requests": 314,
+      "optimized_matched_requests": 254,
+      "all_60_step_states_identical": true,
+      "validation_checkpoints_identical": true,
+      "selected_book_matches_original_frozen_book": true,
+      "selected_book_sha256": "04437316150c89da2ef203c24c639bd083776354f02bfebec5a822f5551a475f"
+    },
+    {
+      "seed": 43,
+      "original_matched_requests": 322,
+      "optimized_matched_requests": 262,
+      "all_60_step_states_identical": true,
+      "validation_checkpoints_identical": true,
+      "selected_book_matches_original_frozen_book": true,
+      "selected_book_sha256": "180db2ab36846d5a8f55bd83fe040399a853207c06ec8f9d70dcf7c533db02a6"
+    },
+    {
+      "seed": 44,
+      "original_matched_requests": 326,
+      "optimized_matched_requests": 266,
+      "all_60_step_states_identical": true,
+      "validation_checkpoints_identical": true,
+      "selected_book_matches_original_frozen_book": true,
+      "selected_book_sha256": "4ee2fb49fbe2be4242c256d8d2cde4f286725df7da264f5f9042a6f1de77164f"
+    }
+  ],
+  "training_calls_before": 782,
+  "training_calls_after": 602,
+  "standardized_learning_cny_before": 8.7682872,
+  "standardized_learning_cny_after": 6.766670399999999,
+  "claim_scope": "Exact state/prompt equivalence conditional on archived retained responses; historical cost attribution, not a new paid retraining or live randomness guarantee. Post-curation training accuracy is unavailable, not zero or copied from initial accuracy.",
+  "learning_call_reduction_percent": 23.01790281329923,
+  "standardized_learning_cost_reduction_percent": 22.82791102006787,
+  "prototype_source_sha256": "a9ca18acc199efec2c0e903c91d5576e1ab96da5e105e0d49f5ba9391e5bd920"
+}
