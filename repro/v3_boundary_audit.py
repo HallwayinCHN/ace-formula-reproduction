@@ -43,12 +43,12 @@ def audit():
             random.Random(seed).shuffle(train_ids)
             training = allowed_data("train", train_ids)
             rows = [row for row in ledger if row["run_id"] == folder.name and row["state"] == "completed"]
+            files = {path.stem: path for path in folder.glob("attempts/**/*.json")}
             checked = {"generator": 0, "reflector": 0, "curator": 0}
             for row in rows:
-                files = list(folder.glob(f"attempts/**/{row['request_id']}.json"))
-                if not files:
+                if row["request_id"] not in files:
                     raise ValueError("Missing durable API prompt")
-                info = json.loads(files[0].read_text())
+                info = json.loads(files[row["request_id"]].read_text())
                 prompt = info["prompt"]
                 if row["call_id"].startswith("test_eval_"):
                     sample = validations[int(row["call_id"].removeprefix("test_eval_"))]

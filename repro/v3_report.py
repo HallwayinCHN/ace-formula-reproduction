@@ -34,6 +34,10 @@ def finish():
              "phase_accounted_cny": sum(row["accounted_cny"] for row in scoped),
              "project_accounted_cny": sum(row["accounted_cny"] for row in rows),
              "request_states": dict(Counter(row["state"] for row in scoped)),
+             "response_models": dict(Counter(row.get("response_model") for row in scoped
+                                               if row["state"] == "completed")),
+             "response_finish_reasons": dict(Counter(row.get("response_finish_reason") for row in scoped
+                                                       if row["state"] == "completed")),
              "training_reductions_percent": reductions, "contract_sha256": digest(CONTRACT.read_bytes()),
              "router_lock_sha256": digest(RULE.read_bytes()),
              "scope": "Live model responses and retained learning trajectories may differ; no live book identity claim"}
@@ -84,9 +88,13 @@ def finish():
         formatter = (lambda v: str(v)) if scale == "count" else (
             (lambda v: f"{v*100:.1f}%") if scale == "ratio" else (lambda v: f"{v:.4f}"))
         text.append(f"| {title} | {formatter(a)} | {formatter(b)} |")
+    labels = {"learning_calls": "学习调用", "learning_accounted_cost": "含缓存学习核算",
+              "learning_standardized_cost": "统一无缓存学习成本", "median_workflow_wall_time": "全过程墙钟中位数"}
+    changes = "；".join(f"{labels[key]}{'减少' if value >= 0 else '增加'} {abs(value):.2f}%"
+                       for key, value in reductions.items())
     text += [f"| 全过程墙钟中位数（秒） | {statistics.median(original['wall_seconds_per_seed']):.1f} | "
              f"{statistics.median(nodiag['wall_seconds_per_seed']):.1f} |", "",
-             "相对变化：" + "；".join(f"{key} 减少 {value:.2f}%" for key, value in reductions.items()) + "。", "",
+             "相对变化：" + changes + "。", "",
              "真实调用的保留响应、修正轮数和手册可因服务端随机性而不同，"
              "不能把所有净差都归因于剔除诊断；已单列保留调用数、诊断数和缓存比例。"
              "此前归档回放证明的是固定响应下的等价性，本表测量的是新的真实运行开销。"

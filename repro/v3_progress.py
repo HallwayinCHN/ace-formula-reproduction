@@ -22,6 +22,9 @@ def display(interval=5):
               "blocked": "停止，需检查原因", "stopped": "已停止", "complete": "实验与报告完成", "reporting": "生成报告"}
     lines = ["ACE V3 实时进度", f"北京时间 {now:%Y-%m-%d %H:%M:%S}｜每 {interval:g} 秒刷新", "",
              f"状态：{labels.get(status['state'], status['state'])}", f"当前任务：{status.get('label', '—')}"]
+    age = (now-datetime.fromisoformat(status["heartbeat_at_utc"])).total_seconds()
+    if status["state"] not in ("complete", "blocked", "stopped") and age > 90:
+        lines.append(f"控制器心跳已 {age:.0f} 秒未更新，当前运行状态未确认。")
     for stage, variants, count in (("dev", ("original", "brief"), 40),
                                    ("train", ("original", "nodiag"), 60),
                                    ("eval", ("original", "brief", "adaptive"), 160)):

@@ -2,6 +2,7 @@
 
 from collections import Counter
 import json
+import shutil
 import statistics
 
 from repro import ROOT
@@ -31,6 +32,30 @@ def main():
     if not completion["status"].startswith("completed_"):
         raise ValueError("V3 must be complete before supplemental analysis")
     ledger = CostLedger(ROOT / "results/repro/live_usage.jsonl", "v3-supplement", load_config()).records()
+    public = ARTIFACTS / "v3_training"
+    public.mkdir(exist_ok=True)
+    exports = {}
+    for variant in ("original", "nodiag"):
+        for seed in (42, 43, 44):
+            folder = ROOT / "results/repro" / f"v3-train-{variant}-seed{seed}"
+            for filename in ("summary.json", "trace.json", "best_playbook.txt"):
+                target = public / f"{variant}-seed{seed}-{filename}"
+                shutil.copyfile(folder / filename, target)
+                exports[str(target.relative_to(ROOT))] = digest(target.read_bytes())
+    fields = ("request_id", "run_id", "role", "call_id", "state", "accounted_cny", "prompt_tokens",
+              "completion_tokens", "cached_tokens", "elapsed_seconds", "response_model", "response_finish_reason",
+              "status_code", "error_type", "logical_index", "timestamp")
+    usage_path = ARTIFACTS / "v3_usage.jsonl"
+    with usage_path.open("w") as handle:
+        for row in ledger:
+            if row["run_id"].startswith("v3-"):
+                handle.write(json.dumps({key: row[key] for key in fields if key in row})+"\n")
+    exports[str(usage_path.relative_to(ROOT))] = digest(usage_path.read_bytes())
+    for name in ("v3_dev_scored.jsonl", "v3_router_lock.json", "v3_training_analysis.json"):
+        path = ARTIFACTS / name
+        exports[str(path.relative_to(ROOT))] = digest(path.read_bytes())
+    safe_json(ARTIFACTS / "v3_exports.json", {"sha256": exports, "contains_secrets": False,
+                                             "contract_sha256": digest(CONTRACT.read_bytes())})
     details = {}
     for variant in ("original", "nodiag"):
         rows = [row for row in ledger if row["run_id"].startswith(f"v3-train-{variant}-seed")]
@@ -84,6 +109,8 @@ def main():
              f"{details['original']['diagnostics']['accounted_cny']:.4f} 元。"
              "这是原始运行的费用归因；不能假定删掉后其他请求的缓存、响应和耗时完全不变。", "",
              "逐题开发正确性变化与按角色/验证拆分的 tokens、缓存、费用和 API 时间保存在 `v3_supplement.json`。",
+             "`v3_training/` 保留六次训练的摘要、逐步轨迹与选定手册；`v3_usage.jsonl` 仅导出调用元数据，"
+             "不含密钥或请求头。`v3_recompute` 可使用这些公开本地产物离线核对主结果，无需私有响应缓存。",
              "图表：`v3_results.png` / `v3_results.svg`。", ""]
     marker = "\n## 开发集观察与学习用量明细\n"
     report.write_text(report.read_text().split(marker, 1)[0]+"\n".join(text))
