@@ -67,7 +67,10 @@ def main():
              "Training validation selects books and is not an independent accuracy test.", ha="center", fontsize=8)
     fig.tight_layout(rect=(0, .11, 1, .94))
     for extension in ("png", "svg"):
-        fig.savefig(ARTIFACTS / f"v3_results.{extension}", dpi=180, bbox_inches="tight")
+        path = ARTIFACTS / f"v3_results.{extension}"
+        fig.savefig(path, dpi=180, bbox_inches="tight")
+        if extension == "svg":
+            path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines())+"\n")
     plt.close(fig)
 
 
