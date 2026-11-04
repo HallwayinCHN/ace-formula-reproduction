@@ -106,7 +106,11 @@ def main():
     try:
         while True:
             try:
-                output = render(snapshot(), interval)
+                if (ROOT / "results/repro/v2-batch-status.json").exists():
+                    from repro.v2_progress import display
+                    output = display(interval)
+                else:
+                    output = render(snapshot(), interval)
             except (OSError, ValueError, KeyError) as exc:
                 output = f"进度文件暂时无法读取（{type(exc).__name__}），稍后重新读取。"
             if sys.stdout.isatty() and not args.once:
