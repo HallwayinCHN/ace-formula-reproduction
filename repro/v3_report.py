@@ -29,6 +29,8 @@ def finish():
     audit = {"status": "completed_with_evaluation" if router["passed"] else "completed_gate_failed_evaluation_sealed",
              "audited_at_utc": utcnow(), "routing_gate_passed": router["passed"],
              "evaluation_questions_loaded": router["passed"], "evaluation_questions": 160,
+             "evaluation_questions_loaded_field_scope": "evaluation inference cohort, not raw bulk file parsing",
+             "training_loader_bulk_parses_validation_file": True,
              "phase_accounted_cny": sum(row["accounted_cny"] for row in scoped),
              "project_accounted_cny": sum(row["accounted_cny"] for row in rows),
              "request_states": dict(Counter(row["state"] for row in scoped)),
@@ -65,7 +67,7 @@ def finish():
                  "没有进行正式非劣效检验，不能保证其他数据上的准确率。"]
     else:
         text += ["", "**没有候选同时满足开发交叉验证和完整开发拟合的准确率/费用门槛，"
-                 "因此未加载或评估封存的 160 题。** 没有降低门槛、继续调路由或只挑开发表现好的题。"
+                 "因此没有将封存的 160 题用于推理或评分。** 没有降低门槛、继续调路由或只挑开发表现好的题。"
                  "本轮路由没有被证明有可采用的收益；开发数据不能作为独立测试结果。"]
     text += ["", "## 六次真实训练的执行开销", "",
              "训练 60 题，选模验证 30 题；每次在第 30、60 步验证。种子 42、43、44 成对，"
@@ -89,6 +91,13 @@ def finish():
              "不能把所有净差都归因于剔除诊断；已单列保留调用数、诊断数和缓存比例。"
              "此前归档回放证明的是固定响应下的等价性，本表测量的是新的真实运行开销。"
              "验证集参与选模，不能当作独立准确率证据；主路由实验不使用这些新手册。", "",
+             "## 数据边界的实现偏差", "",
+             "本轮训练复用冻结的 `formal_data`，其底层 `load_rows` 会整文件解析验证 JSONL，"
+             "然后只选择原来的 30 条验证记录进行预处理和模型验证。"
+             "因此不能声称 160 条封存记录在训练进程内从未被解析；这偏离了计划中“未加载”的严格表述。"
+             "路由开发使用逐行按 ID 选择的入口，160 题没有参与路由拟合或门槛选择；"
+             "评估是否执行由开发门槛决定。另以请求白名单审计检查真实训练/验证提示词只含原 60/30 题，"
+             "结果见 `v3_boundary_audit.json`。本轮不改动已经冻结的实验代码或选择规则。", "",
              "## 预算与边界", "",
              f"本阶段核算 {audit['phase_accounted_cny']:.3f} 元，全项目累计 {audit['project_accounted_cny']:.3f} 元。"
              "核算含失败预留、采用冻结峰时单价和保守换算系数，不代表已核对账单。"

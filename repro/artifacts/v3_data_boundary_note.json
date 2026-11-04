@@ -1,0 +1,11 @@
+{
+  "recorded_at_utc": "2026-11-04T07:06:48.071818+00:00",
+  "discovered_during": "seed42 original live training, after failed routing gate",
+  "deviation": "Frozen formal_data calls load_rows(validation), parsing the entire JSONL before selecting the old 30 records. Cannot claim raw sealed records were never parsed in training process memory.",
+  "effective_selection": "Only old 60 training and 30 validation records are preprocessed and supplied to learning/validation agents. New 160 evaluation cohort has no inference or scoring jobs.",
+  "action": "Preserve frozen experimental code and failed routing selection. Audit every completed learning prompt against the registered 60/30 whitelist and report raw parsing separately.",
+  "source_sha256": {
+    "repro/formal.py": "71be169dc910917985cc9c8b49cbd8af885872936d2fb762c352c7d824a30bf2",
+    "repro/prepare.py": "c14b0962aa94891ac25d16408adc8c7645ef2a9c8556d59c61f743d65192ccce"
+  }
+}
