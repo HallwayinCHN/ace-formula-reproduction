@@ -1,0 +1,21 @@
+{
+  "candidate": "brief_guard",
+  "screen_contract_sha256": "abc3be30f20f9c05a5fb3c1f2d65da186b35655dc54e78442b520c104a4af7c9",
+  "screen_prediction_hashes": {
+    "results/repro/v2-screen-original_guard-seed44/predictions.json": "e6bfd81cb2cabf93febacef1be8e43b15e3e964ec0e5dbe72dac100d36118ebb",
+    "results/repro/v2-screen-original_guard-seed43/predictions.json": "ecadaded348c38067a80623cbed1899478e3b179bf79dee7db0098c3129b3f6c",
+    "results/repro/v2-screen-original_guard-seed42/predictions.json": "480eed411a4d5e9ec8defcf7c47f09e450d8b0adb23d1da13f98d3cebc139438",
+    "results/repro/v2-screen-core_brief_guard-seed44/predictions.json": "003451578d6ce7e4f5a066663613fd1d114491350db7ec6dda14db49dfdb0ac5",
+    "results/repro/v2-screen-brief_guard-seed42/predictions.json": "92e21ba3cefaa5b92e8033b552cc200deb47ff9548b08efef988eed0ff02a84d",
+    "results/repro/v2-screen-core_brief_guard-seed43/predictions.json": "9f40573403b76c241f4e59f592fc1fcc0ed413cf21e00f8b1f41b6e289f89791",
+    "results/repro/v2-screen-brief_guard-seed43/predictions.json": "cef76862b5109e00f55338d5700e91191a187a62062ba7336a7931f0d60b5211",
+    "results/repro/v2-screen-core_brief_guard-seed42/predictions.json": "9c008546e2cfb025618014725dc79ca5a217b920851c819f34369b1183d16388",
+    "results/repro/v2-screen-brief_guard-seed44/predictions.json": "a99cc850193c44875972e69c206ce6626ed431313c7d6f74d62f7a36fd05a13f",
+    "results/repro/v2-screen-original-seed44/predictions.json": "2626459871503f84f1b618365e9d776d449f3eb08cad79f2873edfd17d117211",
+    "results/repro/v2-screen-original-seed43/predictions.json": "b9dbec8fd802bda7fcf4d87c12ddcc41abbcfa3537ce47e575fef2630b6b6edd",
+    "results/repro/v2-screen-original-seed42/predictions.json": "1631c63ef402b398c59c7398274fd61fbb0447e0a7b4943176bd97c74038b501",
+    "results/repro/v2-screen-core_guard-seed42/predictions.json": "9325981908e127758192ce8e533bda868fe20a852f2c9498e562a3884594f947",
+    "results/repro/v2-screen-core_guard-seed43/predictions.json": "b55826c3a0f8b8ea82f1b4afe8d1d9532100b06b4c8c4837dd8538da9ed3a97a",
+    "results/repro/v2-screen-core_guard-seed44/predictions.json": "ce6c8cf0aa827f354aa2ab673ae9a091dbcd7a98f5f21a0deee07d8fc2e67275"
+  }
+}
