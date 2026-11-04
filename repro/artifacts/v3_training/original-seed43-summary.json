@@ -1,0 +1,41 @@
+{
+  "state": "completed",
+  "variant": "original",
+  "seed": 43,
+  "steps": 60,
+  "checkpoints": [
+    {
+      "step": 30,
+      "accuracy": 0.8,
+      "correct": 24,
+      "total": 30,
+      "no_answer": 0,
+      "errors": 0,
+      "book_sha256": "b4d00cd817ee67e55afa91d21875e1694bdb7400ca40eb6c7a1f1ea0a132190f"
+    },
+    {
+      "step": 60,
+      "accuracy": 0.8666666666666667,
+      "correct": 26,
+      "total": 30,
+      "no_answer": 0,
+      "errors": 0,
+      "book_sha256": "75f50238f539cdb594ff78c07c55f7ca920a88ed2826c211832c5983f9abc0c1"
+    }
+  ],
+  "best_validation_accuracy": 0.8666666666666667,
+  "best_book_sha256": "75f50238f539cdb594ff78c07c55f7ca920a88ed2826c211832c5983f9abc0c1",
+  "learning_calls": 263,
+  "learning_accounted_cny": 2.100911472,
+  "learning_standardized_cny": 2.9029175999999994,
+  "diagnostic_calls": 60,
+  "accounted_cny": 2.276685552,
+  "prompt_tokens": 1111757,
+  "output_tokens": 112377,
+  "cached_tokens": 625149,
+  "api_seconds": 751.4066593276802,
+  "post_diagnostic_measured": true,
+  "new_eval_questions_loaded": false,
+  "contract_sha256": "be393daa37f4737a0b3088dc209f3db1163650624797a143b3cb6f0acb140a3c",
+  "wall_seconds": 788.593832
+}

@@ -1,0 +1,30 @@
+{
+  "status": "completed_gate_failed_evaluation_sealed",
+  "audited_at_utc": "2026-11-04T07:53:00.724142+00:00",
+  "routing_gate_passed": false,
+  "evaluation_questions_loaded": false,
+  "evaluation_questions": 160,
+  "evaluation_questions_loaded_field_scope": "evaluation inference cohort, not raw bulk file parsing",
+  "training_loader_bulk_parses_validation_file": true,
+  "phase_accounted_cny": 12.945939983999999,
+  "project_accounted_cny": 36.389183855999995,
+  "request_states": {
+    "completed": 1989
+  },
+  "response_models": {
+    "deepseek-flash": 1989
+  },
+  "response_finish_reasons": {
+    "stop": 1965,
+    "length": 24
+  },
+  "training_reductions_percent": {
+    "learning_calls": 23.50698856416773,
+    "learning_accounted_cost": 17.86536524734722,
+    "learning_standardized_cost": 29.64478139881992,
+    "median_workflow_wall_time": 18.055898895237622
+  },
+  "contract_sha256": "be393daa37f4737a0b3088dc209f3db1163650624797a143b3cb6f0acb140a3c",
+  "router_lock_sha256": "39ef64b226da5b60f51c45eafde3d9a24b8e7f3dcbe6376c0af7b99e042eed9b",
+  "scope": "Live model responses and retained learning trajectories may differ; no live book identity claim"
+}

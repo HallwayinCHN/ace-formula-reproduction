@@ -51,7 +51,7 @@ def main():
             if row["run_id"].startswith("v3-"):
                 handle.write(json.dumps({key: row[key] for key in fields if key in row})+"\n")
     exports[str(usage_path.relative_to(ROOT))] = digest(usage_path.read_bytes())
-    for name in ("v3_dev_scored.jsonl", "v3_router_lock.json", "v3_training_analysis.json"):
+    for name in ("v3_dev_scored.jsonl", "v3_router_lock.json", "v3_training_analysis.json", "v3_completion.json"):
         path = ARTIFACTS / name
         exports[str(path.relative_to(ROOT))] = digest(path.read_bytes())
     safe_json(ARTIFACTS / "v3_exports.json", {"sha256": exports, "contains_secrets": False,

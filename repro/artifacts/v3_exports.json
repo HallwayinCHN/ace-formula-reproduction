@@ -1,0 +1,29 @@
+{
+  "sha256": {
+    "repro/artifacts/v3_training/original-seed42-summary.json": "995cf36e735b69684a5c2b9c45f6ae37537b452167edbfaef82e730a935574a4",
+    "repro/artifacts/v3_training/original-seed42-trace.json": "8b55e5e6271e82faec2f52c1005b5e0465202d2c1140bcd48dfc40254469964a",
+    "repro/artifacts/v3_training/original-seed42-best_playbook.txt": "fb6feb3512ef2cb3cdb9d8f7d60a70b294339506be21a165ac37dfadbdcb659d",
+    "repro/artifacts/v3_training/original-seed43-summary.json": "b3c1bfa67dfabb1ef9df0faa215c1128c999407c68abcdaf494c1ecce8116a2d",
+    "repro/artifacts/v3_training/original-seed43-trace.json": "11d4d9136db1653fc7fd9c9d46baa0bffe6cfb9257cc701f7dc2456615821569",
+    "repro/artifacts/v3_training/original-seed43-best_playbook.txt": "75f50238f539cdb594ff78c07c55f7ca920a88ed2826c211832c5983f9abc0c1",
+    "repro/artifacts/v3_training/original-seed44-summary.json": "dad84f98275b43aea53274f4bf77320861d96a69156bca148dc9bbd5e440bea9",
+    "repro/artifacts/v3_training/original-seed44-trace.json": "3368731a3369b1064a1ab78f8c8751ccde590a84c3fc6e8c42daa290b9f1209b",
+    "repro/artifacts/v3_training/original-seed44-best_playbook.txt": "ab92fb3eedcb5ac656eda31635052cb86570adc7c17ea283063ac307ed38f8d4",
+    "repro/artifacts/v3_training/nodiag-seed42-summary.json": "a5efd9b00ef507c27c879a1abed9df31a2a0e6a9b49e6c2001f25630f56076cd",
+    "repro/artifacts/v3_training/nodiag-seed42-trace.json": "b6d7fed012b1b35748daf4f90790208c7b5ce21bf31b326b72379c1ee7728aea",
+    "repro/artifacts/v3_training/nodiag-seed42-best_playbook.txt": "bb502ba325a5e5ffebc819bb7e0a70d387948b2c428a24cee4a51a599f08c578",
+    "repro/artifacts/v3_training/nodiag-seed43-summary.json": "6452817cc46dc0435d483916a19e1c5b9095af2a2b00d59b11176de35eb01852",
+    "repro/artifacts/v3_training/nodiag-seed43-trace.json": "0fe54fc69240ba94241bb4e302cde11cda43ed1e528b307745dd3b92ded07aee",
+    "repro/artifacts/v3_training/nodiag-seed43-best_playbook.txt": "afcfbc8e78de98e0b291d8ab6669e382f5902354083cd4a813d7741fa171b0c1",
+    "repro/artifacts/v3_training/nodiag-seed44-summary.json": "54b9a6e66f8083a25a63179de0ec2aa02472c57a1ca8c56cec6108d61624f42c",
+    "repro/artifacts/v3_training/nodiag-seed44-trace.json": "d1095c5cc65372c06ba06ee861f488d0e6f829bbf85bf5b43892591586cec067",
+    "repro/artifacts/v3_training/nodiag-seed44-best_playbook.txt": "c3154a653bebde9519412c5e1e316512221577e98ee7fb8deabd90c61bf0a8c2",
+    "repro/artifacts/v3_usage.jsonl": "714fbd3031f802e6b7d4ed971350ac44b9cb53735e1af16b03a160cfe50397ab",
+    "repro/artifacts/v3_dev_scored.jsonl": "10bed79efbece8b5d42b27e0f07a5dba9ca28b1a4a6d2aa899c9866c5ef76e48",
+    "repro/artifacts/v3_router_lock.json": "39ef64b226da5b60f51c45eafde3d9a24b8e7f3dcbe6376c0af7b99e042eed9b",
+    "repro/artifacts/v3_training_analysis.json": "ce79c7825b3528ba127838c3b2201052495de69d41ee2a156c9591cf593d6e56",
+    "repro/artifacts/v3_completion.json": "975322d8ad1f7e89a8405924eb326d1d1493123284eef102336dfb038cbaa380"
+  },
+  "contains_secrets": false,
+  "contract_sha256": "be393daa37f4737a0b3088dc209f3db1163650624797a143b3cb6f0acb140a3c"
+}

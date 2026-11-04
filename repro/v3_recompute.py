@@ -2,6 +2,7 @@
 
 import json
 import math
+import statistics
 
 from eval.finance.data_processor import DataProcessor
 from repro import ROOT
@@ -32,6 +33,13 @@ def main():
     close(sum(row["accounted_cny"] for row in rows), completion["phase_accounted_cny"])
     close(completion["project_accounted_cny"], json.loads(contract.read_text())["spent_before_phase_cny"]
           + completion["phase_accounted_cny"])
+    original, nodiag = training["groups"]["original"], training["groups"]["nodiag"]
+    for key, field in (("learning_calls", "learning_calls"), ("learning_accounted_cost", "learning_accounted_cny"),
+                       ("learning_standardized_cost", "learning_standardized_cny")):
+        close(100*(1-nodiag[field]/original[field]), completion["training_reductions_percent"][key])
+    close(100*(1-statistics.median(nodiag["wall_seconds_per_seed"])
+               /statistics.median(original["wall_seconds_per_seed"])),
+          completion["training_reductions_percent"]["median_workflow_wall_time"])
     for variant in ("original", "nodiag"):
         learning = [row for row in rows if row["run_id"].startswith(f"v3-train-{variant}-seed")
                     and row["call_id"].startswith("train_")]
@@ -50,6 +58,16 @@ def main():
             book = prefix.with_name(prefix.name+"best_playbook.txt")
             if len(trace) != 60 or digest(book.read_bytes()) != summary["best_book_sha256"]:
                 raise ValueError("Exported trace or selected book inconsistent")
+            checkpoints = summary["checkpoints"]
+            if [row["step"] for row in checkpoints] != [30, 60]:
+                raise ValueError("Validation schedule changed")
+            for row in checkpoints:
+                if row["total"] != 30 or row["book_sha256"] != trace[row["step"]-1]["book_sha256"]:
+                    raise ValueError("Validation cohort or book trajectory inconsistent")
+            winner = max(checkpoints, key=lambda row: row["accuracy"])
+            close(winner["accuracy"], summary["best_validation_accuracy"])
+            if winner["book_sha256"] != summary["best_book_sha256"]:
+                raise ValueError("Selected book is not the earliest best validation checkpoint")
             if variant == "nodiag" and any(row["post_train_result"]["is_correct"] is not None for row in trace):
                 raise ValueError("Skipped accuracy was not null")
     dev = [json.loads(line) for line in (ARTIFACTS / "v3_dev_scored.jsonl").read_text().splitlines()]

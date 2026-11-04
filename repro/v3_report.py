@@ -99,6 +99,15 @@ def finish():
              "不能把所有净差都归因于剔除诊断；已单列保留调用数、诊断数和缓存比例。"
              "此前归档回放证明的是固定响应下的等价性，本表测量的是新的真实运行开销。"
              "验证集参与选模，不能当作独立准确率证据；主路由实验不使用这些新手册。", "",
+             "| 种子 | 原始学习核算（元） | 去诊断学习核算（元） | 原始最佳选模验证 | 去诊断最佳选模验证 |",
+             "|---|---:|---:|---:|---:|"]
+    for pair in training["pairs"]:
+        a, b = pair["original"], pair["nodiag"]
+        text.append(f"| {pair['seed']} | {a['learning_accounted_cny']:.4f} | "
+                    f"{b['learning_accounted_cny']:.4f} | {a['best_validation_accuracy']*100:.2f}% | "
+                    f"{b['best_validation_accuracy']*100:.2f}% |")
+    text += ["", "上表只是选模验证观察，不是新手册的独立准确率对照；"
+             "本轮没有证明新真实响应下的手册准确率不变。", "",
              "## 数据边界的实现偏差", "",
              "本轮训练复用冻结的 `formal_data`，其底层 `load_rows` 会整文件解析验证 JSONL，"
              "然后只选择原来的 30 条验证记录进行预处理和模型验证。"
@@ -107,6 +116,9 @@ def finish():
              "评估是否执行由开发门槛决定。另以请求白名单审计检查真实训练/验证提示词只含原 60/30 题，"
              "结果见 `v3_boundary_audit.json`。本轮不改动已经冻结的实验代码或选择规则。", "",
              "## 预算与边界", "",
+             f"本阶段返回 {audit['request_states'].get('completed', 0)} 次请求，"
+             f"其中非空截断响应 {audit['response_finish_reasons'].get('length', 0)} 次。"
+             "截断继续采用冻结的上游处理方式，不能当成完整响应；学习阶段的分组截断数见下表。", "",
              f"本阶段核算 {audit['phase_accounted_cny']:.3f} 元，全项目累计 {audit['project_accounted_cny']:.3f} 元。"
              "核算含失败预留、采用冻结峰时单价和保守换算系数，不代表已核对账单。"
              "不存在为了取得好分数而重选旧测试题、修改标签或改变预设门槛的操作。", ""]

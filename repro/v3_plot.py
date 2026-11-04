@@ -55,7 +55,7 @@ def main():
                              (bar.get_x()+bar.get_width()/2, bar.get_height()), ha="center",
                              xytext=(0, 5), textcoords="offset points", fontsize=8)
         axes[2].set_xticks(range(3), [f"Support {item['support']}" for item in candidates])
-        axes[2].set(ylabel="Estimated CV cost reduction (%)", title="Routing gate failed; 160 questions sealed",
+        axes[2].set(ylabel="Estimated CV cost reduction (%)", title="Routing gate failed; no evaluation",
                     ylim=(min(0, min(savings)-8), max(30, max(savings)+12)))
         axes[2].legend(frameon=False, fontsize=8)
     for axis in axes:

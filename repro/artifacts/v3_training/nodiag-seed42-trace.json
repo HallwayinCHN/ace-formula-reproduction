@@ -1,0 +1,902 @@
+[
+  {
+    "step": 1,
+    "pre_train_result": {
+      "final_answer": "0.0",
+      "is_correct": true,
+      "playbook_num_tokens": 61,
+      "playbook_length": 184
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "1fd36785a9141f5399e336d382b2019f0d2f8c0325840771aeeb06ea34b62710"
+  },
+  {
+    "step": 2,
+    "pre_train_result": {
+      "final_answer": "6.93",
+      "is_correct": false,
+      "playbook_num_tokens": 182,
+      "playbook_length": 692
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "76c4b4e3b3245db689abb6c09b2fafb3d35abde735d8b06d488eaa6535e4b4ce"
+  },
+  {
+    "step": 3,
+    "pre_train_result": {
+      "final_answer": "5.5",
+      "is_correct": false,
+      "playbook_num_tokens": 242,
+      "playbook_length": 946
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "79c619947b8c17e7e4a6b48962779ae3b8131281dac310d1784f38138fc9492e"
+  },
+  {
+    "step": 4,
+    "pre_train_result": {
+      "final_answer": "0.04",
+      "is_correct": false,
+      "playbook_num_tokens": 357,
+      "playbook_length": 1388
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "f79e108b8d23b6c231804cd443f02e3ed109456e3fd0c8f2bfcad7967ef7ab08"
+  },
+  {
+    "step": 5,
+    "pre_train_result": {
+      "final_answer": "1.29",
+      "is_correct": true,
+      "playbook_num_tokens": 518,
+      "playbook_length": 2037
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "c9e1a2736d95480c32da3b6bc9503976d665904944305a1d1b55e2e8f60aac96"
+  },
+  {
+    "step": 6,
+    "pre_train_result": {
+      "final_answer": "16000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 585,
+      "playbook_length": 2303
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "c816f03d64f4b8dabaf4903dd36765656997c99663605b8b3fa92539c66827be"
+  },
+  {
+    "step": 7,
+    "pre_train_result": {
+      "final_answer": "1.33",
+      "is_correct": true,
+      "playbook_num_tokens": 632,
+      "playbook_length": 2522
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "128d216bd8357b298aea10ec7d1373416d78b27c40703d8d0f1e8e2ee9dc0217"
+  },
+  {
+    "step": 8,
+    "pre_train_result": {
+      "final_answer": "7.0",
+      "is_correct": true,
+      "playbook_num_tokens": 685,
+      "playbook_length": 2745
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "b5aaa0ff60c6346e710b504099cad72c8196a7d36d7a391b334558eb897502f9"
+  },
+  {
+    "step": 9,
+    "pre_train_result": {
+      "final_answer": "0.09",
+      "is_correct": true,
+      "playbook_num_tokens": 752,
+      "playbook_length": 2990
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "eb8b3c2905c1ea0aede54d9fb1c05b09b04cb0264fde68b20af8c276bc18db2e"
+  },
+  {
+    "step": 10,
+    "pre_train_result": {
+      "final_answer": "22200.73",
+      "is_correct": false,
+      "playbook_num_tokens": 806,
+      "playbook_length": 3216
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "e005112f6e43be953fef8c59ff7421f40aa60374deb51307a8e5372d0ebc761e"
+  },
+  {
+    "step": 11,
+    "pre_train_result": {
+      "final_answer": "0.05",
+      "is_correct": false,
+      "playbook_num_tokens": 943,
+      "playbook_length": 3881
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "2aac8436191dd5678b79820e8244a9273893558d3ce83c8acb5efcda8f325e63"
+  },
+  {
+    "step": 12,
+    "pre_train_result": {
+      "final_answer": "6.0",
+      "is_correct": true,
+      "playbook_num_tokens": 1122,
+      "playbook_length": 4609
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "0ce885e1f4429eeff217450041321cdb2583df3236a86e6c42d1f80445440327"
+  },
+  {
+    "step": 13,
+    "pre_train_result": {
+      "final_answer": "640000000000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 1199,
+      "playbook_length": 4895
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "31f4d1fc88293dfc932aac99859701a9c0bf2ceeff8221df9782df5985ed1bef"
+  },
+  {
+    "step": 14,
+    "pre_train_result": {
+      "final_answer": "2.02",
+      "is_correct": false,
+      "playbook_num_tokens": 1291,
+      "playbook_length": 5278
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "ac5edfeb9ac387edc9811d950ab27110027f66eff5a9a07139c68ffcda353dd3"
+  },
+  {
+    "step": 15,
+    "pre_train_result": {
+      "final_answer": "0.10",
+      "is_correct": true,
+      "playbook_num_tokens": 1395,
+      "playbook_length": 5744
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "11f8a77539fbbbe9b76f0a83a9a0e00c96a4c7f29fa87f0c10e70651aaa1dcbd"
+  },
+  {
+    "step": 16,
+    "pre_train_result": {
+      "final_answer": "0.04",
+      "is_correct": true,
+      "playbook_num_tokens": 1532,
+      "playbook_length": 6300
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "2c0d0f55d9864842bb90320ca8744b4b160649f424ef4dad788136d02edbd255"
+  },
+  {
+    "step": 17,
+    "pre_train_result": {
+      "final_answer": "275000000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 1627,
+      "playbook_length": 6680
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "9b012590ec1c1234ad4603ab0c6292aaf2bd2cfbd132dd0d98e6e888e25a89d3"
+  },
+  {
+    "step": 18,
+    "pre_train_result": {
+      "final_answer": "10.0",
+      "is_correct": true,
+      "playbook_num_tokens": 1690,
+      "playbook_length": 6952
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "2f290c1a06fbc889f3672fd1b28451b9d6bdc231dad9398953b48ea8cb8c7086"
+  },
+  {
+    "step": 19,
+    "pre_train_result": {
+      "final_answer": "4.5",
+      "is_correct": true,
+      "playbook_num_tokens": 1751,
+      "playbook_length": 7202
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "7b9495ad167d3d30fcbd4c46788ae2b1b9523447f66342fcf65045a30279fbbe"
+  },
+  {
+    "step": 20,
+    "pre_train_result": {
+      "final_answer": "0.06",
+      "is_correct": true,
+      "playbook_num_tokens": 1819,
+      "playbook_length": 7514
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "2c69a325c314655c438ec6f69967dc0e27f946c5fd1b4773d283a2c268734007"
+  },
+  {
+    "step": 21,
+    "pre_train_result": {
+      "final_answer": "286004.4",
+      "is_correct": false,
+      "playbook_num_tokens": 1819,
+      "playbook_length": 7514
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "cf93d213bc3388cfad4f8ca7b58e3711c587a717f1a4d3a9600c1f057712de20"
+  },
+  {
+    "step": 22,
+    "pre_train_result": {
+      "final_answer": "3.50",
+      "is_correct": true,
+      "playbook_num_tokens": 1933,
+      "playbook_length": 8020
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "8ca107c16a42fa1ce6de90c0d1b3b66a92523b7a08f66895eea104834773d4e4"
+  },
+  {
+    "step": 23,
+    "pre_train_result": {
+      "final_answer": "2.64",
+      "is_correct": true,
+      "playbook_num_tokens": 1933,
+      "playbook_length": 8020
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "da6212f952d0c9f272bb731ca9748b68328421ec86101cf247b2c945c46724a1"
+  },
+  {
+    "step": 24,
+    "pre_train_result": {
+      "final_answer": "0.56",
+      "is_correct": false,
+      "playbook_num_tokens": 2045,
+      "playbook_length": 8429
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "5539be6753febaf0ce7eb364817a98eb9652d79251a1b6a499f97bad62af039b"
+  },
+  {
+    "step": 25,
+    "pre_train_result": {
+      "final_answer": "20.0",
+      "is_correct": true,
+      "playbook_num_tokens": 2214,
+      "playbook_length": 9113
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "8dadcd45f8870ca94c2163a1b809366696ee87328eb1e04f23d2e0403d6946fe"
+  },
+  {
+    "step": 26,
+    "pre_train_result": {
+      "final_answer": "300000000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 2214,
+      "playbook_length": 9113
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "c4962b391f96c75dc7b023ca653b3189ee06d1a96f2de1cdc69127d75a75e7e7"
+  },
+  {
+    "step": 27,
+    "pre_train_result": {
+      "final_answer": "96.43",
+      "is_correct": true,
+      "playbook_num_tokens": 2214,
+      "playbook_length": 9113
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "dca29b9845c9cb7b2440c81d5fbba86aeccc3ae4e86d642eb2074ef113d37f6d"
+  },
+  {
+    "step": 28,
+    "pre_train_result": {
+      "final_answer": "26.09",
+      "is_correct": true,
+      "playbook_num_tokens": 2303,
+      "playbook_length": 9416
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "dca29b9845c9cb7b2440c81d5fbba86aeccc3ae4e86d642eb2074ef113d37f6d"
+  },
+  {
+    "step": 29,
+    "pre_train_result": {
+      "final_answer": "27.50",
+      "is_correct": true,
+      "playbook_num_tokens": 2303,
+      "playbook_length": 9416
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "c3c9a4b2e63d8da98296bef79d327b481661d6437d5574e3c6cf1223cd275b86"
+  },
+  {
+    "step": 30,
+    "pre_train_result": {
+      "final_answer": "3.0",
+      "is_correct": true,
+      "playbook_num_tokens": 2391,
+      "playbook_length": 9786
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "bb502ba325a5e5ffebc819bb7e0a70d387948b2c428a24cee4a51a599f08c578"
+  },
+  {
+    "step": 31,
+    "pre_train_result": {
+      "final_answer": "76.92",
+      "is_correct": true,
+      "playbook_num_tokens": 2449,
+      "playbook_length": 10023
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "f7ca9d6d2a7307dafe22e8fd15cf6d17b8a2e0aaedc77b4edd1ecbcd3883f809"
+  },
+  {
+    "step": 32,
+    "pre_train_result": {
+      "final_answer": "2.0",
+      "is_correct": true,
+      "playbook_num_tokens": 2449,
+      "playbook_length": 10023
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "4f028f0e4d3834db428b3db89d42a8035a8fffdbe5f24616687ecd4f6f14fce1"
+  },
+  {
+    "step": 33,
+    "pre_train_result": {
+      "final_answer": "2272000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 2502,
+      "playbook_length": 10251
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "6a7049bd13a449b381b6a02dade5e9a7a1da286ed79b4eba3228e17e011e2148"
+  },
+  {
+    "step": 34,
+    "pre_train_result": {
+      "final_answer": "14.0",
+      "is_correct": true,
+      "playbook_num_tokens": 2575,
+      "playbook_length": 10503
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "6a7049bd13a449b381b6a02dade5e9a7a1da286ed79b4eba3228e17e011e2148"
+  },
+  {
+    "step": 35,
+    "pre_train_result": {
+      "final_answer": "9100000000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 2575,
+      "playbook_length": 10503
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "90908b7bd56792e02b9916a736d37b0ee0973fd9146db15a3f242ef54dde3c80"
+  },
+  {
+    "step": 36,
+    "pre_train_result": {
+      "final_answer": "1.29",
+      "is_correct": false,
+      "playbook_num_tokens": 2575,
+      "playbook_length": 10503
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "7a3e2421b49f536f3d512e4a85307fa6ea646e98e9c36aa19f7970ecdd663825"
+  },
+  {
+    "step": 37,
+    "pre_train_result": {
+      "final_answer": "1.60",
+      "is_correct": true,
+      "playbook_num_tokens": 2833,
+      "playbook_length": 11650
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "5ddb9266cbd3051798726d01ccd4cb53ae33c576aecccb8fc1f446f8cbb10b72"
+  },
+  {
+    "step": 38,
+    "pre_train_result": {
+      "final_answer": "18629.38",
+      "is_correct": false,
+      "playbook_num_tokens": 2833,
+      "playbook_length": 11650
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "8fc12f165b54d7187d2386654c1fdb1926be1041b39b85022b5f8d5dc77f78e9"
+  },
+  {
+    "step": 39,
+    "pre_train_result": {
+      "final_answer": "0.28",
+      "is_correct": true,
+      "playbook_num_tokens": 3055,
+      "playbook_length": 12630
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "fa02bdd69e489a3ead9464dd6b9e31a51fb08d2b65c449414304a18b5252463c"
+  },
+  {
+    "step": 40,
+    "pre_train_result": {
+      "final_answer": "12000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 3137,
+      "playbook_length": 12956
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "a24c2bd87a9eabc1071b43cac8f2cafe5c66c7e9bbebcb149ea67d5ab18ae1fc"
+  },
+  {
+    "step": 41,
+    "pre_train_result": {
+      "final_answer": "200000000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 3137,
+      "playbook_length": 12956
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "e68a5df8a64f9aa70f63ee7eca4dcc1758af4ab569cc130889ed166dad99e489"
+  },
+  {
+    "step": 42,
+    "pre_train_result": {
+      "final_answer": "45000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 3232,
+      "playbook_length": 13359
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "5d289f83910d79f9014d79d5362a424cc38c1f9bf3dbedb901d58e9e55c15b64"
+  },
+  {
+    "step": 43,
+    "pre_train_result": {
+      "final_answer": "2.0",
+      "is_correct": true,
+      "playbook_num_tokens": 3281,
+      "playbook_length": 13569
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "7da44c60079793fad83265d6abf7068e4600a670ad7c608808ffd9d927e87ce5"
+  },
+  {
+    "step": 44,
+    "pre_train_result": {
+      "final_answer": "14869.85",
+      "is_correct": true,
+      "playbook_num_tokens": 3281,
+      "playbook_length": 13569
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "968d2f5f276eef67e8e1d51d01a58af32465b828b8c93936bff8ce329256347f"
+  },
+  {
+    "step": 45,
+    "pre_train_result": {
+      "final_answer": "20.0",
+      "is_correct": true,
+      "playbook_num_tokens": 3281,
+      "playbook_length": 13569
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "e27270d772cecb9fc9daefead11151cbeeb2904a3d74a5fab552a7bbbb2e0863"
+  },
+  {
+    "step": 46,
+    "pre_train_result": {
+      "final_answer": "0.07",
+      "is_correct": true,
+      "playbook_num_tokens": 3360,
+      "playbook_length": 13865
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "12c4b6ee385c9d9974d9a31961b2b1e26fddf230d63fb5f861d6d2f36ad02ad8"
+  },
+  {
+    "step": 47,
+    "pre_train_result": {
+      "final_answer": "0.20",
+      "is_correct": true,
+      "playbook_num_tokens": 3475,
+      "playbook_length": 14275
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "120efde51848b4b6bb4c8c0cc9bcc76407591410cb39ac055cf18b01597bf9bf"
+  },
+  {
+    "step": 48,
+    "pre_train_result": {
+      "final_answer": "0.02",
+      "is_correct": false,
+      "playbook_num_tokens": 3557,
+      "playbook_length": 14544
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "fbcc9fe7b185f9c368a83a9a02883c4449b4f7d6f73ea8aaae717de85a916205"
+  },
+  {
+    "step": 49,
+    "pre_train_result": {
+      "final_answer": "0.04",
+      "is_correct": true,
+      "playbook_num_tokens": 3703,
+      "playbook_length": 15196
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "ccfd0812718542bd7493d6232d674b126d54f45a73042264faabf0c46da72ece"
+  },
+  {
+    "step": 50,
+    "pre_train_result": {
+      "final_answer": "1.10",
+      "is_correct": false,
+      "playbook_num_tokens": 3926,
+      "playbook_length": 15763
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "4501676b143cf2ba5ece47bd024e10fa928c275c3167f89e21a9e02711fa3d34"
+  },
+  {
+    "step": 51,
+    "pre_train_result": {
+      "final_answer": "0.05",
+      "is_correct": true,
+      "playbook_num_tokens": 4169,
+      "playbook_length": 16897
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "2c6e949a4a6f364f9bab594b34cad596aca6816ae89a8eadc4c6e84a4c912d96"
+  },
+  {
+    "step": 52,
+    "pre_train_result": {
+      "final_answer": "10752.35",
+      "is_correct": false,
+      "playbook_num_tokens": 4291,
+      "playbook_length": 17337
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "01c4bf6eb6642953cecf48dd2e209a1ebe20b71044b788788212c1916269f089"
+  },
+  {
+    "step": 53,
+    "pre_train_result": {
+      "final_answer": "150000.0",
+      "is_correct": false,
+      "playbook_num_tokens": 4524,
+      "playbook_length": 17985
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "80ffb50b87a7c9747752618ce3d397302ce582e86d0e4c920db1328db1f19ed6"
+  },
+  {
+    "step": 54,
+    "pre_train_result": {
+      "final_answer": "0.60",
+      "is_correct": true,
+      "playbook_num_tokens": 4702,
+      "playbook_length": 18736
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "5d65c8678d1610b200487ef49c5c75784a38f58bbd9117b17939b8d01aa25b74"
+  },
+  {
+    "step": 55,
+    "pre_train_result": {
+      "final_answer": "1333.33",
+      "is_correct": false,
+      "playbook_num_tokens": 4813,
+      "playbook_length": 19115
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "ab07425854b610eec2768ee285aa43a42b27cc5109732f5a8b06bad8218152e0"
+  },
+  {
+    "step": 56,
+    "pre_train_result": {
+      "final_answer": "4.5",
+      "is_correct": true,
+      "playbook_num_tokens": 5104,
+      "playbook_length": 20279
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "4358ae648346ca747526aa36b2473f0191b57e7dc4fd2ce0289fb3719d005973"
+  },
+  {
+    "step": 57,
+    "pre_train_result": {
+      "final_answer": "5.0",
+      "is_correct": true,
+      "playbook_num_tokens": 5246,
+      "playbook_length": 20746
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "2d6e11d5303f940982d18763433361c52b1e58ab5d73824f18ec41473b7b53c2"
+  },
+  {
+    "step": 58,
+    "pre_train_result": {
+      "final_answer": "12.0",
+      "is_correct": true,
+      "playbook_num_tokens": 5343,
+      "playbook_length": 21127
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "cfbee85c3d9229bcd01b68eb52276bc619a1e7450b6e58376f96ecbb6c69a511"
+  },
+  {
+    "step": 59,
+    "pre_train_result": {
+      "final_answer": "300000000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 5424,
+      "playbook_length": 21428
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "f09574d744e18e414ab6ba2b71bb98e184f8c6ce41a2e28bffc2caac784aae15"
+  },
+  {
+    "step": 60,
+    "pre_train_result": {
+      "final_answer": "500000000.0",
+      "is_correct": true,
+      "playbook_num_tokens": 5424,
+      "playbook_length": 21428
+    },
+    "post_train_result": {
+      "status": "not_measured",
+      "final_answer": null,
+      "is_correct": null
+    },
+    "book_sha256": "2f35d8b76feb4247c45f5b6f159cbba72e1a52fe6ff258586146b563a628cbd7"
+  }
+]
