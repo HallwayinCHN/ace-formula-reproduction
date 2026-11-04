@@ -80,6 +80,7 @@ class OutputGuardTests(unittest.TestCase):
         self.assertFalse(item["fallback_used"])
         self.assertEqual(generator.generate.call_count, 1)
 
+
     def test_original_control_does_not_gain_new_fallback_behavior(self):
         generator = Mock()
         generator.generate.return_value = ("no output", [], self.info("a"))
@@ -87,3 +88,28 @@ class OutputGuardTests(unittest.TestCase):
                      BOOK, "original", Path("/tmp/unused-v2-fixture"))
         self.assertFalse(item["fallback_used"])
         self.assertEqual(generator.generate.call_count, 1)
+
+
+class ProspectiveTestIsolationTests(unittest.TestCase):
+    def test_actual_target_is_discarded_before_test_preprocessing(self):
+        from repro.v2_holdout import masked_inputs
+        from repro.prepare import digest
+        contract = {"test_sha256": digest(b"fixture"), "test_ids": [0]}
+        context = 'Use formula. Question: "What is 8 - 5?". Answer:'
+        values = []
+        for target in ("FORBIDDEN_A", "FORBIDDEN_B"):
+            with patch("repro.v2_holdout.load_rows", return_value=[{"context": context, "target": target}]):
+                with patch("pathlib.Path.read_bytes", return_value=b"fixture"):
+                    values.append(masked_inputs(contract))
+        self.assertEqual(values[0], values[1])
+        self.assertNotIn("target", values[0][0])
+
+    def test_incomplete_predictions_prevent_any_test_label_loading(self):
+        from repro.v2_holdout import analyze
+        with patch("repro.v2_holdout.check", return_value={"candidate": "brief_guard"}):
+            with patch("pathlib.Path.read_text", side_effect=FileNotFoundError):
+                with patch("repro.v2_holdout.load_rows") as labels:
+                    with self.assertRaises(FileNotFoundError):
+                        analyze()
+        labels.assert_not_called()
+

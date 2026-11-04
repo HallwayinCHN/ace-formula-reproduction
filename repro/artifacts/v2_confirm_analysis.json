@@ -1,0 +1,70 @@
+{
+  "stage": "confirm",
+  "status": "development_only_not_heldout",
+  "questions": 40,
+  "groups": {
+    "original": {
+      "correct": 109,
+      "total": 120,
+      "seed_accuracy": [
+        0.9,
+        0.9,
+        0.925
+      ],
+      "accuracy": 0.9083333333333333,
+      "accuracy_sd": 0.014433756729740658,
+      "accounted_cny": 0.65600832,
+      "standardized_cny": 2.4262175999999998,
+      "output_tokens": 53947,
+      "prompt_tokens": 795136,
+      "cache_hit_ratio": 0.9465550547327752,
+      "fallback_items": 0,
+      "truncated_responses": 4,
+      "no_answer": 4,
+      "mean_book_tokens": 6280,
+      "median_api_seconds": 1.196021292009391
+    },
+    "brief_guard": {
+      "correct": 109,
+      "total": 120,
+      "seed_accuracy": [
+        0.925,
+        0.925,
+        0.875
+      ],
+      "accuracy": 0.9083333333333333,
+      "accuracy_sd": 0.028867513459481315,
+      "accounted_cny": 0.26601792,
+      "standardized_cny": 2.0362272,
+      "output_tokens": 13083,
+      "prompt_tokens": 796096,
+      "cache_hit_ratio": 0.9454136184580754,
+      "fallback_items": 0,
+      "truncated_responses": 0,
+      "no_answer": 0,
+      "mean_book_tokens": 6280,
+      "median_api_seconds": 0.9043991459766403,
+      "cached_cost_reduction_percent": 59.44900211021713,
+      "output_token_reduction_percent": 75.74841974530557,
+      "screen_gate_met": true
+    }
+  },
+  "comparisons_vs_original": {
+    "brief_guard": {
+      "delta_percentage_points": 0.0,
+      "ci95_percentage_points": [
+        -5.833333333333333,
+        7.5
+      ],
+      "bootstrap_seed": 2026,
+      "repetitions": 10000,
+      "clusters": 40,
+      "unit": "question; all three trained-book seeds kept together"
+    }
+  },
+  "selected_candidate": "brief_guard",
+  "reserved_test_loaded": false,
+  "formal_noninferiority_proved": false,
+  "v2_accounted_cny": 2.066491008,
+  "project_accounted_cny": 20.71297632
+}
