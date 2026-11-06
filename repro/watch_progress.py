@@ -106,7 +106,10 @@ def main():
     try:
         while True:
             try:
-                if (ROOT / "results/repro/v3-batch-status.json").exists():
+                if (ROOT / "results/repro/v4-batch-status.json").exists():
+                    from repro.v4_progress import display
+                    output = display(interval)
+                elif (ROOT / "results/repro/v3-batch-status.json").exists():
                     from repro.v3_progress import display
                     output = display(interval)
                 elif (ROOT / "results/repro/v2-batch-status.json").exists():
