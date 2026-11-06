@@ -32,6 +32,8 @@ def main():
     axes[0].set_xticks([0, 1], ["Original", "No diagnostics"])
     axes[0].set(ylabel="Accuracy (%)", ylim=(0, 105), title="160-question project holdout")
     delta = data["primary_comparison"]["delta_percentage_points"]
+    if abs(delta) < 1e-10:
+        delta = 0.0
     lower, upper = data["primary_comparison"]["ci95_percentage_points"]
     axes[1].scatter(data["seed_delta_pp"], [0, 1, 2], color="#63788d", s=40)
     axes[1].errorbar([delta], [3], xerr=[[max(0, delta-lower)], [max(0, upper-delta)]],

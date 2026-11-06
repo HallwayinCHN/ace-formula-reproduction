@@ -70,6 +70,9 @@ def finish():
     safe_json(ARTIFACTS / "v4_exports.json", {"sha256": hashes, "contains_api_keys_or_headers": False})
     comparison = data["primary_comparison"]
     lower, upper = comparison["ci95_percentage_points"]
+    display_delta = comparison["delta_percentage_points"]
+    if abs(display_delta) < 1e-10:
+        display_delta = 0.0  # Display only; retain the frozen raw statistic and decision unchanged.
     scored = [json.loads(line) for line in (ARTIFACTS / "v4_scored.jsonl").read_text().splitlines()]
     lookup = {(row["variant"], row["seed"], row["sample_id"]): row for row in scored}
     harms = rescues = 0
@@ -89,7 +92,7 @@ def finish():
         seeds = " / ".join(f"{value*100:.2f}%" for value in group["seed_accuracy"])
         text.append(f"| {variant} | {group['correct']}/{group['predictions']} | {group['accuracy']*100:.2f}% | "
                     f"{seeds} | {group['inference_accounted_cny_per_100']:.4f} 元 |")
-    text += ["", f"主要差值 nodiag−original：**{comparison['delta_percentage_points']:+.2f} pp**，"
+    text += ["", f"主要差值 nodiag−original：**{display_delta:+.2f} pp**，"
              f"按题聚类的 95% bootstrap 区间 **[{lower:+.2f}, {upper:+.2f}] pp**。"
              "随机种子 2026，重复 10000 次，每次保留题目对应的全部三个手册配对。", "",
              "预设操作性标准：点估计至少 −1 pp，且区间下界至少 −2 pp。"
@@ -102,16 +105,26 @@ def finish():
              "## 推理用量与总流程费用口径", "",
              "| 指标 | original | nodiag |", "|---|---:|---:|"]
     metrics = (("输入 tokens", "prompt_tokens", ".0f"), ("输出 tokens", "output_tokens", ".0f"),
-               ("缓存命中比例", "cache_hit_ratio", ".3f"), ("有限数值输出率", "finite_numeric_output_rate", ".3f"),
+               ("缓存命中比例", "cache_hit_ratio", ".1%"), ("有限数值输出率", "finite_numeric_output_rate", ".1%"),
                ("截断回答数", "truncated_predictions", ".0f"), ("API中位秒数", "api_median_seconds", ".3f"),
                ("API P95秒数", "api_p95_seconds", ".3f"),
+               ("端到端中位秒数", "end_to_end_median_seconds", ".3f"),
+               ("端到端 P95秒数", "end_to_end_p95_seconds", ".3f"),
+               ("端到端实测回答数", "end_to_end_measured_predictions", ".0f"),
                ("推理核算/100回答（元）", "inference_accounted_cny_per_100", ".4f"),
                ("统一无缓存成本/100回答（元）", "standardized_cny_per_100", ".4f"),
                ("历史训练含验证＋本次三本各答160题（元）", "assembled_cost_three_books_plus_160_answers_each_cny", ".4f"))
     for title, key, fmt in metrics:
-        text.append(f"| {title} | {data['groups']['original'][key]:{fmt}} | {data['groups']['nodiag'][key]:{fmt}} |")
+        values = ["未测量" if data["groups"][v][key] is None else format(data["groups"][v][key], fmt)
+                  for v in ("original", "nodiag")]
+        text.append(f"| {title} | {values[0]} | {values[1]} |")
+    a, b = data["groups"]["original"], data["groups"]["nodiag"]
+    inference_saving = 100*(1-b["inference_accounted_cny"]/a["inference_accounted_cny"])
+    total_saving = 100*(1-b["assembled_cost_three_books_plus_160_answers_each_cny"]
+                       /a["assembled_cost_three_books_plus_160_answers_each_cny"])
     text += ["", "总流程费用是 V3 的训练及选模验证核算，加上本次推理核算的组合；"
-             "不是一次连续部署的实付账单。训练节省与推理节省不能直接相加。", "",
+             "不是一次连续部署的实付账单。训练节省与推理节省不能直接相加。"
+             f"本次含缓存推理核算减少 {inference_saving:.2f}%，组合口径费用减少 {total_saving:.2f}%。", "",
              "## 边界与局限", "",
              "这些题来自原验证池，不是新的官方测试集。V3 旧训练加载器曾整文件解析验证文件，"
              "但只选原 30 条验证记录供模型使用；该实现偏差继续披露。"

@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "finished_at_utc": "2026-11-06T07:27:16.440810+00:00",
+  "phase_accounted_cny": 3.45810816,
+  "project_accounted_cny": 39.847292016,
+  "request_states": {
+    "completed": 960
+  },
+  "response_models": {
+    "deepseek-flash": 960
+  },
+  "truncated_responses": 14,
+  "operational_accuracy_target_passed": false,
+  "contract_sha256": "efdd6d58e2225a669b818328cecd6f0a1d1790e25cfd9ae54d3bf7cbfc8fe79e"
+}

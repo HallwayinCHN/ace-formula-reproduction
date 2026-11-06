@@ -1,0 +1,39 @@
+{
+  "status": "all_actual_prompts_and_answers_verified",
+  "jobs": [
+    {
+      "variant": "original",
+      "seed": 42,
+      "exact_prompts_verified": 160
+    },
+    {
+      "variant": "original",
+      "seed": 43,
+      "exact_prompts_verified": 160
+    },
+    {
+      "variant": "original",
+      "seed": 44,
+      "exact_prompts_verified": 160
+    },
+    {
+      "variant": "nodiag",
+      "seed": 42,
+      "exact_prompts_verified": 160
+    },
+    {
+      "variant": "nodiag",
+      "seed": 43,
+      "exact_prompts_verified": 160
+    },
+    {
+      "variant": "nodiag",
+      "seed": 44,
+      "exact_prompts_verified": 160
+    }
+  ],
+  "total_exact_prompts": 960,
+  "prompt_contains_only": "original template, fixed book, empty reflection, selected question and context",
+  "targets_added_to_model_prompt": false,
+  "prior_bulk_parse_deviation": "V3 formal_data bulk-parsed the validation file but selected only old 30; no heldout inference/scoring or use in method selection occurred"
+}

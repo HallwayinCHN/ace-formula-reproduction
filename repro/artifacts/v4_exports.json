@@ -1,0 +1,19 @@
+{
+  "sha256": {
+    "repro/artifacts/v4_contract.json": "efdd6d58e2225a669b818328cecd6f0a1d1790e25cfd9ae54d3bf7cbfc8fe79e",
+    "repro/artifacts/v4_analysis.json": "b53c4a876d33679c8a95b1ef246f967b3ad143f2286b1eef9d49d202bc2261e6",
+    "repro/artifacts/v4_scored.jsonl": "eeb6ed38002e6282f8e8856bd8f915482d53b288dc11f5b95c5254d24d49da3b",
+    "repro/artifacts/v4_prediction_lock.json": "7c2ed6c68acc6ec6faa28fbe0b32461199cdc503ecb6b57cc3c1424de68d4b78",
+    "repro/artifacts/v4_audit.json": "055600066430f74ddc42f21086659e747c21008e4357d0414e02e47436b41649",
+    "repro/artifacts/v4_completion.json": "c2edeee576d2d636837897b4062212fc82bb818b2304214780b266e99f31c97b",
+    "repro/artifacts/v4_usage.jsonl": "56dcdecceb10def49be75a9d8a53355e051e4b2913656071405128c79f5dc874",
+    "repro/artifacts/v3_training_analysis.json": "ce79c7825b3528ba127838c3b2201052495de69d41ee2a156c9591cf593d6e56",
+    "repro/artifacts/v3_training/original-seed42-best_playbook.txt": "fb6feb3512ef2cb3cdb9d8f7d60a70b294339506be21a165ac37dfadbdcb659d",
+    "repro/artifacts/v3_training/original-seed43-best_playbook.txt": "75f50238f539cdb594ff78c07c55f7ca920a88ed2826c211832c5983f9abc0c1",
+    "repro/artifacts/v3_training/original-seed44-best_playbook.txt": "ab92fb3eedcb5ac656eda31635052cb86570adc7c17ea283063ac307ed38f8d4",
+    "repro/artifacts/v3_training/nodiag-seed42-best_playbook.txt": "bb502ba325a5e5ffebc819bb7e0a70d387948b2c428a24cee4a51a599f08c578",
+    "repro/artifacts/v3_training/nodiag-seed43-best_playbook.txt": "afcfbc8e78de98e0b291d8ab6669e382f5902354083cd4a813d7741fa171b0c1",
+    "repro/artifacts/v3_training/nodiag-seed44-best_playbook.txt": "c3154a653bebde9519412c5e1e316512221577e98ee7fb8deabd90c61bf0a8c2"
+  },
+  "contains_api_keys_or_headers": false
+}

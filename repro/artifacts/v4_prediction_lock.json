@@ -1,0 +1,19 @@
+{
+  "contract_sha256": "efdd6d58e2225a669b818328cecd6f0a1d1790e25cfd9ae54d3bf7cbfc8fe79e",
+  "complete_job_hashes": {
+    "results/repro/v4-original-seed42/summary.json": "377783ca3fef375961df935e74574de942e17b744e5bb86dcd4672266cf96ae3",
+    "results/repro/v4-original-seed42/predictions.json": "39882fafffdf0e6b9cad61162b37d3c24e71bd622f81f0e5fc05c34a6ba1867e",
+    "results/repro/v4-original-seed43/summary.json": "c86a0670c538fd6d12c33fb6269f5b3e0dc8fab2ee890247555cb0bb24cb66a0",
+    "results/repro/v4-original-seed43/predictions.json": "ffdd053d882b0bff6cbf852ecaab25c14a354ff146bcfb59c598b4b7f34f4ba9",
+    "results/repro/v4-original-seed44/summary.json": "8fff3450acbb2fb79d873b54e3816ea2ff1c155fdfb599a7e025b96eee1fff31",
+    "results/repro/v4-original-seed44/predictions.json": "f013a15b222aa2b682a0e936ccc7c0a8476975352eb58dce922fa06271496cb1",
+    "results/repro/v4-nodiag-seed42/summary.json": "4e4b91a6f580b4bcb92e709ac90255c92d0e8a7ff28a35b9c5fe4b0d1fa266f9",
+    "results/repro/v4-nodiag-seed42/predictions.json": "171526159b0188d0784c246b32b33fbde2ce55bf5cde1ebeeb410d78065687e6",
+    "results/repro/v4-nodiag-seed43/summary.json": "8cade16e1d75f57234e2d4423a966d49af07fdc2e7a55b08b311e139ff3fdc86",
+    "results/repro/v4-nodiag-seed43/predictions.json": "2cce7d8431fea6308aedc529ce659c6ddeea2a1d322f06d26d0f4dec8c8af50f",
+    "results/repro/v4-nodiag-seed44/summary.json": "bcf09c629b239f8097bcd0e17c1a58d1b3d6b659e308d91938405057d83d40fe",
+    "results/repro/v4-nodiag-seed44/predictions.json": "cf0330c9fd4472ae0ac71e0a89e7e4d100e17e96396f80b8e1de27a12a5540bb"
+  },
+  "prediction_count": 960,
+  "labels_loaded_only_after_all_hash_checks": true
+}

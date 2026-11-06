@@ -1,0 +1,83 @@
+{
+  "status": "fixed_six_book_evaluation_complete",
+  "origin": "Validation-derived project holdout, not a new official test set",
+  "questions": 160,
+  "predictions": 960,
+  "groups": {
+    "original": {
+      "accuracy": 0.8645833333333334,
+      "correct": 415,
+      "predictions": 480,
+      "seed_accuracy": [
+        0.86875,
+        0.85,
+        0.875
+      ],
+      "accuracy_sd_across_three_books": 0.013010412496663345,
+      "inference_accounted_cny": 1.7635824,
+      "inference_accounted_cny_per_100": 0.367413,
+      "standardized_cny_per_100": 1.772341,
+      "prompt_tokens": 3020774,
+      "output_tokens": 130977,
+      "cache_hit_ratio": 0.949160711791084,
+      "truncated_predictions": 8,
+      "finite_numeric_output_rate": 0.9854166666666667,
+      "missing_answers": 7,
+      "api_median_seconds": 1.4562203960958868,
+      "api_p95_seconds": 4.3160665153991395,
+      "end_to_end_measured_predictions": 480,
+      "end_to_end_median_seconds": 1.5881043337285519,
+      "end_to_end_p95_seconds": 4.476821417012251,
+      "historical_v3_training_plus_validation_cny": 6.520281455999999,
+      "assembled_cost_three_books_plus_160_answers_each_cny": 8.283863856
+    },
+    "nodiag": {
+      "accuracy": 0.8645833333333334,
+      "correct": 415,
+      "predictions": 480,
+      "seed_accuracy": [
+        0.8375,
+        0.8875,
+        0.86875
+      ],
+      "accuracy_sd_across_three_books": 0.025259074277046097,
+      "inference_accounted_cny": 1.6945257599999999,
+      "inference_accounted_cny_per_100": 0.35302619999999996,
+      "standardized_cny_per_100": 1.396687,
+      "prompt_tokens": 2300774,
+      "output_tokens": 123150,
+      "cache_hit_ratio": 0.925740642062193,
+      "truncated_predictions": 6,
+      "finite_numeric_output_rate": 0.9875,
+      "missing_answers": 6,
+      "api_median_seconds": 1.4319142296444625,
+      "api_p95_seconds": 3.8621089368825667,
+      "end_to_end_measured_predictions": 480,
+      "end_to_end_median_seconds": 1.5599961664993316,
+      "end_to_end_p95_seconds": 3.985305770556432,
+      "historical_v3_training_plus_validation_cny": 5.571590688,
+      "assembled_cost_three_books_plus_160_answers_each_cny": 7.266116448
+    }
+  },
+  "primary_comparison": {
+    "delta_percentage_points": -6.938893903907228e-17,
+    "ci95_percentage_points": [
+      -2.083333333333333,
+      2.083333333333333
+    ],
+    "bootstrap_seed": 2026,
+    "repetitions": 10000,
+    "clusters": 160,
+    "unit": "question; all three trained-book seeds kept together"
+  },
+  "seed_delta_pp": [
+    -3.125,
+    3.75,
+    -0.625
+  ],
+  "point_target_passed": true,
+  "interval_target_passed": false,
+  "operational_accuracy_target_passed": false,
+  "formal_noninferiority_proved": false,
+  "scope": "Comparison of six fixed V3-selected books, not causal proof of diagnostic removal. Historical training plus fresh inference costs are assembled estimates, not a continuous bill."
+}
