@@ -52,6 +52,15 @@ def main():
         raise ValueError("Duplicated request states")
     if {r["request_id"] for r in rows} != {r["request_id"] for r in usage if r["state"] == "completed"}:
         raise ValueError("Predictions and accepted usage differ")
+    by_id = {row["request_id"]: row for row in usage if row["state"] == "completed"}
+    for row in rows:
+        record = by_id[row["request_id"]]
+        for item_key, usage_key in (("prompt_tokens", "prompt_tokens"), ("output_tokens", "completion_tokens"),
+                                    ("cached_tokens", "cached_tokens"), ("accounted_cny", "accounted_cny"),
+                                    ("api_seconds", "elapsed_seconds")):
+            equal(row[item_key], record[usage_key])
+        if record["run_id"] != f"v4-{row['variant']}-seed{row['seed']}":
+            raise ValueError("Response belongs to another condition")
     training = json.loads((ARTIFACTS / "v3_training_analysis.json").read_text())
     result = compute(rows, usage, contract, training)
     equal(result, json.loads((ARTIFACTS / "v4_analysis.json").read_text()))

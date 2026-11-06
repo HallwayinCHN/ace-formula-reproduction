@@ -70,6 +70,14 @@ def finish():
     safe_json(ARTIFACTS / "v4_exports.json", {"sha256": hashes, "contains_api_keys_or_headers": False})
     comparison = data["primary_comparison"]
     lower, upper = comparison["ci95_percentage_points"]
+    scored = [json.loads(line) for line in (ARTIFACTS / "v4_scored.jsonl").read_text().splitlines()]
+    lookup = {(row["variant"], row["seed"], row["sample_id"]): row for row in scored}
+    harms = rescues = 0
+    for row in scored:
+        if row["variant"] == "original":
+            other = lookup[("nodiag", row["seed"], row["sample_id"])]
+            harms += row["is_correct"] and not other["is_correct"]
+            rescues += not row["is_correct"] and other["is_correct"]
     text = ["# V4：去诊断训练手册的项目留出评估", "",
             "六份手册由 V3 的原 30 题验证集提前选定，分别来自原始训练和去诊断训练，各三个顺序种子。"
             "本轮不重新训练、不替换手册，使用相同原始提示、完整手册和模型参数。", "",
@@ -87,6 +95,10 @@ def finish():
              "预设操作性标准：点估计至少 −1 pp，且区间下界至少 −2 pp。"
              f"本轮**{'达到' if data['operational_accuracy_target_passed'] else '未达到'}**该标准。"
              "这不是正式非劣效证明，也不能保证任意模型、手册或数据上的准确率。", "",
+             f"具体检查：点估计条件{'通过' if data['point_target_passed'] else '未通过'}；"
+             f"区间下界条件{'通过' if data['interval_target_passed'] else '未通过'}。"
+             f"在480个同题/同训练顺序种子的回答配对中，原始正确而去诊断错误 {harms} 个，"
+             f"反向变化 {rescues} 个。这些是事后描述性计数，统计推断仍以按题聚类的主区间为准。", "",
              "## 推理用量与总流程费用口径", "",
              "| 指标 | original | nodiag |", "|---|---:|---:|"]
     metrics = (("输入 tokens", "prompt_tokens", ".0f"), ("输出 tokens", "output_tokens", ".0f"),
