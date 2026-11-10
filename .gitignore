@@ -19,3 +19,11 @@ report/*.fls
 report/*.fdb_latexmk
 report/*.synctex.gz
 report/*.xdv
+
+# Intermediate run snapshots excluded from the final submission
+/repro/artifacts/stage2_batch_status.json
+/repro/artifacts/stage2_preflight.json
+/repro/artifacts/stage3_batch_status.json
+/repro/artifacts/stage3_execution_status.json
+/repro/artifacts/stage3_recovery_activation.json
+/repro/artifacts/stage3_recovery_preflight.json

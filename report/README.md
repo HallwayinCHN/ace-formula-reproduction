@@ -12,6 +12,6 @@ tectonic main.tex
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-`figures/learning_flow.tex` is editable TikZ source. The two PNGs are unchanged copies of the measured-study plots in `../repro/artifacts/`; `v4_results.png` is used in the report and `v3_results.png` is retained as an optional additional figure. No API calls are required to compile.
+`figures/learning_flow.tex` is editable TikZ source. `v4_results.png` is an unchanged copy of the measured-study plot in `../repro/artifacts/` and is used in the report. No API calls are required to compile.
 
 The report distinguishes the original official-test reproduction, archived-response replay, fresh paired training efficiency, and the validation-derived fixed-book accuracy audit. It reports negative findings and the failed accuracy interval criterion. Exact numerical evidence is maintained in the repository artifacts rather than inferred from figure pixels.

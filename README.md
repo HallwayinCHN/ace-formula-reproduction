@@ -1,369 +1,123 @@
-> **FTEC5660 reproduction submission:** see [SUBMISSION.md](SUBMISSION.md) for the report, setup, public results and offline verification. Original upstream README retained below; this notice was added for the reproduction.
+# FTEC5660: ACE Formula Reproduction
 
-# Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models
+This submission reproduces an ACE context-adaptation behavior on the Formula financial reasoning benchmark and evaluates one isolated execution optimization: omitting the post-curation answer used only for training diagnostics. It uses the authors' implementation, rather than reimplementing ACE from the paper. No model weights are trained.
 
-<div align="left">
+The original implementation is [ace-agent/ace](https://github.com/ace-agent/ace), pinned at `82709de050e1db6e6ef2f07bcb0393560b94992a`. The corresponding paper is [Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models](https://arxiv.org/abs/2510.04618v3). Upstream method, prompts, preprocessing, scorer and `uv.lock` are preserved. Reproduction additions are under `repro/`; this document and `report/` contain the submission material. The original [Apache-2.0 license](LICENSE.txt) and upstream attribution are retained. The original repository README is preserved byte-for-byte in [README_UPSTREAM.md](README_UPSTREAM.md).
 
-<p align="left" style="display:flex; gap:18px;">
-  <a href="https://arxiv.org/abs/2510.04618" target="_blank" style="margin-right:0;">
-    <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2510.04618-b31b1b.svg">
-  </a>
-  <a href="https://join.slack.com/t/ace-agent/shared_invite/zt-3np7gusuf-DCUJaBshNjuAz5ECDx702w" target="_blank" style="margin-right:0;">
-    <img alt="Slack" src="https://img.shields.io/badge/Join Slack-4A154B?logo=slack&logoColor=white">
-  </a>
-  <a href="https://discord.gg/NW2W4xYt" target="_blank" style="margin-right:0;">
-    <img alt="Discord" src="https://img.shields.io/badge/Discord-7289DA?logo=discord&logoColor=white">
-  </a>
-  <a href="https://deepwiki.com/ace-agent/ace" target="_blank" style="margin-right:0;">
-    <img alt="Ask DeepWiki" src="https://deepwiki.com/badge.svg">
-  </a>
-  <a href="https://forms.gle/ZNJpqVBRa8QoPjzM7" target="_blank" style="margin-right:0;">
-    <img alt="Feedback & Interest Form" src="https://img.shields.io/badge/Feedback & Interest Form-4285F4?logo=googleforms&logoColor=white">
-  </a>
-</p>
+## Submission contents
 
+| Item | Location | Purpose |
+|---|---|---|
+| Written report | [report/main.pdf](report/main.pdf) | Academic report, including references, within the 10-page limit |
+| Complete LaTeX source | [report/main.tex](report/main.tex), [report/references.bib](report/references.bib), [report/figures/](report/figures/) | Editable report and self-contained figures |
+| Reproduction implementation | [repro/](repro/) | Provider adapter, controlled variants, protocols, analysis and tests |
+| Frozen protocols | [repro/configs/protocol.json](repro/configs/protocol.json), [V3 contract](repro/artifacts/v3_contract.json), [V4 contract](repro/artifacts/v4_contract.json) | Parameters, cohorts, source hashes and decision rules |
+| Results and evidence | [repro/artifacts/](repro/artifacts/) | Public predictions, selected playbooks, accounting, audits and plots |
+| Detailed experiment notes | [repro/README.md](repro/README.md) | Chronological procedures, recovery behavior and limitations |
+| Historical planning archive | [repro/archive/README.md](repro/archive/README.md) | Superseded planning documents, clearly separated from final results |
 
-<img src="assets/images/ace_framework.png" alt="ACE Framework" width="800"/>
+The Zoom presentation is outside this delivery scope and is not included.
 
-</div>
+## Install the original locked environment
 
----
-
-## 🎯 Overview
-
-ACE (Agentic Context Engineering) is a framework that enables large language models to self-improve by treating contexts as evolving playbooks that accumulate, refine, and organize strategies through a modular process of generation, reflection, and curation. Unlike traditional approaches that suffer from **brevity bias** and **context collapse**, ACE introduces structured, incremental updates guided by a grow-and-refine principle, preserving detailed, domain-specific knowledge while remaining comprehensive and scalable throughout adaptation.
-
-## Latest News
-- **2025 Nov**: ACE [Paper](https://arxiv.org/abs/2510.04618) and Repo says "Hello World"!
-
-### Key Features
-
-- 🔄 **Three-Role Agentic Architecture**: Generator, Reflector, and Curator work together to continuously improve contexts
-- 📈 **Incremental Delta Updates**: Localized edits that preserve prior knowledge while accumulating new insights
-- 🎓 **Self-Supervised Learning**: Adapts effectively without labeled supervision by leveraging natural execution feedback
-- 🚀 **High Efficiency**: 86.9% lower adaptation latency on average compared to existing adaptive methods
-- 💰 **Cost Effective**: Significantly fewer rollouts and lower dollar costs while achieving higher accuracy
-
-### Tutorials
-- 📚 **Adding Dataset for Evaluation** [Link](tutorials/ExtendingDatasets.md)
-- ✨ **Extending ACE for Tool Calling** (Coming Soon) 
-
-### 📊 Performance
-
-ACE consistently outperforms strong baselines, achieving average gains of **+10.6%** on agent tasks and **+8.6%** on domain-specific benchmarks, across both offline and online adaptation settings.
-
-#### Benchmarks
-
-| Task Category | Dataset | Improvement | Details |
-|---------------|---------|-------------|---------|
-| **Agent Tasks** | AppWorld | +10.6% | Matches top-ranked production-level agent (GPT-4.1) on average and surpasses it on harder test-challenge split, using smaller open-source model |
-| **Finance** | FiNER + XBRL Formula | +8.6% | Domain-specific reasoning with structured information extraction |
-
-#### Efficiency Improvements
-
-- **Offline (AppWorld)**: -82.3% latency and -75.1% rollouts vs GEPA
-- **Online (FiNER)**: -91.5% latency and -83.6% token cost vs Dynamic Cheatsheet
-
-
-#### How It Works
-
-1. **Generator** produces reasoning trajectories for new queries, surfacing both effective strategies and recurring pitfalls
-2. **Reflector** separates evaluation and insight extraction from curation, improving context quality
-3. **Curator** converts lessons into structured delta updates with helpful/harmful counters, using deterministic merging with de-duplication and pruning
-
-This design prevents the **context collapse** problem where iterative rewriting erodes details over time.
-
-## 🚀 Quick Start
-
-### Installation
+Use a full Git clone of this repository. Do not use a shallow clone: the upstream ancestry and source-byte checks require the pinned original commit to be present. The tested experiment interpreter was Python 3.12.13. Install `uv` if it is not already available, then run:
 
 ```bash
-# Clone the repository
-git clone https://github.com/ace-agent/ace.git
-cd ace
-
-# Install uv (if not already installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Install ACE and core dependencies
-uv sync
-
-# Set up API keys
-cp .env.example .env
-# Edit .env and set the API key(s) you need
+git clone https://github.com/HallwayinCHN/ace-formula-reproduction.git
+cd ace-formula-reproduction
+uv sync --python 3.12 --locked
 ```
 
-### Basic Usage
+This uses the original `uv.lock`; it does not upgrade or regenerate experimental dependencies. Formula does not require initializing the AppWorld submodule. The first installation needs network access to download packages. Some tokenization or execution paths also download the public `cl100k_base` vocabulary on first use. The project sets a local vocabulary cache at `../.runtime-cache/tiktoken`. No embedding-model download is needed for the TF-IDF variant.
 
-```python
-from ace import ACE
-from utils import initialize_clients
+## Verify the completed results without an API key
 
-# Initialize API clients
-api_provider = "sambanova" # or "together", "openai", "commonstack"
-
-# Initialize ACE system
-ace_system = ACE(
-    api_provider=api_provider,
-    generator_model="DeepSeek-V3.1",
-    reflector_model="DeepSeek-V3.1",
-    curator_model="DeepSeek-V3.1",
-    max_tokens=4096
-)
-
-# Prepare configuration
-config = {
-    'num_epochs': 1,
-    'max_num_rounds': 3,
-    'curator_frequency': 1,
-    'eval_steps': 100,
-    'online_eval_frequency': 15,
-    'save_steps': 50,
-    'playbook_token_budget': 80000,
-    'task_name': 'your_task',
-    'json_mode': False,
-    'no_ground_truth': False,
-    'save_dir': './results',
-    'test_workers': 20,
-    'use_bulletpoint_analyzer': false,
-    'api_provider': api_provider
-
-}
-
-# Offline adaptation
-results = ace_system.run(
-    mode='offline',
-    train_samples=train_data,
-    val_samples=val_data,
-    test_samples=test_data,  # Optional
-    data_processor=processor,
-    config=config
-)
-
-# Online adaptation
-results = ace_system.run(
-    mode='online',
-    test_samples=test_data,
-    data_processor=processor,
-    config=config
-)
-
-# Evaluation only
-results = ace_system.run(
-    mode='eval_only',
-    test_samples=test_data,
-    data_processor=processor,
-    config=config
-)
-```
-
-## 💼 Finance Domain Example
-
-### Training Script Usage
-
-The `finance/run.py` script provides a unified interface for training and evaluation on financial analysis tasks.
+After dependency installation and the initial public tokenizer-vocabulary download, the following checks run offline using committed artifacts and the original scorer. They do not contact DeepSeek or require the ignored private request logs:
 
 ```bash
-# Offline training (with automatic initial and final testing)
-uv run python -m eval.finance.run \
-    --task_name finer \
-    --mode offline \
-    --save_path results
-
-# Online training and testing
-uv run python -m eval.finance.run \
-    --task_name finer \
-    --mode online \
-    --save_path results
-
-# Run evaluation on the test split only. Provide a pre-trained playbook or leave initial_playbook_path empty to evaluate an uninitialized playbook.
-uv run python -m eval.finance.run \
-    --task_name finer \
-    --mode eval_only \
-    --initial_playbook_path results/ace_run_TIMESTAMP_finer_offline/best_playbook.txt \
-    --save_path test_results
-
-# Training with custom configuration
-uv run python -m eval.finance.run \
-    --task_name finer \
-    --mode offline \
-    --save_path results \
-    --num_epochs 3 \
-    --eval_steps 100 \
-    --max_tokens 4096
+.venv/bin/python -m repro.v2_recompute
+.venv/bin/python -m repro.v3_recompute
+.venv/bin/python -m repro.v4_recompute
 ```
 
-#### Available Arguments
-<details>
-<summary>Click here to see available arguments</summary>
+| Check | Evidence verified | Expected result |
+|---|---|---|
+| `v2_recompute` | 600 predictions on the second official 100-question test cohort, original labels, accuracy, accounting and paired interval | `status: public_rows_recompute_passed`, `new_api_calls: 0` |
+| `v3_recompute` | 1,989 usage records, six training summaries/traces/playbooks, validation selection and 240 development predictions | `verified: true`, `api_calls: 0` |
+| `v4_recompute` | 960 predictions on 160 project holdout questions, labels, frozen hashes, usage, costs and the primary accuracy decision | `verified: true`, `api_calls: 0` |
 
-| Argument | Description | Default |
-|----------|-------------|---------|
-| `--task_name` | Task to train on (e.g., `finer`, `formula`) | Required |
-| `--save_path` | Directory to save results | Required |
-| `--initial_playbook_path` | Path to initial playbook | Optional |
-| `--mode` | Run mode: 'offline' for offline training with validation, 'online' for online training and testing on test split, 'eval_only' for evaluation only | `offline` |
-| `--api_provider` | API provider for LLM calls. Choose from ['sambanova', 'together', 'openai', 'commonstack'] | `sambanova` |
-| `--num_epochs` | Number of training epochs | 1 |
-| `--max_num_rounds` | Max reflection rounds for incorrect answers | 3 |
-| `--curator_frequency` | Run curator every N steps | 1 |
-| `--eval_steps` | Evaluate every N steps | 100 |
-| `--online_eval_frequency` | Update playbook every N samples for evaluation in online mode | 15 |
-| `--save_steps` | Save intermediate playbooks every N steps | 50 |
-| `--max_tokens` | Maximum tokens for LLM responses | 4096 |
-| `--playbook_token_budget` | Total token budget for playbook | 80000 |
-| `--test_workers` | Number of parallel workers for testing | 20 |
-| `--generator_model` | Model for generator | `DeepSeek-V3.1` |
-| `--reflector_model` | Model for reflector | `DeepSeek-V3.1` |
-| `--curator_model` | Model for curator | `DeepSeek-V3.1` |
-| `--json_mode` | Enable JSON mode for structured output | False |
-| `--no_ground_truth` | Don't use ground truth in reflection | False |
-| `--use_bulletpoint_analyzer` | Enable bulletpoint analyzer for playbook deduplication and merging | False |
-| `--bulletpoint_analyzer_threshold` | Similarity threshold for bulletpoint analyzer (0-1) | 0.9 |
+`v2_recompute` also regenerates the small deterministic summary `repro/artifacts/v2_public_recompute.json`. V3 and V4 verification print their conclusions. All three checks were executed successfully during submission preparation.
 
-</details>
+For the first official test cohort, the complete public rows are in [stage3_scored.jsonl](repro/artifacts/stage3_scored.jsonl), with [analysis](repro/artifacts/stage3_analysis.json) and the original [audit](repro/artifacts/stage3_audit.json). The historical `verify_stage3` command additionally requires private local request records; it is not a fresh-clone public verification command.
 
-## 📈 Results and Outputs
+Offline implementation tests can be run separately:
 
-Using offline training as an example, after training, ACE generates:
-
-```
-results/
-└── ace_run_TIMESTAMP_finer_offline/
-    ├── run_config.json                # Training configuration
-    ├── final_results.json             # Consolidated results from all stages
-    ├── initial_test_results.json      # Initial test results with empty playbook (baseline)
-    ├── final_test_results.json        # Final test results with best playbook
-    ├── train_results.json             # Training results
-    ├── val_results.json               # Validation results and error logs
-    ├── pre_train_post_train_results.json     # Detailed pre-train and post-train generator output for each training sample
-    ├── final_playbook.txt             # Final evolved context
-    ├── best_playbook.txt              # Best performing context (only for offline training)
-    ├── bullet_usage_log.jsonl         # Bullet usage tracking
-    ├── curator_operations_diff.jsonl  # Curator operation tracking
-    ├── detailed_llm_logs/             # Detailed LLM call logs
-    └── intermediate_playbooks/        # Intermediate playbooks 
+```bash
+.venv/bin/python -m unittest discover -s repro/tests -v
 ```
 
-### Understanding Playbook Format
+## Read the main results
 
-The evolved context (playbook) follows this structure:
+| Question | Matched comparison | Finding | Evidence |
+|---|---|---|---|
+| Does accumulated ACE context help in this setup? | Empty-playbook Generator versus ACE on the first official 100-question test cohort; three training-order seeds | 69.33% versus 84.00%; difference +14.67 percentage points, question-clustered 95% interval [+8.33, +21.67] | [STAGE3.md](repro/artifacts/STAGE3.md) |
+| Does removing the diagnostic preserve the learning path under fixed responses? | Original versus diagnostic-free replay of archived retained responses | All 180 step states, six validation checkpoints and three selected playbooks match; no new API calls | [DIAGNOSTIC_FREE_RESULTS.md](repro/artifacts/DIAGNOSTIC_FREE_RESULTS.md) |
+| What happens in fresh training runs? | Three paired original/diagnostic-free runs, 60 training and 30 selection-validation questions each | Learning calls 787 to 602 (-23.51%); cached learning-cost estimate 5.9796 to 4.9114 CNY (-17.87%); median workflow time 788.6 to 646.2 seconds (-18.06%) | [V3_RESULTS.md](repro/artifacts/V3_RESULTS.md) |
+| Is accuracy preserved on the project holdout? | Six V3-selected playbooks, original versus diagnostic-free training, 160 holdout questions | Each group 415/480 (86.46%); difference 0.00 percentage points, question-clustered 95% interval [-2.08, +2.08]; the predefined interval criterion was not met | [V4_RESULTS.md](repro/artifacts/V4_RESULTS.md) |
+| Did the additional proposals improve the trade-off? | Selective reflection, retrieval, brief output and conservative routing, within their own cohorts | Mixed or negative quality results; routing failed its development cost gate and was not evaluated on holdout | [STAGE3.md](repro/artifacts/STAGE3.md), [V2_RESULTS.md](repro/artifacts/V2_RESULTS.md), [V3_RESULTS.md](repro/artifacts/V3_RESULTS.md) |
 
-```
-## STRATEGIES & INSIGHTS
-[str-00001] helpful=5 harmful=0 :: Always verify data types before processing
-[str-00002] helpful=3 harmful=1 :: Consider edge cases in financial data
+The main report focuses on ACE behavior reproduction and diagnostic-free execution. The first study's prespecified primary modification comparison was selective reflection plus retrieval versus ACE. Diagnostic-free training became the report's main engineering contribution after the earlier studies; V3 and V4 have their own prospectively frozen protocols. This chronology is preserved rather than rewritten as one original hypothesis.
 
-## FORMULAS & CALCULATIONS
-[cal-00003] helpful=8 harmful=0 :: NPV = Σ(Cash Flow / (1+r)^t)
+## Optional: configure and run a new live pilot
 
-## COMMON MISTAKES TO AVOID
-[mis-00004] helpful=6 harmful=0 :: Don't forget timezone conversions
-```
+No credentials are needed to inspect the submitted evidence or perform the public recomputations. To run new model requests, create a local ignored configuration file:
 
-Each bullet has:
-- **ID**: `[section_slug-00000]` for tracking
-- **Counts**: `helpful=X harmful=Y` updated by Reflector
-- **Content**: `:: actual advice or strategy`
-
-<!-- ## 🎓 Key Innovations
-
-### 1. Incremental Delta Updates
-
-Instead of rewriting full prompts, ACE performs delta updates—localized edits that accumulate new insights while preserving prior knowledge.
-
-### 2. Grow-and-Refine Mechanism
-
-A mechanism that balances steady context expansion with redundancy management by merging or pruning context items based on semantic similarity.
-
-### 3. Dedicated Reflector
-
-A specialized Reflector that separates evaluation and insight extraction from curation, improving context quality and downstream performance. -->
-
-### 📬 Supported Tasks
-#### Agent Tasks
-- **AppWorld**: Simulated digital environment with app interactions
-#### Domain-Specific Tasks
-- **FiNER**: Financial information extraction
-- **XBRL Formula**: Structured financial data processing
-
-## 🛠️ Extending ACE
-
-ACE is designed to be easily extended to new tasks and domains. To add your own task:
-
-1. **Prepare your data**: Create JSONL files with train/val/test splits
-2. **Implement DataProcessor**: Only 3 methods needed - `process_task_data()`, `answer_is_correct()`, `evaluate_accuracy()`
-3. **Create training script**: Initialize ACE and run training using the `run()` method
-4. **Customize prompts** (optional): Adapt prompts to your domain
-
-The evaluation orchestration (parallel test execution, result aggregation) is handled by reusable utilities in `utils.py`, so you only need to focus on task-specific logic.
-
-### Quick Example
-
-```python
-class DataProcessor:
-    def process_task_data(self, raw_data):
-        # Convert your data format to standardized format
-        return [{"context": ..., "question": ..., "target": ..., "others": {...}}]
-    
-    def answer_is_correct(self, predicted, ground_truth):
-        # Your comparison logic
-        return predicted.strip() == ground_truth.strip()
-    
-    def evaluate_accuracy(self, predictions, ground_truths):
-        # Calculate accuracy
-        return sum(self.answer_is_correct(p, g) for p, g in zip(predictions, ground_truths)) / len(predictions)
-```
-📖 **[Read the full extension guide →](EXTENDING_ACE.md)**
-
-
-## 🤝 Contributing
-We welcome contributions! Please follow these steps:
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-
-## 📚 Additional Resources
-- **Blog Posts**: 
-  - [Medium: Agentic Context Engineering](https://medium.com/@bingqian/agentic-context-engineering-teaching-language-models-to-learn-from-experience-706c31a872ca)
-  - [MarkTechPost Coverage](https://www.marktechpost.com/2025/10/10/agentic-context-engineering-ace-self-improving-llms-via-evolving-contexts-not-fine-tuning/)
-  - [InfoQ Article](https://www.infoq.com/news/2025/10/agentic-context-eng/)
-
-### 🙏 Acknowledgments
-This work builds upon insights from Dynamic Cheatsheet and incorporates ideas from the broader LLM agent and context optimization research community.
-
-### 📧 Contact
-For questions and feedback:
-- **Paper Authors**: See [arXiv paper](https://arxiv.org/abs/2510.04618) for author contact information
-- **Issues**: Please open an issue on GitHub
-- **Discussions**: Join the [GitHub Discussions](../../discussions)
-
----
-
-
-## 📝 Citation
-
-If you use ACE in your research, please cite our paper:
-
-```bibtex
-@misc{zhang2025agenticcontextengineeringevolving,
-      title={Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models}, 
-      author={Qizheng Zhang and Changran Hu and Shubhangi Upasani and Boyuan Ma and Fenglu Hong and Vamsidhar Kamanuru and Jay Rainton and Chen Wu and Mengmeng Ji and Hanchen Li and Urmish Thakker and James Zou and Kunle Olukotun},
-      year={2025},
-      eprint={2510.04618},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2510.04618}, 
-}
+```bash
+cp repro/deepseek.env.example .env
+chmod 600 .env
 ```
 
-<div align="center">
+Open `.env` locally and fill in the value of `DEEPSEEK_API_KEY`. Do not commit the file or paste the key into command arguments, issue text or logs. Check readiness without making model requests:
 
-**⭐ Star us on GitHub if ACE helps your research!**
+```bash
+.venv/bin/python -m repro.pilot --check
+```
 
-Made with ❤️ by the ACE team
+The live pilot below makes **paid DeepSeek API calls** and creates a new run on every invocation. It uses 10 training and 10 validation questions, separate from formal study cohorts, with a 20-CNY accounting stop line and the project-wide 180-CNY accounting stop line. These are conservative ledger controls, not guarantees about provider billing:
 
-</div>
+```bash
+.venv/bin/python -m repro.pilot --live
+```
+
+The provider configuration is `deepseek-flash` at `https://api.deepseek.com`, temperature 0, thinking disabled and a 4,096-token output cap. The exact model parameters, pricing assumptions and the permissive handling of nonempty truncated responses are recorded in [repro/configs/pilot.json](repro/configs/pilot.json). Formal experiments use 60 training questions, 30 selection-validation questions and order seeds 42/43/44, with validation checkpoints after steps 30 and 60. See [repro/README.md](repro/README.md) for the staged execution commands. Do not overwrite the frozen protocols or treat previously evaluated questions as a new unseen test.
+
+New live runs may differ because provider responses, model aliases, cache state and network conditions are not fully controlled. A fresh clone does not contain historical private response caches, and cannot resume the original paid jobs byte-for-byte. Public artifact verification is the appropriate starting point for reviewing the submitted results.
+
+## Build the report
+
+The LaTeX project is contained in `report/`. With a LaTeX distribution and `latexmk` installed:
+
+```bash
+cd report
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+```
+
+The result is `report/main.pdf`. References and figures are stored with the source; the scientific figures do not need an API key or a model call. The report can also be uploaded as a complete folder to a LaTeX editor.
+
+As an alternative to a full TeX distribution, a Tectonic installation can build the same source with `tectonic main.tex` from `report/`; its first build may need network access to obtain TeX packages.
+
+## Interpretation and reproducibility boundaries
+
+- **Behavior reproduction, not an exact paper-number replication.** The paper's Formula Table 2 uses DeepSeek-V3.1 and a different experimental scale. This project uses DeepSeek Flash and a reduced subset; its empty-playbook baseline uses the upstream ACE Generator prompt. Paper and project numbers are therefore not directly interchangeable.
+- **Cohorts remain separate.** The first and second official test cohorts each contain 100 different questions. V4 uses 160 questions from a separately assigned validation-pool project holdout; it is not a new official test set. Do not compare 84.00%, 80.67% and 86.46% as a sequence of gains.
+- **Equal means are not proof of non-inferiority.** V4 has 160 independent question units, with three paired fixed-playbook responses per question. The observed equality did not satisfy the preregistered interval lower-bound criterion. The interval does not cover all uncertainty from future retraining.
+- **Replay equivalence is conditional.** The local `repro.diagnostic_free_replay` check needs ignored historical response archives. It confirms identical states only when retained responses are held fixed; it does not guarantee identical outputs in new online calls. The committed replay result is available for inspection.
+- **The optimization is measurement-overhead removal.** It does not introduce a new ACE learning algorithm. The diagnostic can be removed in this offline driver because its answer does not update learning state; this does not justify deleting an online answer that is part of the actual task output. Skipped training diagnostic accuracy is marked as unmeasured, not as zero or copied from the initial answer.
+- **Data-boundary deviation is disclosed.** V3's legacy loader parsed the full validation file before selecting the original 30 records. The remaining records were not used in actual training/validation model prompts. V4 selects physical row IDs before parsing and audits all 960 actual prompts. The holdout must not be described as having never been parsed in earlier processes.
+- **Scoring and failures are retained.** Original Formula labels and exact numeric matching are unchanged. Nonempty truncated answers remain in the fixed evaluation denominator. Ambiguous units or possible label issues are discussed rather than corrected after seeing results.
+- **Costs are estimates, not reconciled bills.** Cache-aware accounting uses the recorded provider usage, frozen peak prices and an 8-CNY-per-USD budgeting factor. Standardized uncached cost is a separate metric. Unknown-billing reserves remain in the project ledger. Training and inference saving percentages must not be added, and cross-stage assembled costs are not a single continuous deployment bill.
+- **Fresh-run differences have several causes.** Retained learning calls were 607 versus 602 in V3, and one seed's learning-cost estimate increased. New responses, reflection trajectories and cache effects prevent attributing every net difference solely to the deleted diagnostic.
+
+## Repository hygiene
+
+Private `.env` files, `.venv/`, `.plot-venv/`, local `results/`, request recovery caches and operating-system files are excluded by `.gitignore`. Committed usage exports are restricted to experiment metadata and do not include authorization headers or API keys. Source history and staged commits are retained so that experimental additions can be reviewed against the original pinned implementation.
