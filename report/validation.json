@@ -1,0 +1,21 @@
+{
+  "report_pages": 9,
+  "compiler": "Tectonic 0.17.0",
+  "checked": "2026-11-10",
+  "offline_public_checks": [
+    "v2_recompute",
+    "v3_recompute",
+    "v4_recompute"
+  ],
+  "source_and_output_sha256": {
+    "main.tex": "e4035b7abc5263fdbee96724ba83cdfa87f68b4e7503ed3abc01e6b6db61aaed",
+    "author.tex": "bd3c844365254e322cef74d218681cd0a3f0109c53dcc7d7bd545ec699d13ad0",
+    "references.bib": "e5505ba53b08f149f9c7d06dc0615b1d5346e781059e31f41079cef23f1f0671",
+    "README.md": "203448feed3aa6e812e7b3db4b44358f07ac5b172409781bcb1a2bd615325c63",
+    "main.pdf": "6c89cefcdede40ec6268f65306cc7c07b84edb19fced46191129653aa31da793",
+    "figures/learning_flow.tex": "63b92d49efbae39a2cb0be523cb196772d0b1815793111d8d210ccd20a0e0b89",
+    "figures/v3_results.png": "5b42a60c2ecd4224d2fcdc39ff161ec6cd83cebfbc5c0a8d8158a54bba6d723e",
+    "figures/v4_results.png": "e6448a7e7112a8ded95b01d0415a60819273d019547090fa8a4932d036f0226a"
+  },
+  "notes": "Observed costs are accounting estimates, and accuracy preservation is not established. Raw response archives and credentials are excluded."
+}

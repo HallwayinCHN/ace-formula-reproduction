@@ -1,0 +1,367 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=20mm,top=18mm,bottom=19mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,multirow}
+\usepackage{graphicx,xcolor,tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{enumitem,fancyhdr}
+\usepackage[hidelinks,breaklinks]{hyperref}
+\usepackage{xurl}
+\definecolor{navy}{RGB}{28,56,85}
+\hypersetup{pdftitle={Reproducing ACE and Evaluating Diagnostic-Free Offline Training on Formula},pdfauthor={WANG Haowei}}
+\input{author}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\art}[1]{\texttt{\small\detokenize{#1}}}
+\newcommand{\pp}{\,\mathrm{pp}}
+\newcommand{\smalltable}{\small\setlength{\tabcolsep}{4pt}}
+\setlist[itemize]{leftmargin=*,nosep,topsep=3pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small FTEC5660 Reproducibility Work}
+\fancyhead[R]{\small ACE on Formula}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\title{\vspace{-13mm}\LARGE\bfseries Reproducing ACE and Evaluating\\Diagnostic-Free Offline Training on Formula}
+\author{\reportauthor\quad (\studentid)\\\small Agentic AI for Business and FinTech (FTEC5660)}
+\date{10 November 2026}
+\begin{document}
+\maketitle\thispagestyle{fancy}
+\vspace{-5mm}
+\begin{abstract}
+\noindent This study evaluates Agentic Context Engineering (ACE) on financial numerical reasoning using the authors' implementation and a resource-constrained DeepSeek Flash configuration. On 100 official test questions evaluated under three training-order seeds, ACE attains 84.00\% accuracy versus 69.33\% for an empty-playbook Generator, a difference of 14.67 percentage points. A subsequent execution optimization removes a training-time answer used exclusively for diagnostic measurement. Fixed-response replay preserves all 180 learning states, six validation checkpoints and three selected playbooks. Three fresh paired training runs reduce learning calls by 23.51\% and cache-aware learning-cost estimates by 17.87\%. On a separate 160-question project holdout, both conditions obtain 86.46\% accuracy, but the question-clustered 95\% difference interval, $[-2.08,+2.08]$ percentage points, does not meet the predefined lower-bound criterion. The evidence supports behavioral reproduction and observed efficiency benefits, while remaining insufficient to establish accuracy preservation. Auxiliary experiments and implementation deviations are reported rather than omitted.
+\end{abstract}
+\section{Introduction and Reproduction Target}
+Financial question answering requires both appropriate formulas and reliable numerical execution. This project asks whether accumulated textual experience improves performance, and whether training overhead can be reduced without deleting learning opportunities. It reproduces one offline Formula task using the public ACE implementation, rather than attempting every benchmark or updating model weights.
+
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{10mm}YY}
+\toprule
+ & Research question & Evidence required \\
+\midrule
+RQ1 & Does ACE improve over the same Generator without learned experience? & A paired comparison on the same official test questions. \\
+RQ2 & Can measurement-only training calls be removed? & Source inspection, fixed-response state equivalence, and fresh execution measurements. \\
+RQ3 & What accuracy claim does the evidence permit? & A separately frozen holdout comparison with a prespecified decision rule. \\
+\bottomrule
+\end{tabularx}
+\caption{Questions that separate reproduction, execution efficiency, and accuracy inference.}
+\end{table}
+The principal modification is diagnostic-free \emph{offline execution}, not a new learning algorithm. Earlier selective-reflection, retrieval and output-policy studies remain part of the record. The report's focus evolved after those studies; it is not presented as the project's sole original hypothesis. Code, protocols, selected playbooks and public measured outputs accompany the report~\cite{thisrepo}.
+
+\clearpage
+\section{System, Reference Result, and Experimental Setup}
+\subsection{Reproduced system and comparison boundary}
+ACE uses a Generator, Reflector and Curator to maintain an evolving textual playbook. Learning changes context rather than model weights~\cite{zhang2026ace}. The official implementation is retained at upstream revision \art{82709de050e1db6e6ef2f07bcb0393560b94992a}~\cite{acerepo}; the added experimental harness resides in \art{repro/}. Formula data, preprocessing, prompts used by the original condition, and numeric scoring are preserved.
+
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{39mm}YYY}
+\toprule
+Source / setting & Backbone & Baseline & Offline ACE with labels \\
+\midrule
+Paper, Table 2~\cite{zhang2026ace} & DeepSeek-V3.1 & 67.5\% & 85.5\% \\
+This reproduction, test cohort A & DeepSeek Flash & 69.33\% & 84.00\% \\
+\bottomrule
+\end{tabularx}
+\caption{Reference numbers are contextual, not a controlled cross-model comparison. The local baseline is the upstream ACE Generator with an empty playbook; the paper's Base LLM uses dataset-default prompts.}
+\label{tab:reference}
+\end{table}
+Differences in backbone, scale and baseline prompts preclude strict numerical replication of the paper's 85.5\% result. The defensible target is the \emph{behavior} that learned context improves performance under the local setup. A difference between the paper's number and ours cannot be attributed to any single cause.
+
+\subsection{Execution configuration}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{42mm}Y}
+\toprule
+Component & Fixed configuration \\
+\midrule
+Environment & Local macOS orchestration; Python 3.12.13; dependencies from upstream \art{uv.lock}; hosted inference, no local GPU training. \\
+Provider / endpoint & DeepSeek; \url{https://api.deepseek.com}; requested and returned alias \art{deepseek-flash}. \\
+Decoding & Temperature 0; thinking disabled; maximum output 4,096 tokens; JSON mode off; \art{top_p} not explicitly set (provider default). \\
+Adaptation & One epoch; 60 training questions; up to three reflection rounds; curation every sample; 30 selection-validation questions. \\
+Repetition / selection & Training-order seeds 42, 43 and 44; validation after steps 30 and 60; best checkpoint selected by validation. Seeds do not fix server-side randomness. \\
+Credentials / logging & Key in ignored local \art{.env}; public usage exports exclude keys and request headers; raw response archives remain local. \\
+Integrity & Dataset, source, template and playbook hashes frozen before the corresponding evaluation; original labels retained. \\
+\bottomrule
+\end{tabularx}
+\caption{Configuration common to the principal comparisons. Exact manifests are distributed with the repository.}
+\end{table}
+The original release contains 500/300/200 train/validation/test questions. A separate 10-train/10-validation pilot checked execution and budgeting; both pilot conditions scored 6/10. The formal 60/30/100 scale was selected from cost projections before test scoring, not from accuracy.
+
+\clearpage
+\section{Evaluation Design and Accounting}
+\subsection{Cohorts and prospective controls}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{20mm}P{31mm}P{24mm}Y}
+\toprule
+Study & Data / independent questions & Conditions / responses & Purpose and selection status \\
+\midrule
+Initial study & Official test A: 100 & Five conditions; 1,500 outputs & Original ACE behavior plus selective reflection and retrieval. Combined minus ACE was the prespecified main modification contrast. \\
+V2 & New validation: 20 screen + 40 confirm; official test B: 100 & Test: two conditions $\times$ three books; 600 outputs & Candidate selected using development data, then locked before disjoint test B. \\
+V3 & New development: 40; original 60/30 adaptation split & 240 development outputs; six fresh training jobs & Routing gate and separate original/diagnostic-free training comparison. \\
+V4 & Project holdout: 160 from the remaining validation pool & Two conditions $\times$ three books; 960 outputs & Evaluate the six V3-selected books; no retraining, routing, brief output or fallback. \\
+\bottomrule
+\end{tabularx}
+\caption{Cohorts must be compared within studies. Test A, test B and the validation-derived holdout cannot be pooled or ranked as successive improvements.}
+\end{table}
+V3 reserved 160 validation-pool questions after allocating 40 to routing development. The routing candidate failed its gate and was never evaluated on that holdout. V4 later used the 160 questions for a separately frozen comparison of the six V3-selected training artifacts. All six prediction files were completed and hash-locked before unified scoring. A prior bulk-parsing deviation is disclosed in Section~\ref{sec:limits}.
+
+\subsection{Accuracy and uncertainty}
+Let $a_{is}^{(m)}$ be the correctness indicator for question $i$, order seed/playbook $s$, and condition $m$. We report mean accuracy and paired difference as
+\[
+\widehat A_m=\frac{1}{3N}\sum_{i=1}^{N}\sum_{s=1}^{3}a_{is}^{(m)},\qquad
+\widehat\Delta=\frac{1}{N}\sum_{i=1}^{N}\frac{1}{3}\sum_{s=1}^{3}\big(a_{is}^{(\mathrm{modified})}-a_{is}^{(\mathrm{original})}\big).
+\]
+The unchanged scorer removes commas and compares parsed floats exactly, with string equality as fallback; no tolerance or percentage normalization is added. Missing or unparseable answers remain in the denominator. Nonempty truncated responses follow the upstream parser and are flagged.
+
+Confidence intervals use 10,000 paired question-cluster bootstrap resamples with RNG seed 2026. Each sampled question retains its three paired book outputs. Thus, V4 has 160 independent question units, not 480 independent questions per condition. Intervals condition on the selected books; they do not capture all variability from arbitrary future retraining. Reported SD is sample SD across the three order-seed/book accuracies.
+
+\subsection{Cost and latency definitions}
+For completed requests with recorded usage, uncached input $U$, cached input $H$ and output tokens $O$ give the frozen estimate
+\[
+C_{\mathrm{CNY}}=\frac{8}{10^6}\left(0.30U+0.006H+1.20O\right).
+\]
+Rates are peak USD prices per million tokens~\cite{deepseekpricing}; factor 8 is a conservative accounting coefficient, not an observed exchange rate. Standardized cost prices all input as uncached. Actual cache reuse can differ across conditions~\cite{deepseekcache}. Unknown-billing reserves are added separately where applicable. Estimates are not reconciled provider bills. Training, selection validation and inference are separated. API time and end-to-end wall time are observational, not service-independent benchmarks.
+
+\clearpage
+\section{Modification: Diagnostic-Free Offline Execution}
+\subsection{Isolation and preserved learning behavior}
+Source inspection of \art{ACE._train_single_sample} identified an extra Generator answer after reflection and curation. This \art{_post_curate} answer measures post-update training accuracy; it does not modify the playbook, global entry IDs or the next sample's learning input. Checkpoint selection uses separate validation.
+
+\begin{figure}[h!]
+\centering\input{figures/learning_flow.tex}
+\caption{The isolated change removes the dashed diagnostic branch. Solid arrows retain the learning and selection path. The diagram describes this project's offline driver, not an arbitrary online ACE deployment.}
+\label{fig:flow}
+\end{figure}
+The diagnostic-free driver skips only that branch. It retains reflection on correct examples, corrections on incorrect examples, all Curator updates and checkpoint validation. A skipped score is \emph{null/not measured}, rather than zero or a copy of the initial score. Consequently, the custom driver also handles missing diagnostic statistics; inserting null into the unchanged upstream accuracy aggregation would be invalid. This intervention is distinct from selective reflection, which removes learning opportunities. It is not applicable where the post-update answer is itself the required online task output.
+
+\subsection{Fixed-response replay evidence}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{68mm}Y}
+\toprule
+Replay invariant & Result \\
+\midrule
+Training states, including playbook contents & Identical at all $60\times3=180$ steps \\
+Global IDs and initial answers & Identical at every step \\
+Validation checkpoints / selected books & All six checkpoints and three selected book hashes match \\
+New hosted-model calls & Zero \\
+\bottomrule
+\end{tabularx}
+\caption{Replay checks every retained request against archived model, prompt, role, ID and parameter fingerprints. Public results are in \art{diagnostic_free_replay.json}; rerunning the full replay requires local private archives.}
+\end{table}
+This establishes equivalence \emph{conditional on identical retained responses}. It does not establish byte-identical fresh hosted-model runs, unchanged cache behavior, or universal accuracy preservation. Those questions require separate measurements.
+
+\clearpage
+\section{Results I: ACE Behavior Reproduction}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{Yrrr}
+\toprule
+Condition on official test A & Seeds 42 / 43 / 44 & Mean $\pm$ SD (\%) & Correct / outputs \\
+\midrule
+Empty-playbook Generator & 68 / 71 / 69 & $69.33\pm1.53$ & 208/300 \\
+Original ACE & 81 / 85 / 86 & $84.00\pm2.65$ & 252/300 \\
+Selective reflection & 78 / 81 / 80 & $79.67\pm1.53$ & 239/300 \\
+ACE + TF-IDF retrieval & 84 / 80 / 80 & $81.33\pm2.31$ & 244/300 \\
+Selective + retrieval & 84 / 83 / 80 & $82.33\pm2.08$ & 247/300 \\
+\bottomrule
+\end{tabularx}
+\caption{All conditions use the same 100 test questions and three order seeds. Retrieval uses the original learned books; the combined condition uses selectively learned books.}
+\label{tab:reproduction}
+\end{table}
+ACE improves over the empty-playbook Generator by $14.67\pp$, with a question-clustered 95\% interval of $[8.33,21.67]\pp$. This supports the targeted behavior under the changed backbone and reduced scale. It does not establish that the paper's full experimental result has been reproduced numerically.
+
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{Yrr}
+\toprule
+Within-cohort paired contrast & Difference (pp) & 95\% interval (pp) \\
+\midrule
+ACE minus empty playbook & +14.67 & [8.33, 21.67] \\
+Selective minus ACE & -4.33 & [-7.33, -1.67] \\
+Retrieval minus ACE & -2.67 & [-5.67, -0.33] \\
+Combined minus ACE (prespecified main contrast) & -1.67 & [-3.67, +0.33] \\
+\bottomrule
+\end{tabularx}
+\caption{The initial main modification contrast was negative in point estimate. The remaining ablation comparisons are exploratory and have no multiplicity adjustment.}
+\end{table}
+Selective reflection preserves the original loop for incorrect initial answers but retains reflection/curation for only every fifth correct example. TF-IDF retrieval selects at most 12 entries under a 1,500-token budget for inference. These interventions reduce learning or context volume, but none outperforms original ACE on this cohort.
+
+\subsection{Why token reduction is not sufficient}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{Yrr}
+\toprule
+Per selected book plus 100 inference answers & Original ACE & Combined \\
+\midrule
+Inference: cache-aware estimate (CNY) & 0.530 & 0.597 \\
+Inference: standardized uncached estimate (CNY) & 1.889 & 0.631 \\
+Input cache hit proportion (\%) & 94.7 & 22.0 \\
+Learning + inference: cache-aware estimate (CNY) & 2.606 & 1.657 \\
+\bottomrule
+\end{tabularx}
+\caption{The combined variant saves standardized inference cost but increases the cache-aware inference estimate. Learning here excludes selection validation; failure reserves are retained.}
+\end{table}
+The combined method reduces standardized learning and inference costs, yet its cache-aware inference cost is higher. Variable retrieved prefixes and lower observed cache reuse are consistent with this discrepancy, but caching and interruptions were not independently controlled. Thus, the full cost difference is not causally attributable to retrieval alone. These results motivated an alternative that preserves learning opportunities and complete inference context.
+
+\clearpage
+\section{Results II: Fresh Training Efficiency}
+Six fresh jobs compare original and diagnostic-free training using the same original 60/30 adaptation split and paired order seeds. A first seed-42 pair and budget check precede seeds 43 and 44. Condition order alternates across seeds. The original historical books remain unchanged; these jobs produce six new selected books.
+
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{Yrrr}
+\toprule
+Metric (three runs pooled unless stated) & Original & Diagnostic-free & Change \\
+\midrule
+Learning calls & 787 & 602 & $-23.51\%$ \\
+Diagnostic calls & 180 & 0 & $-100\%$ \\
+Retained learning calls & 607 & 602 & $-0.82\%$ \\
+Cache-aware learning estimate (CNY) & 5.9796 & 4.9114 & $-17.87\%$ \\
+Standardized learning estimate (CNY) & 8.4772 & 5.9641 & $-29.64\%$ \\
+Training + validation estimate (CNY) & 6.5203 & 5.5716 & $-14.55\%$ \\
+Learning-input cache hit proportion & 43.5\% & 27.3\% & $-16.2\pp$ \\
+Workflow wall-time median (s) & 788.6 & 646.2 & $-18.06\%$ \\
+\bottomrule
+\end{tabularx}
+\caption{New online execution measurements. Learning excludes selection-validation calls; workflow time and the training-plus-validation row include them. Estimates are based on token usage rather than verified bills.}
+\label{tab:fresh}
+\end{table}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{Yrrrr}
+\toprule
+Order seed & \multicolumn{2}{c}{Learning estimate (CNY)} & \multicolumn{2}{c}{Workflow wall time (s)}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & Original & Diagnostic-free & Original & Diagnostic-free \\
+\midrule
+42 & 1.5885 & 1.6084 & 656.9 & 646.2 \\
+43 & 2.1009 & 1.8678 & 788.6 & 685.8 \\
+44 & 2.2902 & 1.4352 & 851.0 & 602.2 \\
+\bottomrule
+\end{tabularx}
+\caption{Per-run variability. The diagnostic-free estimate is slightly higher for seed 42, despite removal of the diagnostic branch.}
+\end{table}
+Removing 180 measurement-only calls is structurally interpretable. The net difference of 185 learning calls also includes five fewer retained calls in fresh trajectories. Hosted responses and correction loops may differ even at temperature zero, and cache hits fall from 43.5\% to 27.3\%. Therefore, the entire observed cost reduction is not a controlled estimate of the diagnostic branch's isolated causal cost. Three pairs support a local efficiency observation, not a universal savings guarantee.
+
+Validation scores selected the books and are not independent evidence of accuracy. The replay result establishes a fixed-response invariant; Table~\ref{tab:fresh} measures fresh execution. Neither replaces a held-out quality comparison.
+
+\subsection{Combined training and inference accounting}
+Adding V3 training plus validation to V4 inference gives CNY 8.2839 for original training versus CNY 7.2661 for diagnostic-free training, a 12.29\% reduction. This is an assembled cross-stage estimate for three trained books and 160 answers per book, not a single uninterrupted deployment bill. Training and inference percentage savings must not be added. The quality qualification in the following section applies to this comparison.
+
+\clearpage
+\section{Results III: Fixed-Book Holdout Accuracy Audit}
+V4 compares the six books selected in V3 without retraining or replacing them. Each condition answers the same 160 validation-derived holdout questions with the original Generator prompt and full book. Seeds 42 and 44 run the original condition first; seed 43 reverses the order. Each job is serial, with three job queues in parallel. Labels enter scoring only after all prediction artifacts are locked.
+
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{Yrr}
+\toprule
+Metric & Original & Diagnostic-free \\
+\midrule
+Correct / outputs & 415/480 & 415/480 \\
+Accuracy mean $\pm$ SD (\%) & $86.46\pm1.30$ & $86.46\pm2.53$ \\
+Seed 42 / 43 / 44 accuracy (\%) & 86.88 / 85.00 / 87.50 & 83.75 / 88.75 / 86.88 \\
+Cache-aware inference estimate / 100 answers (CNY) & 0.3674 & 0.3530 \\
+Output tokens / 480 answers & 130,977 & 123,150 \\
+Finite numeric output proportion (\%) & 98.5 & 98.8 \\
+Truncated responses (included in denominator) & 8 & 6 \\
+API time median / P95 (s) & 1.456 / 4.316 & 1.432 / 3.862 \\
+\bottomrule
+\end{tabularx}
+\caption{V4 quality and inference measurements, conditional on the six fixed books. Inference accounting decreases by 3.92\%; no brief-output or retrieval policy is used.}
+\end{table}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{YP{49mm}P{23mm}}
+\toprule
+Prespecified check & Observed value & Decision \\
+\midrule
+Point difference at least $-1\pp$ & $0.00\pp$ & Pass \\
+95\% interval lower bound at least $-2\pp$ & $-2.0833\pp$ (interval $[-2.0833,+2.0833]$) & Fail \\
+Overall operational accuracy target & Both checks required & Not met \\
+\bottomrule
+\end{tabularx}
+\caption{Equal means do not establish non-inferiority. Rounding the lower bound to $-2$ or changing the threshold after scoring would change the decision rule.}
+\end{table}
+\begin{figure}[h!]
+\centering\includegraphics[width=\linewidth]{figures/v4_results.png}
+\caption{Fixed-book accuracy, paired differences and relative estimated costs. The pooled interval clusters by question; per-seed bars are descriptive. The dashed $-2\pp$ reference is the predefined interval criterion.}
+\end{figure}
+Of 480 paired answers, 16 change from original-correct to diagnostic-free-wrong and 16 in the reverse direction. Thus, the equal mean does not imply identical behavior. The evidence shows no net observed accuracy change, but lacks the precision required by the predefined criterion. It neither proves degradation nor proves accuracy preservation. No threshold adjustment, additional rule tuning or selective retesting follows the result.
+
+\clearpage
+\section{Auxiliary Experiments and Debug Diary}
+\subsection{Additional efficiency proposals}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{30mm}YY}
+\toprule
+Proposal & Observed outcome & Interpretation \\
+\midrule
+Selective reflection / retrieval & Test-A accuracies: 79.67\% / 81.33\%; combined 82.33\%, versus ACE 84.00\%. & Deleting learning opportunities or context does not provide an accuracy improvement here. \\
+Brief output + format fallback (V2) & Test B: original 80.67\%, modified 79.67\%; difference $-1.00\pp$, CI $[-4.33,+2.00]$; cache-aware inference estimate $-42.12\%$. & Efficiency benefit with unresolved accuracy risk. Five fallbacks rescue no correct answer. \\
+Conservative routing (V3) & 40 development questions, grouped four-fold CV; best candidate accuracy $+3.33\pp$, cost $-5.63\%$. Required cost reduction: 15\%. & Gate fails; no routing evaluation on the 160-question holdout. Development gains are not test evidence. \\
+\bottomrule
+\end{tabularx}
+\caption{Auxiliary results preserve the study chronology and include unsuccessful proposals. Comparisons use their own original-condition baselines.}
+\end{table}
+The brief-output policy keeps the full playbook, adds a soft 60-word reasoning instruction, and makes at most one original-prompt fallback when the answer is nonnumeric or nonfinite. It retains the 4,096-token hard cap. Screening on 20 questions and confirmation on 40 precede the disjoint second 100-question official test. The V3 router instead considers pre-generation question features, defaults to original output, and is selected without holdout labels. Neither study establishes an accuracy-preserving improvement.
+
+\subsection{Operational and evaluation issues}
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{27mm}YY}
+\toprule
+Issue & Resolution / record & Remaining qualification \\
+\midrule
+Truncated responses & Initial transport rejected them; changed to retain nonempty truncated text and finish reasons, matching upstream behavior. & Truncation remains in fixed denominators; no output-cap inflation or selective deletion. \\
+API 402 / 503 failures & Preserve completed outputs; bounded recovery for explicit 503; stop on credential/budget issues; retain unknown-billing reserves. & Twelve historical unknown-billing requests remain reserved. Provider interruption does not explain every local failure. \\
+Units and labels & Inspect percent/decimal and simple/compound-interest cases; retain released labels and exact numeric scoring. & Apparent semantic equivalence or suspected annotation errors are not retroactively scored as correct. \\
+Cache-sensitive cost & Export input/output/cache tokens; report both cache-aware and standardized accounting. & Fewer tokens need not imply lower observed cached cost; estimates are not bills. \\
+Validation loading & Disclose V3 bulk parsing; V4 selects physical IDs before parsing and audits actual prompts. & Do not describe the holdout as never physically parsed in all earlier processes. \\
+\bottomrule
+\end{tabularx}
+\caption{Debug diary: implementation fixes and unresolved limits are distinguished. Public usage exports, audits and phase summaries remain in the repository; raw response archives are excluded.}
+\end{table}
+The complete project accounting estimate is CNY 39.8473, including retained historical failure reserves. V4 itself completes 960 requests without a network failure and retains 14 nonempty truncated outputs. This documents the observed run, not guaranteed service reliability.
+
+\clearpage
+\section{Limitations, Reproducibility Package, and Conclusions}
+\label{sec:limits}
+\textbf{Scope and generalization.} Findings concern one Formula subset, one hosted-model alias and three training orders. The experiment does not test all ACE applications, new model families or arbitrary future retraining. Temperature zero and order seeds do not make hosted inference deterministic. The current alias does not pin immutable model weights.
+
+\textbf{Data boundary.} V3's frozen loader decoded the full validation JSONL before selecting the original 30 validation examples. This deviates from a strict ``never loaded'' claim. Audited training/validation prompts contain only the original 60/30 examples; the 160 questions did not guide routing selection. V4 selects line IDs before JSON parsing, constructs model inputs without target fields, and audits all 960 prompts against the specified template, book and question. Selected raw records still contain labels when decoded before masking. Therefore, this is a validation-derived project holdout with a disclosed parsing deviation, not a pristine new official test or a process that never decoded labels.
+
+\textbf{Statistical and causal scope.} The main intervals capture question sampling conditional on fixed books. Three live pairs do not isolate every effect of server randomness, caching and condition order. The failed V4 interval criterion is reported unchanged. Multiple auxiliary analyses and the evolving report focus limit broad confirmatory claims.
+
+\begin{table}[h!]
+\centering\smalltable
+\begin{tabularx}{\linewidth}{P{33mm}YP{30mm}}
+\toprule
+Package component & Reviewable content & Verification route \\
+\midrule
+\art{report/} & Complete LaTeX source, local figures, BibTeX references and compiled report. & \art{tectonic main.tex} or \art{latexmk -pdf main.tex} \\
+\art{repro/configs/}, contracts & Frozen split/order manifests, parameters, source and artifact hashes. & Inspect protocols and study contracts \\
+\art{repro/artifacts/} & Public per-item outputs, usage, selected books, analyses and negative results. & Public V2/V3/V4 recompute modules \\
+\art{SUBMISSION.md}, commits & Locked installation, live/offline commands, evidence map and upstream attribution. & Fresh clone; public recomputation without a key \\
+Private local archives & Original raw responses for exact trajectory replay; excluded along with secrets. & Full replay is local-only; exported replay findings remain public \\
+\bottomrule
+\end{tabularx}
+\caption{The public package supports artifact recomputation; re-executing hosted experiments is a separate paid operation. Zoom presentation preparation is outside this delivery.}
+\end{table}
+\textbf{Conclusions.} RQ1 is supported as a behavioral reproduction: ACE improves over the empty-playbook Generator by $14.67\pp$ on the first test cohort. For RQ2, the isolated diagnostic removal preserves all replayed learning states and produces lower aggregate learning calls, cost estimates and median workflow time in fresh runs. RQ3 remains unresolved at the predefined precision: equal holdout accuracy is compatible with meaningful differences, and the interval criterion fails. Future users should distinguish learning from measurement overhead, preserve test boundaries, and evaluate cache-aware cost together with quality. The present evidence supports a measured engineering optimization with explicit uncertainty, rather than a lossless-learning guarantee.
+
+\vspace{-2mm}
+{\small\setlength{\bibsep}{2pt}\bibliographystyle{plainnat}\bibliography{references}}
+\end{document}

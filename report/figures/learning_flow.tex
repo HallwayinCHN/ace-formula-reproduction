@@ -1,0 +1,15 @@
+\begin{tikzpicture}[>=Latex, node distance=7mm and 9mm,
+ stagebox/.style={draw=navy, rounded corners=2pt, fill=blue!4, align=center, font=\small, text width=43mm, minimum height=11mm},
+ note/.style={draw=orange!75!black, dashed, rounded corners=2pt, fill=orange!7, align=center, font=\small, text width=40mm, minimum height=13mm},
+ arr/.style={->, thick, draw=navy}]
+\node[stagebox] (input) {Training question $x_t$\\and current playbook $B_t$};
+\node[stagebox, below=of input] (gen) {Generator: initial answer\\and numeric feedback};
+\node[stagebox, below=of gen] (reflect) {Reflector: feedback analysis\\and correction loop};
+\node[stagebox, below=of reflect] (curate) {Curator: merge updates\\to obtain $B_{t+1}$};
+\node[stagebox, below=of curate] (next) {Continue learning; validate\\at steps 30 and 60};
+\node[note, right=of curate] (diag) {Original diagnostic answer\\records post-update accuracy\\Removed in diagnostic-free};
+\draw[arr] (input)--(gen); \draw[arr] (gen)--(reflect); \draw[arr] (reflect)--(curate); \draw[arr] (curate)--(next);
+\draw[->, dashed, thick, orange!80!black] (curate)--(diag);
+\node[align=left, font=\footnotesize, text width=42mm, above=9mm of diag] {Preserved: all reflections, corrections, curation, validation and checkpoint selection.};
+\node[align=left, font=\footnotesize, text width=42mm, below=8mm of diag] {The removed response has no path back to the playbook. Its diagnostic score is marked \emph{not measured}.};
+\end{tikzpicture}
