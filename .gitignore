@@ -8,3 +8,14 @@ results/
 .env.*
 *.pyc
 .plot-venv/
+
+# LaTeX intermediates (keep report/main.pdf as the reviewed deliverable)
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+report/*.xdv

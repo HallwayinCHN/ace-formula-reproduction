@@ -1,3 +1,5 @@
+> **FTEC5660 reproduction submission:** see [SUBMISSION.md](SUBMISSION.md) for the report, setup, public results and offline verification. Original upstream README retained below; this notice was added for the reproduction.
+
 # Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models
 
 <div align="left">
